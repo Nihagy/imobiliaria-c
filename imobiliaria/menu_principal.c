@@ -28,7 +28,7 @@ int opcao = 0;
 
 //Menu Incial com as opcões
 void MenuPrincipal(){
-	printf("IMÓBILIARIA \n");
+	//printf("IMÓBILIARIA \n");
 
     setlocale(LC_ALL, "Portuguese");
 	SetConsoleTitle("IMOBILIÁRIA");
@@ -47,7 +47,7 @@ void MenuPrincipal(){
 //1
 void MenuCliente(){
 	printf("MENU CLIENTE");
-	
+
 	printf( "\n\n(1) - Cadastrar Cliente\n"
 	        "(2) - Editar Cadastro\n"
 	        "(3) - Buscar Cliente\n"
@@ -90,7 +90,7 @@ void MenuCorretor(){
 	        "0 - Menu Principal\n");
 	printf("Digite o numero da opçção desejada: ");
 	scanf("%i", &opcao);
-	OpcaoCorretor(opcao);
+	//OpcaoCorretor(opcao);
 	getchar(); // limpar o <enter> do scanf anterior
 
     	switch(opcao)
@@ -245,7 +245,7 @@ int main(){
             case '5': // Menbu Utilidade
                 opcMenu[0] ='\0';
                 system("cls");
-                //MenuUtilidades();
+                MenuUtilidades();
                 printf("teste6");
                 break;
             case '6': // Menbu de Teste
