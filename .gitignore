@@ -11,3 +11,7 @@
 # generated directories
 bin/
 obj/
+
+
+#Arquivos
+#*.txt

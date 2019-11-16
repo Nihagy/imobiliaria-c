@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <windows.h>
-//#include "funcoes.c"
+#include "funcoes.c"
 
 
 
@@ -61,13 +61,13 @@ void MenuCliente(){
 	switch(opcao)
 	{
 		case 1: // Cadastro Cliente
-			MenuPrincipal();
+			CadastroCliente();
 			break;
 		case 2: // Editar Cadastro
 			MenuPrincipal();
 			break;
         case 3: // Buscar Cliente
-			MenuPrincipal();
+			BuscarCliente();
 			break;
         case 4: // Excluir Cliente
 			MenuPrincipal();
@@ -96,7 +96,7 @@ void MenuCorretor(){
     	switch(opcao)
 	{
 		case 1: // Cadastro Corretor
-			MenuPrincipal();
+			CadastroCorretor();
 			break;
 		case 2: // Editar Cadastro
 			MenuPrincipal();
