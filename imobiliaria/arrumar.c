@@ -133,7 +133,7 @@ void MenuCalculo(){
 	printf("(2) - Comissao por locacao\n");
 	printf("(3) - Comissao por venda\n");
 	printf("(0) - Voltar\n");
-	printf("Entre com a op??o desejada: ");
+	printf("Entre com a opção desejada: ");
 	scanf("%i", &opcao);
 	getchar(); // limpar o <enter> do scanf anterior
 	system("cls");

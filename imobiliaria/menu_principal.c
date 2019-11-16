@@ -1,3 +1,8 @@
+/*
+    versão 1.0 Programa Imobilaria
+
+*/
+
 //Bibliotecas
 #include <conio.h>
 #include <ctype.h>
@@ -16,40 +21,39 @@
 // contantes
 
 
+
 // Variavel Global
 int opcao = 0;
 
 
-
+//Menu Incial com as opcões
 void MenuPrincipal(){
-	//printf("MENU PRINCIPAL \n");
+	printf("IMÓBILIARIA \n");
 
-    //setlocale(LC_ALL, "Portuguese");
-	//SetConsoleTitle("IMOBILIÁRIA");
+    setlocale(LC_ALL, "Portuguese");
+	SetConsoleTitle("IMOBILIÁRIA");
 
 	printf(	"\nIMOBILIARIA \n\n\n"
 			"\n1 - CLIENTE || "
 			"2 - CORRETOR || "
 			"3 - IMÓVEIS || "
-			"4 - CALCULO || "
-			"5 - AJUDA || "
-			"6 - UTILIDADES || "
-            "7 - TESTES || "
+			"4 - AJUDA || "
+			"5 - UTILIDADES || "
+            "6 - TESTES || "
 			"0 - Sair"
 			"\n\nEntre com a o desejada: ");
 }
 
-
-
-void menuCliente(){
+//1
+void MenuCliente(){
 	printf("MENU CLIENTE");
 	
-	printf("\n\n(1) - Cadastrar Cliente\n");
-	printf("(2) - Editar de cadastro\n");
-	printf("(4) - Excluir Cliente\n");
-	printf("(5) - Visualizar Cadastro\n");
-	printf("(0) - Voltar\n");
-	printf("Entre com a opção desejada: ");
+	printf( "\n\n(1) - Cadastrar Cliente\n"
+	        "(2) - Editar Cadastro\n"
+	        "(3) - Buscar Cliente\n"
+	        "(4) - Excluir Cliente\n"
+	        "(0) - Menu Principal\n"
+	        "Entre com a opção desejada: ");
 	scanf("%i", &opcao);
 	system("cls");
 	getchar(); // limpar o <enter> do scanf anterior
@@ -59,19 +63,115 @@ void menuCliente(){
 		case 1: // Cadastro Cliente
 			MenuPrincipal();
 			break;
-		case 2: // Leitura Cadastro
+		case 2: // Editar Cadastro
 			MenuPrincipal();
 			break;
-		case 0:// Voltar
+        case 3: // Buscar Cliente
+			MenuPrincipal();
+			break;
+        case 4: // Excluir Cliente
+			MenuPrincipal();
+			break;
+		case 0:// Voltar para o Menu Principal
+            MenuPrincipal();
 			break;
 		default:
-			printf("Op??o Inv?lida!");
+			printf("Opção Invalida!");
 			break;
 	}
 }
 
+//2
+void MenuCorretor(){
+	printf( "\n1 - Cadastro de Corretor\n"
+	        "2 - lista corretores\n"
+	        "3 - Excluir Corretor\n"// estudar se aqui ? o lugar certo de comissao.
+            "4 - Editar Cadastro\n"
+	        "0 - Menu Principal\n");
+	printf("Digite o numero da opçção desejada: ");
+	scanf("%i", &opcao);
+	OpcaoCorretor(opcao);
+	getchar(); // limpar o <enter> do scanf anterior
 
+    	switch(opcao)
+	{
+		case 1: // Cadastro Corretor
+			MenuPrincipal();
+			break;
+		case 2: // Editar Cadastro
+			MenuPrincipal();
+			break;
+        case 3: // Buscar Cliente
+			MenuPrincipal();
+			break;
+        case 4: // Excluir Cliente
+			MenuPrincipal();
+			break;
+		case 0:// Voltar para o Menu Principal
+            MenuPrincipal();
+			break;
+		default:
+			printf("Opção Invalida!");
+			break;
+	}
+}
 
+//3
+void MenuImoveis(){
+	printf("MENU IMOVEIS");
+
+	printf("\n\n(1) - Cadastro Imóvel\n");
+	printf("(2) - Buscar Imóvel\n");
+	printf("(3) - Alteracao no Imóvel\n");
+	printf("(4) - Excluir Imóvel\n");
+	printf("(0) - Voltar\n");
+	printf("Entre com a opcao desejada: ");
+	scanf("%i", &opcao);
+	getchar(); // limpar o <enter> do scanf anterior
+
+	switch(opcao){
+		case 1: // Cadastro Imóvel
+			MenuPrincipal();
+			break;
+		case 2: // Buscar Imóvel
+			MenuPrincipal();
+			break;
+        case 3: // Alteracao Cadastro
+			MenuPrincipal();
+			break;
+        case 4: // Excluir Imóvel
+			MenuPrincipal();
+			break;
+        // case 5: // Leitura Cadastro
+		// 	MenuPrincipal();
+		// 	break;
+		case 0: //Voltar
+			break;
+		default:
+			printf("Opcao invalida");
+			break;
+	}
+}
+
+//4
+void MenuAjuda(){
+    printf("MENU AJUDA");
+    system("pause");
+}
+
+//5
+void MenuUtilidades(){
+    printf("MENU Utilidade");
+    system("pause");
+}
+
+//6
+void MenuTeste(){
+    printf("MENU Teste");
+    system("pause");
+}
+
+//Redireciona para qual menu vai acessar de acordo com as opcão
 int main(){
 
     char sair;
@@ -83,7 +183,6 @@ int main(){
 
 	do{
 		MenuPrincipal();
-
         do{
             opc=getch();
             if (isdigit(opc)!=0 || opc == ';'){
@@ -114,45 +213,45 @@ int main(){
             case '1': // Menu Cliente
                 opcMenu[0] ='\0'; // Deixando o valor nulo para quando retornar ao menu principal não acessar nenhum outro menu quando apertar o enter
                 system("cls");
-                menuCliente();
+                MenuCliente();
                 //printf("teste1");
                 break;
             case '2': // Menu Corretor
                 opcMenu[0] ='\0';
                 system("cls");
-                MenuPrincipal();
+                MenuCorretor();
                 printf("teste2");
                 break;
             case '3': // Menu Imoveis
                 opcMenu[0] ='\0';
                 system("cls");
-                MenuPrincipal();
+                MenuImoveis();
                 printf("teste3");
                 break;
-            case '4': // Menu Calculo
-                opcMenu[0] ='\0';
-                system("cls");
-                MenuPrincipal();
-                printf("teste4");
-                break;
-            case '5': // Menu Ajuda
+            // case '4': // Menu Calculo
+            //     opcMenu[0] ='\0';
+            //     system("cls");
+            //     MenuPrincipal();
+            //     printf("teste4");
+            //     break;
+            case '4': // Menu Ajuda
                 opcMenu[0] ='\0';
                 ajuda:
                 system("cls");
-                //MenuAjuda();
-                MenuPrincipal();
+                MenuAjuda();
+                //MenuPrincipal();
                 printf("teste5");
                 break;
-            case '6': // Menbu Utilidade
+            case '5': // Menbu Utilidade
                 opcMenu[0] ='\0';
                 system("cls");
                 //MenuUtilidades();
                 printf("teste6");
                 break;
-            case '7': // Menbu de Testes
+            case '6': // Menbu de Teste
                 opcMenu[0] ='\0';
                 system("cls");
-                //MenuTests();
+                MenuTeste();
                 printf("teste7");
                 break;
             case '0': // sair
