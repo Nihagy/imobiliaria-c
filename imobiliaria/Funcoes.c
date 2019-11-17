@@ -110,17 +110,17 @@ ExcluirCorretor(){
 	printf("\nExclus�o do cadastro\n\n");
 	printf("Informe o RA que deseja remover: ");
 	scanf("%s",&nome);
-	cadastro = fopen("CadastroCorretor.txt","r"); // abrir arquivo em modo leitura
+	Corretor = fopen("Corretor.txt","r"); // abrir arquivo em modo leitura
 	FILE* arquivoNovo = fopen("CadastroCorretor_novo.txt","r"); // abrir arquivo em modo escrita
-	while(!feof(cadastro))
+	while(!feof(Corretor))
 	{
-		fscanf(cadastro,"%s %s %s \n", &nome, &end, &tel); // acessar os dados
+		fscanf(Corretor,"%s %s %s \n", &nome, &end, &tel); // acessar os dados
 		if (strcmp(nome, nome)!=0) // se o RA lido for diferente do desejado para exluir, grava no arquivo novo
 		{
 			fprintf(arquivoNovo,"%s %s %s \n", &nome, &end, &tel); // escrever dados no arquivo novo
 		}
 	}
-	fclose(cadastro); // fechar o uso do arquivo
+	fclose(Corretor); // fechar o uso do arquivo
 	fclose(arquivoNovo); // fechar o uso do arquivo
 
 	system("del CadastroCorretor.txt");
