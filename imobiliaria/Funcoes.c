@@ -1,16 +1,17 @@
 
 // funcóes de acordo com o menu selecionado
 FILE* arquivo;
-FILE * cadastro;
+FILE * Cliente;
+FILE * Corretor;
 int opcaoMenu = 0;
 
 
 		//---------------------------------- CLIENTE-----------CLIENTE------------------CLIENTE---------------------------------------------------------------------
 void CadastroCliente(){
 	char nome [10], nascimento[12], sexo[15], mail[40], tel[10], rg[14], cpf[14], EstadoCivil[10];
-	FILE * cadastro;
+	FILE * Cliente;
 
-	cadastro= fopen("c:/Cliente.txt","a++");// verificar se aqui eu abro usando o W  e depois vou usando A para adicionar.
+	Cliente = fopen("c:/Cliente.txt","a++");// verificar se aqui eu abro usando o W  e depois vou usando A para adicionar.
 	printf("CADASTRO DE CLIENTE\n");
 
 	printf ("\nEscreva seu nome completo:");
@@ -30,19 +31,19 @@ void CadastroCliente(){
 	printf("Estado Civil:");
 	scanf("%s", &EstadoCivil);
 
-	fprintf(cadastro,"\nNome:" "%s",nome);
-	fprintf(cadastro,"\nData de Nascimento:" "%s",nascimento);
-	fprintf(cadastro,"\nSexo:" "%s",sexo);
-	fprintf(cadastro,"\nEndere?o de e-mail:" "%s",mail);
-	fprintf(cadastro,"\nTelefone:" "%s",tel);
-	fprintf(cadastro,"\nRegistro Geral:" "%s",rg);
-	fprintf(cadastro,"\nCadastro Pessoa F?sica:" "%s",cpf);
-	fprintf(cadastro,"\n\nNome:" "%s",EstadoCivil);
+	fprintf(Cliente,"\nNome:" "%s",nome);
+	fprintf(Cliente,"\nData de Nascimento:" "%s",nascimento);
+	fprintf(Cliente,"\nSexo:" "%s",sexo);
+	fprintf(Cliente,"\nEndere?o de e-mail:" "%s",mail);
+	fprintf(Cliente,"\nTelefone:" "%s",tel);
+	fprintf(Cliente,"\nRegistro Geral:" "%s",rg);
+	fprintf(Cliente,"\nCadastro Pessoa F?sica:" "%s",cpf);
+	fprintf(Cliente,"\n\nNome:" "%s",EstadoCivil);
 
-	fclose(cadastro);
+	fclose(Cliente);
 	system("cls");
 	printf("Cliente cadastrado com sucesso ! Pressione 1 para realizar um novo cadastro, ou 0 para sair:");
-	scanf("%i", &opcaoMenu);FILE * cadastro;
+	scanf("%i", &opcaoMenu);//FILE * Cliente;
 
 	if(opcaoMenu==0)
 		{
@@ -77,9 +78,9 @@ void BuscarCliente(){
 void CadastroCorretor(){
 	char nome [10], tel[12],end[15];
 
-	cadastro= fopen("c:/Corretor.txt","a++");// verificar se aqui eu abro usando o W  e depois vou usando A para adicionar.
+	Corretor = fopen("c:/Corretor.txt","a++");// verificar se aqui eu abro usando o W  e depois vou usando A para adicionar.
 
-		if (cadastro==NULL)
+		if (Corretor == NULL)
 		{
 			printf("abertura nao foi bem sucedida");
 		}
@@ -92,17 +93,16 @@ void CadastroCorretor(){
 	printf("telefone:");scanf("%s",&tel);
 	printf("informe seu endere?o:");scanf("%s",&end);
 
-	fprintf(cadastro,"\nNome:" "%s",nome);
+	fprintf(Corretor,"\nNome:" "%s",nome);
 	//fprintf(cadastro,"%s",nome);
-	fprintf(cadastro,"\nEndereco:");
-	fprintf(cadastro,"%s",end);
-	fprintf(cadastro,"\nTelefone:");
-	fprintf(cadastro,"%s",tel);
-	fclose(cadastro);
+	fprintf(Corretor,"\nEndereco:");
+	fprintf(Corretor,"%s",end);
+	fprintf(Corretor,"\nTelefone:");
+	fprintf(Corretor,"%s",tel);
+	fclose(Corretor);
 	printf("Cadastrado Com sucesso!!");
 }
 
-/*
 
 ExcluirCorretor(){
 
@@ -129,7 +129,7 @@ ExcluirCorretor(){
 	printf("Fim da exclus�o!");
 }
 
-
+/*
 
 void lerCadastroCorretor(){
 	FILE *Leitura;// tipo de arquivo FILE --> SEMPRE ELE EM MAIUSCULO

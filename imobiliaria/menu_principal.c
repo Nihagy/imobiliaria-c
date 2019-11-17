@@ -44,6 +44,8 @@ void MenuPrincipal(){
 			"\n\nEntre com a o desejada: ");
 }
 
+
+//Numero correspodente aa opcao do menu
 //1
 void MenuCliente(){
 	printf("MENU CLIENTE");
