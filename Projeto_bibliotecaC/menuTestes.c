@@ -6,8 +6,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <windows.h>
-#include "testes.c"
+
+#include "string++.h"
 
 
 //Configuracão
@@ -29,22 +29,15 @@ int opcao;
 void MenuPrincipal(){
 	//printf("MENU PRINCIPAL \n");
 
-    setlocale(LC_ALL,"");
-	SetConsoleTitle("IMOBILIARIA");
-
 	printf(	"\nIMOBILIARIA \n\n\n"
-			"\n1 - CLIENTE"
-			"2 - CORRETOR"
-			"3 - IMÓVEIS"
-			"4 - CALCULO"
+			"\n1 - teste1"
+			"2 - teste2"
+			"3 - teste3"
+			"4 - teste4"
 			"5 - AJUDA"
 			"6 - UTILIDADES"
 			"0 - Sair\t"
-			"\n\nEntre com a o desejada: ");
-		// scanf("%i", &opcao);
-		// system("cls");
-		// getchar(); // limpar o <enter> do scanf anterior
-    	//system("pause");
+			"\n\nEntre com a opcao desejada: ");
 }
 
 
@@ -66,27 +59,27 @@ int main(){
         crtNumber(&opc);
 
         switch(opc){
-            case '1': // listar Menu Cliente
+            case '1': // teste1
                 system("cls");
                 MenuPrincipal();
                 printf("teste1");
                 break;
-            case '2': // listar Menu Corretor
+            case '2': // teste2
                 system("cls");
                 MenuPrincipal();
                 printf("teste2");
                 break;
-            case '3': // listar Menu Imoveis
+            case '3': // teste3
                 system("cls");
                 MenuPrincipal();
                 printf("teste3");
                 break;
-            case '4': // listar Menu Calculo
+            case '4': // teste4
                 system("cls");
                 MenuPrincipal();
                 printf("teste4");
                 break;
-            case '5': // Sair
+            case '5': // ajuda
                 ajuda:
                 system("cls");
                 //MenuAjuda();
@@ -112,7 +105,6 @@ int main(){
                 break;
             default:
                 printf("\n\t\t\tOpcao Invalida!! Tente denovo!");
-                Sleep(1000);
 		}
         //getchar();
 		system("cls");
