@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <windows.h>
-#include "testando.c"
+#include "testes.c"
 
 
 //Configuracão
@@ -53,7 +53,7 @@ int main(){
     //MenuPrincipal();
     char sair;
     //char opcMenu[10];
-    char opc;
+    char opc = '1';
     // i de indice
     //int i = 0;
 
@@ -63,7 +63,7 @@ int main(){
         //scanf("%c", &opc);
 		//opc=getch();
 
-        opc = crtNumber(opc);
+        crtNumber(&opc);
 
         switch(opc){
             case '1': // listar Menu Cliente
@@ -97,6 +97,7 @@ int main(){
                 system("cls");
                 //MenuUtilidades();
                 printf("teste6");
+                system("pause");
                 break;
             case '0':
                 system("cls");
