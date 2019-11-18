@@ -50,6 +50,19 @@ int main(){
     // i de indice
     //int i = 0;
 
+    char t[7];
+    //gets(t);
+    scanf("%s", t);
+    getchar();
+
+    if(strcmp(t, "teste")==0){
+        printf("foiii");
+    }else{
+        printf("quase");
+    }
+
+    
+
 	do{
 		MenuPrincipal();
         printf("\noi\n%c\n", opc);
