@@ -56,6 +56,10 @@ void MenuPrincipal(){
 //Numero correspodente aa opcao do menu
 //1
 void MenuCliente(){
+
+    // configuracao da tela
+    setlocale(LC_ALL, "Portuguese");
+
 	printf("MENU CLIENTE");
 
 	printf( "\n\n(1) - Cadastrar Cliente\n"
@@ -93,6 +97,11 @@ void MenuCliente(){
 
 //2
 void MenuCorretor(){
+
+    // configuracao da tela
+    setlocale(LC_ALL, "Portuguese");
+
+
 	printf( "\n1 - Cadastro de Corretor\n"
 	        "2 - lista corretores\n"
 	        "3 - Excluir Corretor\n"// estudar se aqui ? o lugar certo de comissao.
@@ -128,6 +137,10 @@ void MenuCorretor(){
 
 //3
 void MenuImoveis(){
+
+    // configuracao da tela
+    setlocale(LC_ALL, "Portuguese");
+
 	printf("MENU IMOVEIS");
 
 	printf("\n\n(1) - Cadastro Imóvel\n");
@@ -165,18 +178,33 @@ void MenuImoveis(){
 
 //4
 void MenuAjuda(){
-    printf("MENU AJUDA");
+
+    // configuracao da tela
+    setlocale(LC_ALL, "Portuguese");
+
+
+    printf("MENU AJUDA\n\n");
     system("pause");
 }
 
 //5
 void MenuUtilidades(){
+
+    // configuracao da tela
+    setlocale(LC_ALL, "Portuguese");
+
+
     printf("MENU Utilidade");
     system("pause");
 }
 
 //6
 void MenuTeste(){
+
+    // configuracao da tela
+    setlocale(LC_ALL, "Portuguese");
+
+
     printf("MENU Teste");
     system("pause");
 }
@@ -190,6 +218,8 @@ int main(){
     // i de indice
     int i = 0;
 
+    // configuracao da tela
+    setlocale(LC_ALL, "Portuguese");
 
 	do{
 		MenuPrincipal();

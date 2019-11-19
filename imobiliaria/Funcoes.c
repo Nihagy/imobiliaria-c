@@ -8,6 +8,10 @@ int opcaoMenu = 0;
 
 		//---------------------------------- CLIENTE-----------CLIENTE------------------CLIENTE---------------------------------------------------------------------
 void CadastroCliente(){
+
+	// configuracao da tela
+    setlocale(LC_ALL, "Portuguese");
+
 	char nome [10], nascimento[12], sexo[15], mail[40], tel[10], rg[14], cpf[14], EstadoCivil[10];
 	FILE * Cliente;
 
