@@ -9,7 +9,7 @@
 #include <locale.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <windows.h>
+#include <windows.h> // importar para usar algun comandos do windows principalmente na parte de utilidades
 #include "funcoes.c"
 
 
@@ -193,6 +193,67 @@ void MenuUtilidades(){
     // configuracao da tela
     setlocale(LC_ALL, "Portuguese");
 
+    //variáveis
+    int opc=0;
+
+    //título do programa
+    SetConsoleTitle("Imobliaria - Utilidades");
+   
+    printf ("Escolha um programa para abrir\n\n");
+    printf ("\t1 - Calculadora\n\n");
+    printf ("\t2 - Bloco de notas\n\n");
+    printf ("\t3 - WordPad\n\n");
+    printf ("\t4 - Microsoft Word\n\n");
+    printf ("\t5 - Microsoft Excel\n\n");
+    printf ("\t6 - Microsoft chrome\n\n");
+    printf ("\t7 - Menu Principal\n\n");
+    printf ("Obs.: Algumas opcoes acima só irá abrir se o mesmo estiver instalado no computador.\n\n");
+
+   
+    //tenta implementar o gotoxy da biblioteca conio.h
+    printf ("Digite a opção desejada: ");
+   
+    do{
+        scanf ("%d", &opc);
+        switch (opc){
+            case 1:
+                system ("start calc");
+                system("cls");
+                MenuUtilidades();
+                break;
+            case 2:
+                system ("start notepad");
+                system("cls");
+                MenuUtilidades();
+                break;
+            case 3:
+                system ("start write");
+                system("cls");
+                MenuUtilidades();
+                break;
+            case 4:
+                system ("start winword");
+                system("cls");
+                MenuUtilidades();
+                break;
+            case 5:
+                system ("start excel");
+                system("cls");
+                MenuUtilidades();
+                break;
+            case 6:
+                system ("start chrome");
+                system("cls");
+                MenuUtilidades();
+                break;
+            case 7:
+                system("cls");
+                MenuPrincipal();
+                break;
+            default:
+                printf ("\n\nDesculpe, esta opção é inválida.\n\n");
+        }
+   }while(1);
 
     printf("MENU Utilidade");
     system("pause");
@@ -268,12 +329,6 @@ int main(){
                 MenuImoveis();
                 printf("teste3");
                 break;
-            // case '4': // Menu Calculo
-            //     opcMenu[0] ='\0';
-            //     system("cls");
-            //     MenuPrincipal();
-            //     printf("teste4");
-            //     break;
             case '4': // Menu Ajuda
                 opcMenu[0] ='\0';
                 ajuda:
@@ -282,13 +337,13 @@ int main(){
                 //MenuPrincipal();
                 printf("teste5");
                 break;
-            case '5': // Menbu Utilidade
+            case '5': // Menu Utilidade
                 opcMenu[0] ='\0';
                 system("cls");
                 MenuUtilidades();
                 printf("teste6");
                 break;
-            case '6': // Menbu de Teste
+            case '6': // Menu de Teste
                 opcMenu[0] ='\0';
                 system("cls");
                 MenuTeste();
