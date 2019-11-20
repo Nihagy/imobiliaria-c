@@ -4,7 +4,7 @@
  * 
  * 
  * Criador: Nihagy Radesh
- * E-mail: nihagy.radesh@gmail.com
+ * E-mail: michaelneves.v@gmail.com
  * 
  * 
  * A Biblioteca contem funcões que limitam

@@ -1,14 +1,14 @@
 /*
  *  // formatar uma string e criar uma mascara para os dados
- * 
- * 
- * 
- * 
- * 
- * 
- * 
+ *
+ *
+ *
+ *
+ *
+ *
+ *
  *  OBS.: ERROR quando coloca a barra
- * 
+ *
  */
 
 
@@ -21,6 +21,8 @@
 // Validar data de Nasc
 
 // Parametro tem que ser um vetor de preferencia 10 casas
+
+/*
 char main(void){
 
 	unsigned char data[11];
@@ -150,7 +152,7 @@ char main(void){
                                     i++;
                             }else if( data[7] == '9'){
                                 if(c >= 48){
-                                    data[i] = c;   
+                                    data[i] = c;
                                     printf("%c", c);
                                     i++;
                                 }
@@ -202,6 +204,7 @@ char main(void){
     system("pause");
 }
 
+*/
 
 //====================//====================//=================//
 
@@ -212,49 +215,87 @@ char main(void){
 int main(void) {
 
 	//char c;
-    char email[50]={"abc@xyz.se"};
-    int tam=strlen(email);
-    int arroba = 0, ponto = 0, pontoAntes = 0, pontoDepois = 0, i;
+    char email[50];//={"michaelnevesv@gmail.com"};
+    int tam;//=strlen(email);
+    int arroba = 0, charAntes = 0, pontoAntes = 0, pontoDepois = 0, i;
     int valor;
+
+    gets(email);
+    tam = strlen(email);
 
     for (i = 0; i < tam; i++) {
     	//scanf("%c", &c);
-        char validar = email[i];
-        if(validar == '@') {
-            arroba++;
-            if (i < 3){
-                break; // se o@ vier antes de 3 caracteres, erro
-            }
-        }
-        // se arroba possui qualquer valor diferente de 0 ele é verdadeiro
-        else if (arroba) {
-            // como foi atribuido '0' a variavel arroba ele não executa pois é considerado falso
-            if (arroba >1){
-                break; // caso entre, vai sair fora porque não pode ter dois arroba
-            }
-            else if (ponto) { // se encontrar '.' depois do @
-                pontoDepois++;
-            }
-            else if(validar == '.') {
-                ponto++;
-                if (pontoAntes < 3) {
-                    break; // se '.' depois de @ vier antes de 3 caracteres, erro
+        email[i];
+            // Códigos da validacao correspondentes a '.' e '@' e '_' de acordo com a tabela ASCII
+            if( (isalnum(email[i]) != 0 ) || email[i] == 46 || email[i] == 64 || email[i] == 95){
+                // se arroba possui qualquer valor diferente de 0 ele é verdadeiro
+                if(email[i] == '@') {
+                    arroba++;
+                    if (i < 3){
+                        break; // se o@ vier antes de 3 caracteres, erro
+                    }
+                    else if(email[i-1] == '.' || email[i-1] == '_'){
+                        break;
+                    }
                 }
+                // como foi atribuido '0' a variavel arroba ele não executa pois é considerado falso
+                else if (arroba) {
+                    // caso entre, vai sair fora porque não pode ter dois arroba
+                    if (arroba >1){
+                        break; 
+                    }
+                    //else if (ponto) { // se encontrar '.' depois do @
+                    //}
+                    else if(email[i] == '.') {
+                        pontoDepois++;
+                         // se '.' depois de @ vier antes de 3 caracteres
+                        if(charAntes < 3) {
+                            break;
+                        }
+                    }
+                    else if(isalpha(email[i]) != 0 || email[i] == 95){
+                        charAntes++;
+                        }
+                        else if( email[i] == 95){
+                                break;
+                        }
+                }
+                // else {
+                //     if (email[i] == '.'){
+                //         pontoAntes++;
+                //     }
+                //}
+            }else{
+                break;
             }
-            else
-                pontoAntes++;
-        }
     }
 
-    valor = (i == tam && pontoDepois > 1)?1:0;
-    if (i == tam && pontoDepois > 1)
-        printf("Valido: %i", valor);
-    else
-        printf("Invalido %i", valor);
+    //perrcoreu todas as casas do vetor que contem o email e verifica se tem um ponto depois 
+    valor = (i == tam && pontoDepois >= 1)?1:0;
 
-        system("pause");
-        return (i == tam && pontoDepois > 1)?1:0;
+    // Apenas para conferir os resultado referente ao email
+/*
+    if (i == tam && pontoDepois >= 1){
+        printf("Valido: %i\n", valor);
+        printf("Valido: %i\n", pontoDepois);
+        printf("Valido: %i\n", pontoAntes);
+        printf("Valido: %i\n", arroba);
+    }
+    else{
+        printf("Invalido %i\n", valor);
+        printf("Invalido %i\n", pontoDepois);
+        printf("Invalido %i\n", pontoAntes);
+        printf("Invalido %i\n", arroba);
+    }
+
+    system("pause");
+*/
+    return (i == tam && pontoDepois > 1)?1:0;
 }
 
 
 //====================//====================//=================//
+
+
+// mascara para cpf
+
