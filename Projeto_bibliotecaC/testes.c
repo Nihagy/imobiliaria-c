@@ -6,7 +6,7 @@
 /* Ideias para Desenvolver
  *
  * mascara para Rg
- * mascara para cpf
+ * mascara para rg
  * limitar string *** Prioridade
  * funcao para ler e limitar o tipo char *** Prioridade
  * ...
@@ -28,7 +28,7 @@
 
 //     unsigned int tam = strlen(*vetor);
 //     unsigned int i=0;
-    
+
 //     do{
 
 //     }while();
@@ -42,53 +42,78 @@
 int main(){
 
     char c;
-    char cpf[15];
-    unsigned int i=0;
+    char rg[13];
+    unsigned int i=0, cont;
 
-    printf ("digite um cpf: ");
+    printf ("digite um rg: ");
+    //scanf("%c", c);
 
     do{
         c=getch();
-        if (isdigit(c)!=0){
-            if (i <= 13){
-                cpf[i] = c;
+        if (isdigit(c)!=0 ||  c==-32){
+            if (i <= 11 && c!=-32){
+                rg[i] = c;
                 i++;
                 printf ("%c", c);
             }
-        if(i==3 || i==7 || i==11){
-            if(i==11){
-                cpf[i]='-';
-                printf ("%c", cpf[i]);
-                i++;
-            }else{
-                cpf[i]='.';
-                printf ("%c", cpf[i]);
-                i++;
+            // else if(c==-32 ){
+            //     printf("%i",c);
+            //     printf("%i",c);
+            //     if(c=='K'){
+            //         printf("%i",c);
+            //         printf("\b");
+            //         i--;
+            //     }
+            // }
+            if(i==2 || i==6 || i==10){
+                if(i==10){
+                    rg[i]='-';
+                    printf ("%c", rg[i]);
+                    i++;
+                }else if(i==2 || i==6){
+                    rg[i]='.';
+                    printf ("%c", rg[i]);
+                    i++;
+                }
             }
-        }
         }
         else if(c=='\b' && i){
             if (i==3 || i==7 || i==11){
                 printf("\b \b");
                 i--;
-                //cpf[i]='\0';
+                rg[i]='\0';
                 printf("\b \b");
                 i--;
             }
             else{
-                cpf[i]='\0';
+                rg[i]='\0';
                 printf("\b \b");
                 i--;
             }
         }
+        if(c==-32&&i>=0){
+            // for(cont=0; cont<i;cont++){
+                do{
+                    printf(" \b");
+                    //printf("\b");
+                    i--;
+                }while(i==0&&c==-32);
+                //printf("Texto: %c",c);
+                //printf("%i",i);
+                //printf("\b");
+                //printf("\b");
+                //i--;
+            //}
+            cont=0;
+        }
     }while(c!=13);
 
 // teste para verificar na tela
-    // cpf[i]='\0';
+    // rg[i]='\0';
 
-    // printf ("\n\nO cpf digitada foi: ");
-    // puts(cpf);
-    // printf("\n%s", cpf);
+    // printf ("\n\nO rg digitada foi: ");
+    // puts(rg);
+    // printf("\n%s", rg);
     // printf("\n\n");
     // system("pause");
 
@@ -102,31 +127,31 @@ int main(){
 
 /*
 
-    char cpf[2];
+    char rg[2];
     unsigned int ind=0, cont;;
 
-    
+
     do{
 
-        gets(cpf[ind]);
+        gets(rg[ind]);
 
-        if(cpf[ind] != 13){
+        if(rg[ind] != 13){
             if (ind < 1){
                 ind++;
-                printf ("%c", cpf[ind]);
+                printf ("%c", rg[ind]);
             }
         }
-        else if(cpf[ind] == '\b'&&ind){
+        else if(rg[ind] == '\b'&&ind){
             printf("\b \b");
             if(ind==1){
-            cpf[ind] ='\0';
+            rg[ind] ='\0';
             ind--;
             }
         }
 
     }while(*c!=13);
 
-    cpf[1] = '/0';
+    rg[1] = '/0';
 
 
 */
