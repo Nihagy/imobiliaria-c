@@ -42,71 +42,56 @@
 int main(){
 
     char c;
-    char ctrLimitar[2];
-    unsigned int i=0, cont=0, enter=0;
+    char cpf[15];
+    unsigned int i=0;
 
-    ctrLimitar[0] == "/0";
-
-    printf ("digite uma letra: ");
+    printf ("digite um cpf: ");
 
     do{
-        cont++;
-        c =getch();
-        if (c != 13){
-            if(i == 0 && c!='\b' ){
-                ctrLimitar[i] = c;
+        c=getch();
+        if (isdigit(c)!=0){
+            if (i <= 13){
+                cpf[i] = c;
                 i++;
-                //printf("\b");
                 printf ("%c", c);
             }
-            else if(c!='\b' && i){
-                if(i==1){
-                    printf("\b");
-                    ctrLimitar[i]='\0';
-                    i--;
-                    printf ("%c", c);
-                    printf("\b");
-                }
-            }
-            else if(c=='\b'){
-                cont=0;
-                enter=0;
-                if(i==1){
-                    printf("\b \b");
-                    i--;
-                }else if(i==0){
-                    //cont=0;
-                    printf(" \b");
-                }
-            }
-
-        }
-        else{
-            //printf("\n%i\n", cont);
-            enter++;
-            if(cont==1 && enter==1){
-                cont=0;
-                enter=0;
-                printf(" \b");
+        if(i==3 || i==7 || i==11){
+            if(i==11){
+                cpf[i]='-';
+                printf ("%c", cpf[i]);
+                i++;
             }else{
-                if(i==0 && cont>1){
-                    //printf("\n1\n");
-                    i=2;
-                }
-                else if(i!='\0'){
-                    //printf("\n2\n");
-                    i=2;
-                }
+                cpf[i]='.';
+                printf ("%c", cpf[i]);
+                i++;
             }
         }
-        // printf("\n%c\n", ctrLimitar[0]);
-        // printf("%c\n", ctrLimitar[1]);
-        // printf("%c\n", c);
+        }
+        else if(c=='\b' && i){
+            if (i==3 || i==7 || i==11){
+                printf("\b \b");
+                i--;
+                //cpf[i]='\0';
+                printf("\b \b");
+                i--;
+            }
+            else{
+                cpf[i]='\0';
+                printf("\b \b");
+                i--;
+            }
+        }
+    }while(c!=13);
 
-    }while (i<2);
+// teste para verificar na tela
+    // cpf[i]='\0';
 
-    // *c = ctrLimitar[0];
-    // return ctrLimitar[0];
+    // printf ("\n\nO cpf digitada foi: ");
+    // puts(cpf);
+    // printf("\n%s", cpf);
+    // printf("\n\n");
+    // system("pause");
+
     return 0;
 
 }
@@ -117,31 +102,31 @@ int main(){
 
 /*
 
-    char ctrLimitar[2];
+    char cpf[2];
     unsigned int ind=0, cont;;
 
     
     do{
 
-        gets(ctrLimitar[ind]);
+        gets(cpf[ind]);
 
-        if(ctrLimitar[ind] != 13){
+        if(cpf[ind] != 13){
             if (ind < 1){
                 ind++;
-                printf ("%c", ctrLimitar[ind]);
+                printf ("%c", cpf[ind]);
             }
         }
-        else if(ctrLimitar[ind] == '\b'&&ind){
+        else if(cpf[ind] == '\b'&&ind){
             printf("\b \b");
             if(ind==1){
-            ctrLimitar[ind] ='\0';
+            cpf[ind] ='\0';
             ind--;
             }
         }
 
     }while(*c!=13);
 
-    ctrLimitar[1] = '/0';
+    cpf[1] = '/0';
 
 
 */
