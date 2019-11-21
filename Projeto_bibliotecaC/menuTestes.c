@@ -7,8 +7,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "string++.h"
 
+#include "string++.h"
+#include "testes.c"
 
 //Configuracão
 
@@ -23,7 +24,7 @@
 
 
 
-int opcao;
+//int opcao;
 
 
 void MenuPrincipal(){
@@ -40,6 +41,15 @@ void MenuPrincipal(){
 			"\n\nEntre com a opcao desejada: ");
 }
 
+void teste1(){
+    char teste;
+    printf("Digite um letra: ");
+    ctrOculta(&teste);
+
+    printf("%c\n\n", teste);
+
+    system("pause");
+}
 
 int main(){
 
@@ -50,31 +60,32 @@ int main(){
     // i de indice
     //int i = 0;
 
-    char t[7];
-    //gets(t);
-    scanf("%s", t);
-    getchar();
+    // char t[7];
+    // gets(t);
+    // scanf("%s", t);
+    // getchar();
 
-    if(strcmp(t, "teste")==0){
-        printf("foiii");
-    }else{
-        printf("quase");
-    }
+    // if(strcmp(t, "teste")==0){
+    //     printf("foiii");
+    // }else{
+    //     printf("quase");
+    // }
 
-    
+
 
 	do{
 		MenuPrincipal();
-        printf("\noi\n%c\n", opc);
+        //printf("\noi\n%c\n", opc);
         //scanf("%c", &opc);
 		//opc=getch();
 
         crtNumber(&opc);
 
+        //opc = getch();
         switch(opc){
             case '1': // teste1
                 system("cls");
-                MenuPrincipal();
+                teste1();
                 printf("teste1");
                 break;
             case '2': // teste2

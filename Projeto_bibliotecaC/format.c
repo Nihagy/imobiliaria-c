@@ -14,6 +14,7 @@
 
 // Bibliotecas necessária
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <conio.h>
 #include <ctype.h>
@@ -211,7 +212,7 @@ char main(void){
 
 // Validar email
 
-
+/*
 int main(void) {
 
 	//char c;
@@ -274,7 +275,7 @@ int main(void) {
     valor = (i == tam && pontoDepois >= 1)?1:0;
 
     // Apenas para conferir os resultado referente ao email
-/*
+
     if (i == tam && pontoDepois >= 1){
         printf("Valido: %i\n", valor);
         printf("Valido: %i\n", pontoDepois);
@@ -289,13 +290,15 @@ int main(void) {
     }
 
     system("pause");
-*/
+
     return (i == tam && pontoDepois > 1)?1:0;
 }
 
+*/
 
 //====================//====================//=================//
 
 
 // mascara para cpf
+
 

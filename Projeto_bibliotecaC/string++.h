@@ -21,16 +21,16 @@
 
 #include <conio.h>
 
-int crtNumber(char *op){
+int ctrNumber(char *op){
 
-    unsigned char crt[2];
+    unsigned char ctrLimitar[2];
     unsigned int i = 0;
 
     do{
         *op=getch();
         if (isdigit(*op)!=0){
             if (i < 1){
-                crt[i] = *op;
+                ctrLimitar[i] = *op;
                 i++;
                 printf ("%c", *op);
             }
@@ -38,13 +38,13 @@ int crtNumber(char *op){
         else if(*op=='\b'&&i){
             printf("\b \b");
             if(i==1){
-            crt[i]='\0';
+            ctrLimitar[i]='\0';
             i--;
             }
         }
     }while(*op!=13);
-    *op = crt[0];
-    return crt[0];
+    *op = ctrLimitar[0];
+    return ctrLimitar[0];
 }
 
 #endif // STRING++_H_INCLUDED
