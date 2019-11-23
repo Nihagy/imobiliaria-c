@@ -23,7 +23,7 @@
 
 
 // Variavel Global
-int opcao = 0;
+char opcao;
 
 
 
@@ -56,7 +56,7 @@ void MenuPrincipal(){
 //Numero correspodente aa opcao do menu
 //1
 void MenuCliente(){
-
+    //char opc;
     // configuracao da tela
     setlocale(LC_ALL, "Portuguese");
 
@@ -68,31 +68,34 @@ void MenuCliente(){
 	        "(4) - Excluir Cliente\n"
 	        "(0) - Menu Principal\n"
 	        "Entre com a opção desejada: ");
-	scanf("%i", &opcao);
-	system("cls");
-	getchar(); // limpar o <enter> do scanf anterior
+	//scanf("%i", &opcao);
+	//system("cls");
+	//getchar(); // limpar o <enter> do scanf anterior
 
-	switch(opcao)
-	{
-		case 1: // Cadastro Cliente
+    ctrNumber(&opcao);
+
+	switch(opcao){
+		case '1': // Cadastro Cliente
 			CadastroCliente();
 			break;
-		case 2: // Editar Cadastro
+		case '2': // Editar Cadastro
 			MenuPrincipal();
 			break;
-        case 3: // Buscar Cliente
+        case '3': // Buscar Cliente
 			BuscarCliente();
 			break;
-        case 4: // Excluir Cliente
+        case '4': // Excluir Cliente
 			MenuPrincipal();
 			break;
-		case 0:// Voltar para o Menu Principal
+		case '0':// Voltar para o Menu Principal
             MenuPrincipal();
 			break;
 		default:
 			printf("Opção Invalida!");
 			break;
 	}
+
+    system("pause");
 }
 
 //2
@@ -114,19 +117,19 @@ void MenuCorretor(){
 
     	switch(opcao)
 	{
-		case 1: // Cadastro Corretor
+		case '1': // Cadastro Corretor
 			CadastroCorretor();
 			break;
-		case 2: // Editar Cadastro
+		case '2': // Editar Cadastro
 			MenuPrincipal();
 			break;
-        case 3: // Buscar Cliente
+        case '3': // Buscar Cliente
 			MenuPrincipal();
 			break;
-        case 4: // Excluir Cliente
+        case '4': // Excluir Cliente
 			MenuPrincipal();
 			break;
-		case 0:// Voltar para o Menu Principal
+		case '0':// Voltar para o Menu Principal
             MenuPrincipal();
 			break;
 		default:
@@ -153,22 +156,22 @@ void MenuImoveis(){
 	getchar(); // limpar o <enter> do scanf anterior
 
 	switch(opcao){
-		case 1: // Cadastro Imóvel
+		case '1': // Cadastro Imóvel
 			MenuPrincipal();
 			break;
-		case 2: // Buscar Imóvel
+		case '2': // Buscar Imóvel
 			MenuPrincipal();
 			break;
-        case 3: // Alteracao Cadastro
+        case '3': // Alteracao Cadastro
 			MenuPrincipal();
 			break;
-        case 4: // Excluir Imóvel
+        case '4': // Excluir Imóvel
 			MenuPrincipal();
 			break;
         // case 5: // Leitura Cadastro
 		// 	MenuPrincipal();
 		// 	break;
-		case 0: //Voltar
+		case '0': //Voltar
 			break;
 		default:
 			printf("Opcao invalida");
@@ -194,7 +197,7 @@ void MenuUtilidades(){
     setlocale(LC_ALL, "Portuguese");
 
     //variáveis
-    int opc=0;
+    //int opc=0;
 
     //título do programa
     SetConsoleTitle("Imobliaria - Utilidades");
@@ -214,39 +217,39 @@ void MenuUtilidades(){
     printf ("Digite a opção desejada: ");
    
     do{
-        scanf ("%d", &opc);
-        switch (opc){
-            case 1:
+        ctrNumber(&opcao);
+        switch (opcao){
+            case '1':
                 system ("start calc");
                 system("cls");
                 MenuUtilidades();
                 break;
-            case 2:
+            case '2':
                 system ("start notepad");
                 system("cls");
                 MenuUtilidades();
                 break;
-            case 3:
+            case '3':
                 system ("start write");
                 system("cls");
                 MenuUtilidades();
                 break;
-            case 4:
+            case '4':
                 system ("start winword");
                 system("cls");
                 MenuUtilidades();
                 break;
-            case 5:
+            case '5':
                 system ("start excel");
                 system("cls");
                 MenuUtilidades();
                 break;
-            case 6:
+            case '6':
                 system ("start chrome");
                 system("cls");
                 MenuUtilidades();
                 break;
-            case 7:
+            case '7':
                 system("cls");
                 MenuPrincipal();
                 break;
@@ -277,7 +280,7 @@ int main(){
     char opcMenu[2];
     char opc;
     // i de indice
-    int i = 0;
+    int i = 0, cont=0, enter=0;
 
     // configuracao da tela
     setlocale(LC_ALL, "Portuguese");
@@ -286,27 +289,54 @@ int main(){
 		MenuPrincipal();
         do{
             opc=getch();
-            if (isdigit(opc)!=0 || opc == ';'){
-                if (opc == ';')
-                {
-                goto ajuda;
-                }else if (i < 1){//menor que 1 ja que só pode exibir um caracter
-                    opcMenu[i] = opc;
-                    i++;//representa o indice(posição) do vetor
-                    printf ("%c", opc);//exibe o caractere digitado
+            if (opc != 13){
+                if (isdigit(opc)!=0 || opc == ';'){
+                    if (opc == ';'){
+                        goto ajuda;
+                    }else if (isdigit(opc)!=0){
+                        if (i < 1){
+                            opcMenu[i] = opc;
+                            i++;
+                            printf ("%c", opc);
+                        }
+                        else if(opc!='\b' && i){
+                            if(i==1){
+                                printf("\b");
+                                opcMenu[i]='\0';
+                                i--;
+                                printf ("%c", opc);
+                                printf("\b");
+                            }
+                        }
+                    }
+                }
+                else if(opc=='\b'){
+                    cont=0;
+                    enter=0;
+                    if(i==1){
+                        printf("\b \b");
+                        i--;
+                    }else if(i==0){
+                        printf(" \b");
+                    }
                 }
             }
-            //tecla BACKSPACE é igual a '\b' ou 8 na tabela ASCII
-            else if(opc=='\b'&&i){
-                // Dois caracter backspace pois somente com um ele andava para o lado e não apagava a letra digitada
-                printf("\b \b");
-                if(i==1){
-                // para saber o fim de uma string tem que ter o '\0' por isso foi inserida na posição logo após o primeiro caracter fazendo que esse seja o fim;
-                opcMenu[i]='\0';
-                i--;
+            else{
+                enter++;
+                if(cont==1 && enter==1){
+                    cont=0;
+                    enter=0;
+                    printf(" \b");
+                }else{
+                    if(i==0 && cont>1){
+                        i=2;
+                    }
+                    else if(i!='\0'){
+                        i=2;
+                    }
                 }
             }
-        }while(opc!=13);
+        }while(i<2);
         //opc = opcMenu[0];
         i=0;
 
@@ -318,19 +348,19 @@ int main(){
                 //printf("teste1");
                 break;
             case '2': // Menu Corretor
-                opcMenu[0] ='\0';
+                //opcMenu[0] ='\0';
                 system("cls");
                 MenuCorretor();
                 printf("teste2");
                 break;
             case '3': // Menu Imoveis
-                opcMenu[0] ='\0';
+                //opcMenu[0] ='\0';
                 system("cls");
                 MenuImoveis();
                 printf("teste3");
                 break;
             case '4': // Menu Ajuda
-                opcMenu[0] ='\0';
+                //opcMenu[0] ='\0';
                 ajuda:
                 system("cls");
                 MenuAjuda();

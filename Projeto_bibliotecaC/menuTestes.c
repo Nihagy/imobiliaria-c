@@ -9,7 +9,7 @@
 
 
 #include "string++.h"
-#include "testes.c"
+//#include "testes.c"
 
 //Configuracão
 
@@ -44,7 +44,7 @@ void MenuPrincipal(){
 void teste1(){
     char teste;
     printf("Digite um letra: ");
-    ctrOculta(&teste);
+    //ctrOculta(&teste);
 
     printf("%c\n\n", teste);
 
@@ -56,7 +56,7 @@ int main(){
     //MenuPrincipal();
     char sair;
     //char opcMenu[10];
-    char opc = '1';
+    char opc;
     // i de indice
     //int i = 0;
 
@@ -79,7 +79,7 @@ int main(){
         //scanf("%c", &opc);
 		//opc=getch();
 
-        crtNumber(&opc);
+        ctrNumber(&opc);
 
         //opc = getch();
         switch(opc){

@@ -5,6 +5,65 @@ FILE * Cliente;
 FILE * Corretor;
 int opcaoMenu = 0;
 
+//===========================================================
+
+
+int ctrNumber(char *num){
+
+    unsigned char ctrLimitar[2];
+    unsigned int i = 0, cont=0, enter=0;
+
+    do{
+        *num=getch();
+        if (*num != 13){
+            if (isdigit(*num)!=0){
+                if (i < 1){
+                    ctrLimitar[i] = *num;
+                    i++;
+                    printf ("%c", *num);
+                }
+                else if(*num!='\b' && i){
+                    if(i==1){
+                        printf("\b");
+                        ctrLimitar[i]='\0';
+                        i--;
+                        printf ("%c", *num);
+                        printf("\b");
+                    }
+                }
+            }
+            else if(*num=='\b'){
+                cont=0;
+                enter=0;
+                if(i==1){
+                    printf("\b \b");
+                    i--;
+                }else if(i==0){
+                    printf(" \b");
+                }
+            }
+        }else{
+            enter++;
+            if(cont==1 && enter==1){
+                cont=0;
+                enter=0;
+                printf(" \b");
+            }else{
+                if(i==0 && cont>1){
+                    i=2;
+                }
+                else if(i!='\0'){
+                    i=2;
+                }
+            }
+        }
+    }while(i<2);
+
+    *num = ctrLimitar[0];
+    return *num;
+}
+
+
 
 		//---------------------------------- CLIENTE-----------CLIENTE------------------CLIENTE---------------------------------------------------------------------
 void CadastroCliente(){
@@ -15,7 +74,7 @@ void CadastroCliente(){
 	char nome [10], nascimento[12], sexo[15], mail[40], tel[10], rg[14], cpf[14], EstadoCivil[10];
 	FILE * Cliente;
 
-	Cliente = fopen("c:/Cliente.txt","a++");// verificar se aqui eu abro usando o W  e depois vou usando A para adicionar.
+	Cliente = fopen("Cliente.txt","a++");// verificar se aqui eu abro usando o W  e depois vou usando A para adicionar.
 	printf("CADASTRO DE CLIENTE\n");
 
 	printf ("\nEscreva seu nome completo:");
@@ -82,7 +141,7 @@ void BuscarCliente(){
 void CadastroCorretor(){
 	char nome [10], tel[12],end[15];
 
-	Corretor = fopen("c:/Corretor.txt","a++");// verificar se aqui eu abro usando o W  e depois vou usando A para adicionar.
+	Corretor = fopen("Corretor.txt","a++");// verificar se aqui eu abro usando o W  e depois vou usando A para adicionar.
 
 		if (Corretor == NULL)
 		{
@@ -93,9 +152,12 @@ void CadastroCorretor(){
 			printf("deu bom a abertura do arquivo!\n");
 		}
 	printf("\nCADASTRO DO CORRETOR!!\n");
-	printf ("\nescreva seu nome:");scanf("%s",&nome);
-	printf("telefone:");scanf("%s",&tel);
-	printf("informe seu endere?o:");scanf("%s",&end);
+	printf ("\nescreva seu nome:");
+	scanf("%s",&nome);
+	printf("telefone:");
+	scanf("%s",&tel);
+	printf("informe seu endere?o:");
+	scanf("%s",&end);
 
 	fprintf(Corretor,"\nNome:" "%s",nome);
 	//fprintf(cadastro,"%s",nome);
@@ -105,10 +167,22 @@ void CadastroCorretor(){
 	fprintf(Corretor,"%s",tel);
 	fclose(Corretor);
 	printf("Cadastrado Com sucesso!!");
+
+	printf("Cliente cadastrado com sucesso ! Pressione 1 para realizar um novo cadastro, ou 0 para sair:");
+	scanf("%i", &opcaoMenu);//FILE * Cliente;
+
+	if(opcaoMenu==0)
+		{
+			MenuCliente();
+		}
+	else
+		{
+			CadastroCliente();
+		}
 }
 
 
-ExcluirCorretor(){
+void ExcluirCorretor(){
 
 	char nome [10], tel[12],end[15];
 	printf("\nExclus�o do cadastro\n\n");
@@ -133,9 +207,8 @@ ExcluirCorretor(){
 	printf("Fim da exclus�o!");
 }
 
-/*
 
-void lerCadastroCorretor(){
+void BuscarCorretor(){
 	FILE *Leitura;// tipo de arquivo FILE --> SEMPRE ELE EM MAIUSCULO
 	char texto_str[50];// array de string
 
@@ -191,7 +264,7 @@ void CadastroImovel(){
 	printf("Cadastrado Com sucesso!!");
 }
 
-
+/*
 
 void lerCadastroImovel(){
 	FILE *Leitura;// tipo de arquivo FILE --> SEMPRE ELE EM MAIUSCULO
@@ -227,6 +300,4 @@ void lerCadastroImovel(){
 //		printf("Com a porcentagem de %.0f %%, o valor final do im?vel ser? de %.2f.", porcentagem, calculo2);
 //		getch();
 //	}
-
-
 */

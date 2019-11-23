@@ -13,49 +13,6 @@ FILE * cadastro;
 
 
 
-void MenuCliente(){
-	printf("MENU CLIENTE");
-	
-	printf("\n\n(1) - Cadastro Cliente\n");
-	printf("(2) - Visualizacão de cadastro\n");
-	printf("(4) - Exclusão de Cadastro\n");
-	printf("(5) - Visualizaco de Cadastro\n");
-	printf("(0) - Voltar\n");
-	printf("Entre com a op??o desejada: ");
-	scanf("%i", &opcao);
-	system("cls");
-	system("cls");
-	getchar(); // limpar o <enter> do scanf anterior
-
-	switch(opcao)
-	{
-		case 1: // Cadastro Cliente
-			CadastroCliente();
-			break;
-		case 2: // Leitura Cadastro
-			lerCadastroCliente();
-			break;
-		case 0:// Voltar
-			break;
-		default:
-			printf("Op??o Inv?lida!");
-			break;
-	}
-}
-
-
-void MenuCorretor(){
-	printf("\n(1) - Cadastro de corretor\n");
-	printf("(2) - lista de corretores\n");
-	printf("(3) - Excluir\n");// estudar se aqui ? o lugar certo de comissao.
-	printf("(0) - Voltar\n");
-	printf("Entre com a op??o desejada: ");
-	scanf("%i", &opcao);
-	OpcaoCorretor(opcao);
-	getchar(); // limpar o <enter> do scanf anterior
-}
-
-
 void OpcaoCorretor(){
 	while(opcao!=5){
 		switch(opcao){
