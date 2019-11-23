@@ -39,6 +39,8 @@
 
 //====================//====================//=================//
 
+/*
+
 int main(){
 
     char c;
@@ -121,37 +123,43 @@ int main(){
 
 }
 
-
+*/
 // ================================
 
 
-/*
+// int main(){
+//     FILE *f;
+//     f = fopen("arquivo.txt", "w");
+//     if(f == NULL){
+//         printf("Erro na abertura\n");
+//         system("pause");
+//         exit(1);
+//     }
+//     char texto[20] = "Meu programa em C";
+//     int i;
+//     //grava a string, caractere a cararactere
+//     for(i=0;i<strlen(texto); i++)
+//         fputc(texto[1], f);
+//     fclose(f);
 
-    char rg[2];
-    unsigned int ind=0, cont;;
-
-
-    do{
-
-        gets(rg[ind]);
-
-        if(rg[ind] != 13){
-            if (ind < 1){
-                ind++;
-                printf ("%c", rg[ind]);
-            }
-        }
-        else if(rg[ind] == '\b'&&ind){
-            printf("\b \b");
-            if(ind==1){
-            rg[ind] ='\0';
-            ind--;
-            }
-        }
-
-    }while(*c!=13);
-
-    rg[1] = '/0';
+//     system("pause");
+//     return 0;
+// }
 
 
-*/
+int main(){
+
+    FILE *f;
+    
+    // leitura de arquivo texto
+    f = fopen("arquivo.txt", "r");
+    // escrita de arquivo texto
+    f = fopen("arquivo.txt", "w");
+    // leitura de arquivo binario
+    f = fopen("arquivo.txt","rb";
+    // escrita de arquivos binario
+    f = fopen("arquivo.txt", "wb");
+
+    system("pause")
+    return 0;
+}

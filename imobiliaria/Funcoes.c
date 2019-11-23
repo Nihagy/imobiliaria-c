@@ -8,12 +8,70 @@ int opcaoMenu = 0;
 //===========================================================
 
 
-int ctrNumber(char *num){
+void ctrAlnum(char *chart){
 
     unsigned char ctrLimitar[2];
     unsigned int i = 0, cont=0, enter=0;
 
     do{
+		cont++;
+        *chart=getch();
+        if (*chart != 13){
+            if (isalnum(*chart)!=0){
+                if (i < 1){
+                    ctrLimitar[i] = *chart;
+                    i++;
+                    printf ("%c", *chart);
+                }
+                else if(*chart!='\b' && i){
+                    if(i==1){
+                        printf("\b");
+                        ctrLimitar[i]='\0';
+                        i--;
+                        printf ("%c", *chart);
+                        printf("\b");
+                    }
+                }
+            }
+            else if(*chart=='\b'){
+                cont=0;
+                enter=0;
+                if(i==1){
+                    printf("\b \b");
+                    i--;
+                }else if(i==0){
+                    printf(" \b");
+                }
+            }
+        }else{
+            enter++;
+            if(cont==1 && enter==1){
+                cont=0;
+                enter=0;
+                printf(" \b");
+            }else{
+                if(i==0 && cont>1){
+                    i=2;
+                }
+                else if(i!='\0'){
+                    i=2;
+                }
+            }
+        }
+    }while(i<2);
+
+    *chart = ctrLimitar[0];
+    //return ctrLimitar[0];
+}
+
+
+void ctrNumber(char *num){
+
+    unsigned char ctrLimitar[2];
+    unsigned int i = 0, cont=0, enter=0;
+
+    do{
+        cont++;
         *num=getch();
         if (*num != 13){
             if (isdigit(*num)!=0){
@@ -60,12 +118,74 @@ int ctrNumber(char *num){
     }while(i<2);
 
     *num = ctrLimitar[0];
-    return *num;
+    //return ctrLimitar[0];
+}
+
+
+void ctr(char *c){
+
+    //char c;
+    char ctrLimitar[2];
+    unsigned int i=0, cont=0, enter=0;
+
+    ctrLimitar[0] == "/0";
+
+    do{
+        cont++;
+        *c =getch();
+        if (*c != 13){
+            if(i == 0 && *c!='\b' ){
+                ctrLimitar[i] = *c;
+                i++;
+                printf ("%c", *c);
+            }
+            else if(*c!='\b' && i){
+                if(i==1){
+                    printf("\b");
+                    ctrLimitar[i]='\0';
+                    i--;
+                    printf ("%c", *c);
+                    printf("\b");
+                }
+            }
+        }
+		else if(*c=='\b'){
+			cont=0;
+			enter=0;
+			if(i==1){
+				printf("\b \b");
+				i--;
+			}else if(i==0){
+				printf(" \b");
+			}
+        }
+        else{
+            enter++;
+            if(cont==1 && enter==1){
+                cont=0;
+                enter=0;
+                printf(" \b");
+            }else{
+                if(i==0 && cont>1){
+                    i=2;
+                }
+                else if(i!='\0'){
+                    i=2;
+                }
+            }
+        }
+    }while (i<2);
+
+    *c = ctrLimitar[0];
+    // return ctrLimitar[0];
+
 }
 
 
 
-		//---------------------------------- CLIENTE-----------CLIENTE------------------CLIENTE---------------------------------------------------------------------
+
+//---------------------------------- CLIENTE-----------CLIENTE------------------CLIENTE-----------------------
+
 void CadastroCliente(){
 
 	// configuracao da tela
@@ -136,7 +256,7 @@ void BuscarCliente(){
 	  return(0);
 }
 
-	//---------------------------------- CORRETOR-----------CORRETOR------------------CORRETOR---------------------------------------------------------------------
+//---------CORRETOR-----------CORRETOR--------------CORRETOR--------------
 
 void CadastroCorretor(){
 	char nome [10], tel[12],end[15];
@@ -264,9 +384,8 @@ void CadastroImovel(){
 	printf("Cadastrado Com sucesso!!");
 }
 
-/*
 
-void lerCadastroImovel(){
+void BuscarCadastroImovel(){
 	FILE *Leitura;// tipo de arquivo FILE --> SEMPRE ELE EM MAIUSCULO
 	char texto_str[200];// array de string
 
@@ -285,19 +404,20 @@ void lerCadastroImovel(){
 
 
 
-//void SimulacaoFinanciamento()
-//	{
-//		float valorImovel, calculo1, calculo2, porcentagem;
-//
-//		printf("Informe o valor do im?vel R$:");
-//		scanf("%f", &valorImovel);
-//		printf("Informe a porcentagem para o estado de SP:");
-//		scanf("%f", &porcentagem);
-//
-//		calculo1 = (porcentagem / 100) * valorImovel;
-//		calculo2 = valorImovel + calculo1;
-//		system("cls");
-//		printf("Com a porcentagem de %.0f %%, o valor final do im?vel ser? de %.2f.", porcentagem, calculo2);
-//		getch();
-//	}
-*/
+void SimularFinanciamento()
+	{
+		float valorImovel, calculo1, calculo2, porcentagem;
+
+		printf("Informe o valor do im?vel R$:");
+		scanf("%f", &valorImovel);
+		printf("Informe a porcentagem para o estado de SP:");
+		scanf("%f", &porcentagem);
+
+		calculo1 = (porcentagem / 100) * valorImovel;
+		calculo2 = valorImovel + calculo1;
+		system("cls");
+		printf("Com a porcentagem de %.0f %%, o valor final do im?vel ser? de %.2f.", porcentagem, calculo2);
+		getch();
+	}
+
+

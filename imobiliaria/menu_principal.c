@@ -11,6 +11,7 @@
 #include <stdlib.h>
 #include <windows.h> // importar para usar algun comandos do windows principalmente na parte de utilidades
 #include "funcoes.c"
+#include "formatbr.c"
 
 
 
@@ -24,6 +25,16 @@
 
 // Variavel Global
 char opcao;
+struct {
+    Nome[40];
+    telefone/cel[11];
+    Nasc[10];
+    sexo[3];
+    email[30];
+    rg[11];
+    cpf[11];
+    est_civil[10];
+}dados;
 
 
 
@@ -95,7 +106,6 @@ void MenuCliente(){
 			break;
 	}
 
-    system("pause");
 }
 
 //2
@@ -111,9 +121,10 @@ void MenuCorretor(){
             "4 - Editar Cadastro\n"
 	        "0 - Menu Principal\n");
 	printf("Digite o numero da opçção desejada: ");
-	scanf("%i", &opcao);
+	//scanf("%i", &opcao);
 	//OpcaoCorretor(opcao);
-	getchar(); // limpar o <enter> do scanf anterior
+	//getchar(); // limpar o <enter> do scanf anterior
+    ctrNumber(&opcao);
 
     	switch(opcao)
 	{
@@ -121,12 +132,12 @@ void MenuCorretor(){
 			CadastroCorretor();
 			break;
 		case '2': // Editar Cadastro
-			MenuPrincipal();
+			BuscarCorretor();
 			break;
-        case '3': // Buscar Cliente
-			MenuPrincipal();
+        case '3': // Buscar Corretor
+			ExcluirCorretor();
 			break;
-        case '4': // Excluir Cliente
+        case '4': // Excluir Corretor
 			MenuPrincipal();
 			break;
 		case '0':// Voltar para o Menu Principal
@@ -146,21 +157,21 @@ void MenuImoveis(){
 
 	printf("MENU IMOVEIS");
 
-	printf("\n\n(1) - Cadastro Imóvel\n");
-	printf("(2) - Buscar Imóvel\n");
-	printf("(3) - Alteracao no Imóvel\n");
-	printf("(4) - Excluir Imóvel\n");
-	printf("(0) - Voltar\n");
-	printf("Entre com a opcao desejada: ");
-	scanf("%i", &opcao);
-	getchar(); // limpar o <enter> do scanf anterior
+	printf( "\n\n(1) - Cadastro Imóvel\n"
+	        "(2) - Buscar Imóvel\n"
+	        "(3) - Alteracao no Imóvel\n"
+	        "(4) - Excluir Imóvel\n"
+	        "(0) - Voltar\n");
+
+    printf("Entre com a opcao desejada: ");
+    ctrNumber(&opcao);
 
 	switch(opcao){
 		case '1': // Cadastro Imóvel
-			MenuPrincipal();
+			CadastroImovel();
 			break;
 		case '2': // Buscar Imóvel
-			MenuPrincipal();
+			BuscarCadastroImovel();
 			break;
         case '3': // Alteracao Cadastro
 			MenuPrincipal();
@@ -273,6 +284,31 @@ void MenuTeste(){
     system("pause");
 }
 
+//7
+void MenuSimulado(){
+	printf("MENU Simulado");
+
+	printf("\n\n(1) - Simulacao financiamento\n");
+	printf("(2) - Comissao por locacao\n");
+	printf("(3) - Comissao por venda\n");
+	printf("(0) - Voltar\n");
+	printf("Entre com a opção desejada: ");
+	scanf("%i", &opcao);
+	getchar(); // limpar o <enter> do scanf anterior
+	system("cls");
+
+	switch(opcao){
+		case 1: // Simula??o financiamento
+			SimularFinanciamento();
+			break;
+		case 0: // Voltar
+			break;
+		default:
+			printf("Op??o inv?lida");
+			break;
+	}
+}
+
 //Redireciona para qual menu vai acessar de acordo com as opcão
 int main(){
 
@@ -288,6 +324,7 @@ int main(){
 	do{
 		MenuPrincipal();
         do{
+            cont++;
             opc=getch();
             if (opc != 13){
                 if (isdigit(opc)!=0 || opc == ';'){
@@ -345,50 +382,63 @@ int main(){
                 opcMenu[0] ='\0'; // Deixando o valor nulo para quando retornar ao menu principal não acessar nenhum outro menu quando apertar o enter
                 system("cls");
                 MenuCliente();
-                //printf("teste1");
                 break;
             case '2': // Menu Corretor
-                //opcMenu[0] ='\0';
+                opcMenu[0] ='\0';
                 system("cls");
                 MenuCorretor();
-                printf("teste2");
                 break;
             case '3': // Menu Imoveis
-                //opcMenu[0] ='\0';
+                opcMenu[0] ='\0';
                 system("cls");
                 MenuImoveis();
-                printf("teste3");
                 break;
             case '4': // Menu Ajuda
-                //opcMenu[0] ='\0';
+                opcMenu[0] ='\0';
                 ajuda:
                 system("cls");
                 MenuAjuda();
-                //MenuPrincipal();
-                printf("teste5");
                 break;
             case '5': // Menu Utilidade
                 opcMenu[0] ='\0';
                 system("cls");
                 MenuUtilidades();
-                printf("teste6");
                 break;
             case '6': // Menu de Teste
                 opcMenu[0] ='\0';
                 system("cls");
                 MenuTeste();
-                printf("teste7");
+                printf("teste6");
+                break;
+            case '7': // Menu de Simulado
+                opcMenu[0] ='\0';
+                system("cls");
+                MenuSimulado();
                 break;
             case '0': // sair
                 system("cls");
-                printf("\n\tTem certeza que deseja sair do programa ?[S/N]: ");
-                scanf("%c", &sair);
-                getchar();
-                if(sair == 'S' || sair == 's'){
-                    exit(1);
-                }else{
-                    MenuPrincipal();
-                }
+                do{
+                    printf( "\n\n\tTem certeza que deseja sair do programa ?\n"
+                            "\tdigite 1 ou Sim para Sair\n"
+                            "\t2 ou Não para voltar ao Menu"
+                            "\n\nDigite a opcao escolhida?");
+                    ctrAlnum(&sair);
+
+                        if(sair== '1' || tolower(sair)== 's'){
+                            printf ("%c", sair);
+                            exit(1);
+                        }else if(sair== '2' || tolower(sair)== 'n'){
+                            printf ("%c", sair);
+                            system("cls");
+                            MenuPrincipal();
+                            break;
+                        }
+                        else{
+                            printf("\n\n\n\t\t\tOpcao Invalida!! Tente denovo!");
+                            Sleep(1000);
+                            system("cls");
+                        }
+                }while(sair!= 's' || sair!= 'n');
                 break;
             default:
                 printf("\n\t\t\tOpcao Invalida!! Tente denovo!");
