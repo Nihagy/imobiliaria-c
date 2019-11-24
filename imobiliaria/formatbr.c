@@ -226,3 +226,4 @@ int emailf(char email[50]) {
 
     return (i == tam && pontoDepois >= 1)?1:0;
 }
+

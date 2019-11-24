@@ -7,7 +7,9 @@ int opcaoMenu = 0;
 
 //===========================================================
 
-
+// outras funçoes na:
+// pasta Projeto_bibliotecaC oinde estar a biblioteca string++
+// e no arquivo formatbr.c
 void ctrAlnum(char *chart){
 
     unsigned char ctrLimitar[2];
@@ -181,6 +183,7 @@ void ctr(char *c){
 
 }
 
+
 void senhaOculta(char *senha){
     int c = 0;
     while((senha[c] = getch())!=13){
@@ -190,7 +193,9 @@ void senhaOculta(char *senha){
     senha[c] = '\0';
 }
 
-//---------------------------------- CLIENTE-----------CLIENTE------------------CLIENTE-----------------------
+
+
+//--------CLIENTE-----------CLIENTE------------------CLIENTE---------------
 
 void CadastroCliente(){
 
@@ -262,7 +267,9 @@ void BuscarCliente(){
 	  return(0);
 }
 
-//---------CORRETOR-----------CORRETOR--------------CORRETOR--------------
+
+
+//---------CORRETOR-----------CORRETOR--------------CORRETOR---------------
 
 void CadastroCorretor(){
 	char nome [10], tel[12],end[15];
@@ -351,7 +358,9 @@ void BuscarCorretor(){
 	return(0);
 }
 
-//--------------------------------------------- IMOVEIS--------------------IMOVEIS--------------------IMOVEIS-------------------------------------
+
+
+//---------IMOVEIS-------------IMOVEIS----------------IMOVEIS---------------
 
 void CadastroImovel(){
 
@@ -410,8 +419,8 @@ void BuscarCadastroImovel(){
 
 
 
-void SimularFinanciamento()
-	{
+//-------SIMULAÇÃO------------SIMULAÇÃO---------------SIMULAÇÃO--------------
+void SimularFinanciamento(){
 		float valorImovel, calculo1, calculo2, porcentagem;
 
 		printf("Informe o valor do im?vel R$:");
