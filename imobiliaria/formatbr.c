@@ -1,6 +1,6 @@
 // funcões para formatar e colocar mascara em rg, cpf, data entre outras coisas
 
-char dataf(unsigned char data[11]){
+void dataf(char data[11]){
 
 	//unsigned char data[11];
 	char c;
@@ -177,10 +177,8 @@ char dataf(unsigned char data[11]){
 }
 
 
-int emailf(char email[50]) {
+int emailf(char email[40]) {
 
-	//char c;
-    //char email[50];//={"michaelnevesv@gmail.com"};
     int tam=strlen(email);
     int arroba = 0, charAntes = 0, pontoAntes = 0, pontoDepois = 0, i;
     int valor;
@@ -227,3 +225,99 @@ int emailf(char email[50]) {
     return (i == tam && pontoDepois >= 1)?1:0;
 }
 
+
+void main(char rg[]){
+
+    char c;
+    unsigned int i=0;
+
+    do{
+        c=getch();
+        if (isdigit(c)!=0){
+            if (i <= 11){
+                rg[i] = c;
+                i++;
+                printf ("%c", c);
+            }
+            if(i==2 || i==6 || i==10){
+                if(i==10){
+                    rg[i]='-';
+                    printf ("%c", rg[i]);
+                    i++;
+                }else if(i==2 || i==6 ){
+                    rg[i]='.';
+                    printf ("%c", rg[i]);
+                    i++;
+                }
+            }
+        }
+        else if(isdigit(c)==0 && c!='\b'){
+            if(i==11){
+                rg[i] = c;
+                i++;
+                printf ("%c", c); 
+            }
+        }
+        else if(c=='\b' && i){
+            if (i==3 || i==7 || i==11){
+                printf("\b \b");
+                i--;
+                printf("\b \b");
+                i--;
+                rg[i]='\0';
+            }
+            else{
+                printf("\b \b");
+                i--;
+                rg[i]='\0';
+            }
+        }
+    }while(c!=13);
+
+    rg[i]='\0';
+}
+
+
+void main(char cpf[]){
+
+    char c;
+    unsigned int i=0;
+
+    do{
+        c=getch();
+        if (isdigit(c)!=0){
+            if (i <= 13){
+                cpf[i] = c;
+                i++;
+                printf ("%c", c);
+            }
+            if(i==3 || i==7 || i==11){
+                if(i==11){
+                    cpf[i]='-';
+                    printf ("%c", cpf[i]);
+                    i++;
+                }else{
+                    cpf[i]='.';
+                    printf ("%c", cpf[i]);
+                    i++;
+                }
+            }
+        }
+        else if(c=='\b' && i){
+            if (i==4 || i==8 || i==12){
+                printf("\b \b");
+                i--;
+                printf("\b \b");
+                i--;
+                cpf[i]='\0';
+            }
+            else{
+                printf("\b \b");
+                i--;
+                cpf[i]='\0';
+            }
+        }
+    }while(c!=13);
+
+    return 0;
+}

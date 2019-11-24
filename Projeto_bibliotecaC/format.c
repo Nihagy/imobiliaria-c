@@ -21,7 +21,7 @@
 
 // Validar data de Nasc
 
-// Parametro tem que ser um vetor de preferencia 10 casas
+// Parametro tem que ser um vetor de preferencia 11 casas
 
 /*
 char data(void){
@@ -184,14 +184,14 @@ char data(void){
             if (i==3 || i==6){
                 printf("\b \b");
                 i--;
-                data[i]='\0';
                 printf("\b \b");
                 i--;
+                data[i]='\0';
             }
             else{
-                data[i]='\0';
                 printf("\b \b");
                 i--;
+                data[i]='\0';
           }
         }
     }while(c!=13);
@@ -316,30 +316,30 @@ int main(){
                 i++;
                 printf ("%c", c);
             }
-        if(i==3 || i==7 || i==11){
-            if(i==11){
-                cpf[i]='-';
-                printf ("%c", cpf[i]);
-                i++;
-            }else{
-                cpf[i]='.';
-                printf ("%c", cpf[i]);
-                i++;
+            if(i==3 || i==7 || i==11){
+                if(i==11){
+                    cpf[i]='-';
+                    printf ("%c", cpf[i]);
+                    i++;
+                }else{
+                    cpf[i]='.';
+                    printf ("%c", cpf[i]);
+                    i++;
+                }
             }
-        }
         }
         else if(c=='\b' && i){
-            if (i==3 || i==7 || i==11){
+            if (i==4 || i==8 || i==12){
                 printf("\b \b");
                 i--;
-                //cpf[i]='\0';
                 printf("\b \b");
                 i--;
+                cpf[i]='\0';
             }
             else{
-                cpf[i]='\0';
                 printf("\b \b");
                 i--;
+                cpf[i]='\0';
             }
         }
     }while(c!=13);
@@ -362,3 +362,57 @@ int main(){
 
 // mascara para rg
 
+/*
+int main(char rg[]){
+
+    char c;
+    unsigned int i=0;
+
+    do{
+        c=getch();
+        if (isdigit(c)!=0){
+            if (i <= 11){
+                rg[i] = c;
+                i++;
+                printf ("%c", c);
+            }
+            if(i==2 || i==6 || i==10){
+                if(i==10){
+                    rg[i]='-';
+                    printf ("%c", rg[i]);
+                    i++;
+                }else if(i==2 || i==6 ){
+                    rg[i]='.';
+                    printf ("%c", rg[i]);
+                    i++;
+                }
+            }
+        }
+        else if(isdigit(c)==0 && c!='\b'){
+            if(i==11){
+                rg[i] = c;
+                i++;
+                printf ("%c", c); 
+            }
+        }
+        else if(c=='\b' && i){
+            if (i==3 || i==7 || i==11){
+                printf("\b \b");
+                i--;
+                printf("\b \b");
+                i--;
+                rg[i]='\0';
+            }
+            else{
+                printf("\b \b");
+                i--;
+                rg[i]='\0';
+            }
+        }
+    }while(c!=13);
+
+    rg[i]='\0';
+
+    return 0;
+}
+*/
