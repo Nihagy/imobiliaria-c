@@ -25,16 +25,16 @@
 
 // Variavel Global
 char opcao;
-struct {
-    Nome[40];
-    telefone/cel[11];
-    Nasc[10];
-    sexo[3];
-    email[30];
-    rg[11];
-    cpf[11];
-    est_civil[10];
-}dados;
+// struct {
+//     Nome[40];
+//     telefonecel[11];
+//     Nasc[10];
+//     sexo[3];
+//     email[30];
+//     rg[11];
+//     cpf[11];
+//     est_civil[10];
+// }dados;
 
 
 
@@ -108,6 +108,7 @@ void MenuCliente(){
 
 }
 
+
 //2
 void MenuCorretor(){
 
@@ -148,6 +149,7 @@ void MenuCorretor(){
 			break;
 	}
 }
+
 
 //3
 void MenuImoveis(){
@@ -190,6 +192,7 @@ void MenuImoveis(){
 	}
 }
 
+
 //4
 void MenuAjuda(){
 
@@ -200,6 +203,7 @@ void MenuAjuda(){
     printf("MENU AJUDA\n\n");
     system("pause");
 }
+
 
 //5
 void MenuUtilidades(){
@@ -212,7 +216,7 @@ void MenuUtilidades(){
 
     //título do programa
     SetConsoleTitle("Imobliaria - Utilidades");
-   
+
     printf ("Escolha um programa para abrir\n\n");
     printf ("\t1 - Calculadora\n\n");
     printf ("\t2 - Bloco de notas\n\n");
@@ -223,10 +227,10 @@ void MenuUtilidades(){
     printf ("\t7 - Menu Principal\n\n");
     printf ("Obs.: Algumas opcoes acima só irá abrir se o mesmo estiver instalado no computador.\n\n");
 
-   
+
     //tenta implementar o gotoxy da biblioteca conio.h
     printf ("Digite a opção desejada: ");
-   
+
     do{
         ctrNumber(&opcao);
         switch (opcao){
@@ -273,6 +277,7 @@ void MenuUtilidades(){
     system("pause");
 }
 
+
 //6
 void MenuTeste(){
 
@@ -283,6 +288,7 @@ void MenuTeste(){
     printf("MENU Teste");
     system("pause");
 }
+
 
 //7
 void MenuSimulado(){
@@ -308,6 +314,7 @@ void MenuSimulado(){
 			break;
 	}
 }
+
 
 //Redireciona para qual menu vai acessar de acordo com as opcão
 int main(){
