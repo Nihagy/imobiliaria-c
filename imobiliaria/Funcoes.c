@@ -181,8 +181,14 @@ void ctr(char *c){
 
 }
 
-
-
+void senhaOculta(char *senha){
+    int c = 0;
+    while((senha[c] = getch())!=13){
+        printf("*");
+        c++;
+    }
+    senha[c] = '\0';
+}
 
 //---------------------------------- CLIENTE-----------CLIENTE------------------CLIENTE-----------------------
 
@@ -244,7 +250,7 @@ void BuscarCliente(){
 	  char texto_str[50];// array de string
 
 	  // fa?o a atribuai??o do meu ponteiro para qual arquivo quero abrir e como vai ser a abertura dele.
-	  Leitura = fopen("c:/Cliente.txt", "r");
+	  Leitura = fopen("Cliente.txt", "r");
 	  	//fa?o um loop aqui para nao parar de ler enquanto nao achar algo igual a null
 	  	while(fgets(texto_str, 20, Leitura) != NULL)
 	  	{
