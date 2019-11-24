@@ -25,7 +25,6 @@
 
 int ctr(char *c){
 
-    //char c;
     char ctrLimitar[2];
     unsigned int i=0, cont=0, enter=0;
 
@@ -59,7 +58,6 @@ int ctr(char *c){
                     printf(" \b");
                 }
             }
-
         }
         else{
             enter++;
@@ -81,7 +79,6 @@ int ctr(char *c){
     *c = ctrLimitar[0];
     // return ctrLimitar[0];
     return 0;
-
 }
 
 
@@ -139,8 +136,6 @@ int ctrNumber(char *num){
     *num = ctrLimitar[0];
     return ctrLimitar[0];
 }
-
-
 
 
 
