@@ -138,5 +138,177 @@ int ctrNumber(char *num){
 }
 
 
+void ctrAlnum(char *chart){
+
+    unsigned char ctrLimitar[2];
+    unsigned int i = 0, cont=0, enter=0;
+
+    do{
+		cont++;
+        *chart=getch();
+        if (*chart != 13){
+            if (isalnum(*chart)!=0){
+                if (i < 1){
+                    ctrLimitar[i] = *chart;
+                    i++;
+                    printf ("%c", *chart);
+                }
+                else if(*chart!='\b' && i){
+                    if(i==1){
+                        printf("\b");
+                        ctrLimitar[i]='\0';
+                        i--;
+                        printf ("%c", *chart);
+                        printf("\b");
+                    }
+                }
+            }
+            else if(*chart=='\b'){
+                cont=0;
+                enter=0;
+                if(i==1){
+                    printf("\b \b");
+                    i--;
+                }else if(i==0){
+                    printf(" \b");
+                }
+            }
+        }else{
+            enter++;
+            if(cont==1 && enter==1){
+                cont=0;
+                enter=0;
+                printf(" \b");
+            }else{
+                if(i==0 && cont>1){
+                    i=2;
+                }
+                else if(i!='\0'){
+                    i=2;
+                }
+            }
+        }
+    }while(i<2);
+
+    *chart = ctrLimitar[0];
+}
+
+
+void strPlus(char *var, int tam){
+
+    char c;
+    int i=0;
+    do{
+        c=getch();
+        if(i < tam-1){
+            if (c !=8 || c == 32){
+                var[i] = c;
+                i++;
+                printf ("%c", c);
+            }
+            else if(c==8&&i){
+                var[i]='\0';
+                i--;
+                printf("\b \b");
+            }
+        }
+        else if(c==8&&i){
+            var[i]='\0';
+            i--;
+            printf("\b \b");
+        }
+    }while(c!=13);
+
+    var[i]='\0';
+}
+
+
+void strPlusAl(char *var, int tam){
+
+    char c;
+    int i=0;
+    do{
+        c=getch();
+        if(i < tam-1){
+            if (isalpha(c) !=0 || c == 32){
+                var[i] = c;
+                i++;
+                printf ("%c", c);
+            }
+            else if(c=='\b'&&i){
+                var[i]='\0';
+                i--;
+                printf("\b \b");
+            }
+        }
+        else if(c=='\b'&&i){
+            var[i]='\0';
+            i--;
+            printf("\b \b");
+        }
+    }while(c!=13);
+
+    var[i]='\0';
+}
+
+
+void strPlusNum(char *var, int tam){
+
+    char c;
+    int i=0;
+    do{
+        c=getch();
+        if(i < tam-1){
+            if (isdigit(c) !=0 || c == 32){
+                var[i] = c;
+                i++;
+                printf ("%c", c);
+            }
+            else if(c=='\b'&&i){
+                var[i]='\0';
+                i--;
+                printf("\b \b");
+            }
+        }
+        else if(c=='\b'&&i){
+            var[i]='\0';
+            i--;
+            printf("\b \b");
+        }
+    }while(c!=13);
+
+    var[i]='\0';
+}
+
+
+void strPlusAlnum(char *var, int tam){
+
+    char c;
+    int i=0;
+    do{
+        c=getch();
+        if(i < tam-1){
+            if (isalnum(c) !=0 || c == 32){
+                var[i] = c;
+                i++;
+                printf ("%c", c);
+            }
+            else if(c==8&&i){
+                var[i]='\0';
+                i--;
+                printf("\b \b");
+            }
+        }
+        else if(c==8&&i){
+            var[i]='\0';
+            i--;
+            printf("\b \b");
+        }
+    }while(c!=13);
+
+    var[i]='\0';
+}
+
+
 
 #endif // STRING++_H_INCLUDED
