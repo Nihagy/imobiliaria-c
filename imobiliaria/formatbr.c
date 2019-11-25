@@ -1,6 +1,6 @@
 // funcões para formatar e colocar mascara em rg, cpf, data entre outras coisas
 
-void dataf(char data[11]){
+void dataf(char *data){
 
 	//unsigned char data[11];
 	char c;
@@ -177,7 +177,7 @@ void dataf(char data[11]){
 }
 
 
-int emailf(char email[40]) {
+int emailf(char *email) {
 
     int tam=strlen(email);
     int arroba = 0, charAntes = 0, pontoAntes = 0, pontoDepois = 0, i;
@@ -200,7 +200,7 @@ int emailf(char email[40]) {
                 }
                 else if (arroba) {
                     if (arroba >1){
-                        break; 
+                        break;
                     }
                     else if(email[i] == '.') {
                         pontoDepois++;
@@ -226,7 +226,7 @@ int emailf(char email[40]) {
 }
 
 
-void main(char rg[]){
+void rgm(char rg[]){
 
     char c;
     unsigned int i=0;
@@ -255,7 +255,7 @@ void main(char rg[]){
             if(i==11){
                 rg[i] = c;
                 i++;
-                printf ("%c", c); 
+                printf ("%c", c);
             }
         }
         else if(c=='\b' && i){
@@ -278,7 +278,7 @@ void main(char rg[]){
 }
 
 
-void main(char cpf[]){
+void cpfm(char cpf[]){
 
     char c;
     unsigned int i=0;

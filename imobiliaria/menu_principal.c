@@ -11,7 +11,7 @@
 #include <stdlib.h>
 #include <windows.h> // importar para usar algun comandos do windows principalmente na parte de utilidades
 #include "funcoes.c"
-#include "formatbr.c"
+// #include "formatbr.c"
 
 
 
@@ -77,11 +77,9 @@ void MenuCliente(){
 	        "(2) - Editar Cadastro\n"
 	        "(3) - Buscar Cliente\n"
 	        "(4) - Excluir Cliente\n"
+	        "(5) - Relatório Cliente\n"
 	        "(0) - Menu Principal\n"
 	        "Entre com a opção desejada: ");
-	//scanf("%i", &opcao);
-	//system("cls");
-	//getchar(); // limpar o <enter> do scanf anterior
 
     ctrNumber(&opcao);
 
@@ -97,6 +95,9 @@ void MenuCliente(){
 			break;
         case '4': // Excluir Cliente
 			MenuPrincipal();
+			break;
+        case '5': // Excluir Cliente
+			RelatorioCliente();
 			break;
 		case '0':// Voltar para o Menu Principal
             MenuPrincipal();

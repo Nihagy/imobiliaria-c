@@ -1,11 +1,39 @@
+#include <stdio.h>
+#include <locale.h>
+#include <string.h>
+#include "formatbr.c"
+
 
 // funcóes de acordo com o menu selecionado
-FILE* arquivo;
-FILE * Cliente;
-FILE * Corretor;
+FILE* Arquivo;
+FILE* Cliente;
+FILE* Corretor;
+FILE* Leitura;
 int opcaoMenu = 0;
 
 //===========================================================
+
+void TirarEspaco(char *texto){
+	int i;
+    for (i=0;i<strlen(texto);i++)
+    {
+		if (texto[i]==' ')
+		{
+			texto[i]='|';
+		}
+	}
+}
+
+void ColocarEspaco(char *texto){
+	int i;
+	for (i=0;i<strlen(texto);i++)
+	{
+		if (texto[i]=='|')
+		{
+			texto[i]=' ';
+		}
+	}
+}
 
 // outras funçoes na:
 // pasta Projeto_bibliotecaC oinde estar a biblioteca string++
@@ -193,51 +221,160 @@ void senhaOculta(char *senha){
     senha[c] = '\0';
 }
 
+void strPlus(char *var, int tam){
+
+    char c;
+    int i=0;
+    do{
+        c=getch();
+        if(i < tam-1){
+            if (c !=8 || c == 32){
+                var[i] = c;
+                i++;
+                printf ("%c", c);
+            }
+            else if(c==8&&i){
+                var[i]='\0';
+                i--;
+                printf("\b \b");
+            }
+        }
+        else if(c==8&&i){
+            var[i]='\0';
+            i--;
+            printf("\b \b");
+        }
+    }while(c!=13);
+
+    var[i]='\0';
+}
+
+void strPlusAl(char *var, int tam){
+
+    char c;
+    int i=0;
+    do{
+        c=getch();
+        if(i < tam-1){
+            if (isalpha(c) !=0 || c == 32){
+                var[i] = c;
+                i++;
+                printf ("%c", c);
+            }
+            else if(c=='\b'&&i){
+                var[i]='\0';
+                i--;
+                printf("\b \b");
+            }
+        }
+        else if(c=='\b'&&i){
+            var[i]='\0';
+            i--;
+            printf("\b \b");
+        }
+    }while(c!=13);
+
+    var[i]='\0';
+}
 
 
+void strPlusNum(char *var, int tam){
+
+    char c;
+    int i=0;
+    do{
+        c=getch();
+        if(i < tam-1){
+            if (isdigit(c) !=0 || c == 32){
+                var[i] = c;
+                i++;
+                printf ("%c", c);
+            }
+            else if(c=='\b'&&i){
+                var[i]='\0';
+                i--;
+                printf("\b \b");
+            }
+        }
+        else if(c=='\b'&&i){
+            var[i]='\0';
+            i--;
+            printf("\b \b");
+        }
+    }while(c!=13);
+
+    var[i]='\0';
+}
+
+//=========Estrutura=============
+
+typedef struct {
+	char nome[50];
+	char dataNas[11];
+	char email[40];
+	char rg[13];
+	char cpf[15];
+	char tel[11];
+	char cel[11];
+	char sexo[15];
+	char estCivil[15];
+} dadosPessoais;
+
+dadosPessoais dpe;
 //--------CLIENTE-----------CLIENTE------------------CLIENTE---------------
+
+// Cadastrar Cliente
+// Editar Cadastro
+// Buscar Cliente
+// Excluir Cliente
 
 void CadastroCliente(){
 
 	// configuracao da tela
     setlocale(LC_ALL, "Portuguese");
 
-	char nome [10], nascimento[12], sexo[15], mail[40], tel[10], rg[14], cpf[14], EstadoCivil[10];
-	FILE * Cliente;
+	//FILE* Cliente;
+	Arquivo = fopen("ClienteConsulta.txt","a+");
 
-	Cliente = fopen("Cliente.txt","a++");// verificar se aqui eu abro usando o W  e depois vou usando A para adicionar.
+	Cliente = fopen("Cliente.txt","a+");// verificar se aqui eu abro usando o W  e depois vou usando A para adicionar.
 	printf("CADASTRO DE CLIENTE\n");
 
-	printf ("\nEscreva seu nome completo:");
-	gets(nome);
-	printf("Telefone:");
-	gets(tel);
-	printf("Data de Nascimento:");
-	scanf("%s",&nascimento);
-	printf("Sexo(F/M):");
-	scanf("%s",&sexo);
-	printf("Informe seu endere?o de e-mail:");
-	scanf("%s", &mail);
-	printf("N?mero de RG:");
-	scanf("%s", &rg);
-	printf("N?mero de CPF:");
-	scanf("%s", &cpf);
-	printf("Estado Civil:");
-	scanf("%s", &EstadoCivil);
+	printf ("\nEscreva seu nome completo: "); 		{} 	strPlusAl(dpe.nome, 30);
+	printf("\nTelefone: ");							{}	strPlusNum(dpe.tel, 11);
+	printf("\nData de Nascimento: ");				{}	dataf(dpe.dataNas);
+	printf("\nSexo(F/M): ");						{}	strPlusAl(dpe.sexo, 15);
+	printf("\nInforme seu endere?o de e-mail: \n");	{}	strPlusAl(dpe.email, 40);
+	printf("\nN?mero de RG: ");						{}	rgm(dpe.rg);
+	printf("\nN?mero de CPF: ");					{}	cpfm(dpe.cpf);
+	printf("\nEstado Civil: ");						{}	strPlusAl(dpe.estCivil, 15);
 
-	fprintf(Cliente,"\nNome:" "%s",nome);
-	fprintf(Cliente,"\nData de Nascimento:" "%s",nascimento);
-	fprintf(Cliente,"\nSexo:" "%s",sexo);
-	fprintf(Cliente,"\nEndere?o de e-mail:" "%s",mail);
-	fprintf(Cliente,"\nTelefone:" "%s",tel);
-	fprintf(Cliente,"\nRegistro Geral:" "%s",rg);
-	fprintf(Cliente,"\nCadastro Pessoa F?sica:" "%s",cpf);
-	fprintf(Cliente,"\n\nNome:" "%s",EstadoCivil);
-
+    fprintf(Cliente,"\n");
+	fprintf(Cliente,"\nNome:" "%s",dpe.nome);
+	fprintf(Cliente,"\nTelefone:" "%s",dpe.tel);
+	fprintf(Cliente,"\nData de Nascimento:" "%s",dpe.dataNas);
+	fprintf(Cliente,"\nSexo:" "%s",dpe.sexo);
+	fprintf(Cliente,"\nEndere?o de e-mail:" "%s",dpe.email);
+	fprintf(Cliente,"\nRegistro Geral:" "%s",dpe.rg);
+	fprintf(Cliente,"\nCadastro Pessoa F?sica:" "%s",dpe.cpf);
+	fprintf(Cliente,"\nEstado Civil::" "%s",dpe.estCivil);
+    
 	fclose(Cliente);
+    //============================================
+
+    //fprintf(Arquivo,"\n");              
+	TirarEspaco(dpe.nome);      {}  fprintf(Arquivo,"%s\n",dpe.nome);    
+	TirarEspaco(dpe.tel);       {}  fprintf(Arquivo,"%s\n",dpe.tel);     
+	TirarEspaco(dpe.dataNas);   {}  fprintf(Arquivo,"%s\n",dpe.dataNas); 
+	TirarEspaco(dpe.sexo);      {}  fprintf(Arquivo,"%s\n",dpe.sexo);    
+	TirarEspaco(dpe.email);     {}  fprintf(Arquivo,"%s\n",dpe.email);   
+	TirarEspaco(dpe.rg);        {}  fprintf(Arquivo,"%s\n",dpe.rg);      
+	TirarEspaco(dpe.cpf);       {}  fprintf(Arquivo,"\n%s\n",dpe.cpf);     
+	TirarEspaco(dpe.estCivil);  {}  fprintf(Arquivo,"%s",dpe.estCivil);
+
+    fclose(Arquivo);
 	system("cls");
 	printf("Cliente cadastrado com sucesso ! Pressione 1 para realizar um novo cadastro, ou 0 para sair:");
-	scanf("%i", &opcaoMenu);//FILE * Cliente;
+	scanf("%i", &opcaoMenu);
 
 	if(opcaoMenu==0)
 		{
@@ -251,23 +388,100 @@ void CadastroCliente(){
 
 
 void BuscarCliente(){
-	  FILE *Leitura;// tipo de arquivo FILE --> SEMPRE ELE EM MAIUSCULO
-	  char texto_str[50];// array de string
+/*
+	if (!arquivo_existe("notas.txt"))
+		return;
 
-	  // fa?o a atribuai??o do meu ponteiro para qual arquivo quero abrir e como vai ser a abertura dele.
-	  Leitura = fopen("Cliente.txt", "r");
-	  	//fa?o um loop aqui para nao parar de ler enquanto nao achar algo igual a null
-	  	while(fgets(texto_str, 20, Leitura) != NULL)
-	  	{
-	  	 	printf("%s", texto_str);
-	  	}
-	  //fechando o arquivo
-	  fclose(Leitura);
-	  getch();
-	  return(0);
+	printf("\n\nListagem do cadastro\n\n");
+	Arquivo = fopen("Cliente.txt","r"); // abrir arquivo em modo leitura
+	while(!feof(Arquivo))
+	{
+		fscanf(Arquivo,"%s %s %s %s %s %s %s %s\n", dpe.nome, dpe.dataNas, dpe.sexo, dpe.email, dpe.tel, dpe.rg, dpe.cpf, dpe.estCivil); // acessar os dados
+        printf("\n");
+        printf("%s",dpe.nome);
+        printf("\n");
+        printf("%s",dpe.dataNas);
+        printf("\n");
+        printf("%s",dpe.sexo);
+        printf("\n");
+        printf("%s",dpe.email);
+        printf("\n");
+        printf("%s",dpe.tel);
+        printf("\n");
+        printf("%s",dpe.rg);
+        printf("\n");
+        printf("%s",dpe.cpf);
+        printf("\n");
+        printf("%s",dpe.estCivil);
+        printf("\n");
+	}
+	fclose(Arquivo); // fechar o uso do arquivo
+
+	printf("Fim da listagem!");
+    printf("Fim da listagem!");
+    getch();
+*/
+    char texto_str[50];// array de string
+
+	// fa�o a atribuai?ao do meu ponteiro para qual arquivo quero abrir e como vai ser a abertura dele.
+	Leitura = fopen("Cliente.txt", "r");
+	//fa?o um loop aqui para nao parar de ler enquanto nao achar algo igual a null
+	while(fgets(texto_str, 5, Leitura) != NULL)
+	{
+		printf("%s", texto_str);
+	}
+	//fechando o arquivo
+	fclose(Leitura);
+	getch();
 }
 
+void RelatorioCliente(){
+	char buscaCpf[15];
+    // char texto_str[50];
+    // int i;
+	printf("\nBuscar cliente\n\n");
+	printf("Informe o cpf ");
+	cpfm(buscaCpf);
+    printf("\n");
+	Arquivo = fopen("ClienteConsulta.txt","r"); // abrir arquivo em modo leitura
+    // 	while(fgets(texto_str, 5, Leitura) != NULL)
+	// {
+	// 	for(i=0; i<(fgets(texto_str, 5, Leitura) != NULL); i++){
 
+    //     }
+	// }
+	while(!feof(Arquivo)){         
+        fscanf( Arquivo,"%s %s %s %s %s %s %s %s",
+                dpe.nome, dpe.tel,dpe.dataNas, dpe.sexo,dpe.email,dpe.rg, dpe.cpf, dpe.estCivil);    
+        // fscanf(Arquivo,"%s",dpe.cpf);      {}//  TirarEspaco(dpe.cpf);
+        // fscanf(Arquivo,"%s",dpe.nome);     {}//  ColocarEspaco(dpe.nome);
+        // fscanf(Arquivo,"%s",dpe.tel);      {}//  TirarEspaco(dpe.tel);
+        // fscanf(Arquivo,"%s",dpe.dataNas);  {}//  TirarEspaco(dpe.dataNas);
+        // fscanf(Arquivo,"%s",dpe.sexo);     {}//  TirarEspaco(dpe.sexo);
+        // fscanf(Arquivo,"%s",dpe.email);    {}//  TirarEspaco(dpe.email);
+        // fscanf(Arquivo,"%s",dpe.rg);       {}//  TirarEspaco(dpe.rg);
+        // fscanf(Arquivo,"%s",dpe.estCivil); {}//  TirarEspaco(dpe.estCivil);
+        
+		if (strcmp(dpe.cpf, buscaCpf)==0){
+            //printf(Arquivo,"\n");              
+            {
+            ColocarEspaco(dpe.nome);
+            } 
+            printf("\nNome:" "%s",dpe.nome);
+            printf("\nTelefone:" "%s",dpe.tel);     
+            printf("\nData de Nascimento:" "%s",dpe.dataNas); 
+            printf("\nSexo:" "%s",dpe.sexo);    
+            printf("\nEndere?o de e-mail:" "%s",dpe.email);   
+            printf("\nRegistro Geral:" "%s",dpe.rg);      
+            printf("\nCadastro Pessoa F?sica:" "%s",dpe.cpf);
+            printf("\nEstado Civil::" "%s",dpe.estCivil);
+            
+		}
+	}
+	fclose(Arquivo);
+	getch();
+	return(0);
+}
 
 //---------CORRETOR-----------CORRETOR--------------CORRETOR---------------
 
