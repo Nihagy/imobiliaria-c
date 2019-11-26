@@ -4,12 +4,16 @@
 #include "formatbr.c"
 
 
-// funcóes de acordo com o menu selecionado
+// variaveis globais funcóes de acordo com o menu selecionado 
 FILE* Arquivo;
 FILE* Cliente;
 FILE* Corretor;
 FILE* Leitura;
-int opcaoMenu = 0;
+FILE* arquivoNovo1;
+FILE* arquivoNovo2;
+char opcaoMenu = '0';
+char buscaCpf[15];
+
 
 //===========================================================
 
@@ -318,6 +322,9 @@ typedef struct {
 	char cel[11];
 	char sexo[15];
 	char estCivil[15];
+	char end[20];
+	char endNum[4];
+    char creci[7]
 } dadosPessoais;
 
 dadosPessoais dpe;
@@ -337,38 +344,42 @@ void CadastroCliente(){
 	Arquivo = fopen("ClienteConsulta.txt","a+");
 
 	Cliente = fopen("Cliente.txt","a+");// verificar se aqui eu abro usando o W  e depois vou usando A para adicionar.
-	printf("CADASTRO DE CLIENTE\n");
+	printf("\n\n\n\t\tCADASTRO DE CLIENTE\n\n");
 
 	printf ("\nEscreva seu nome completo: "); 		{} 	strPlusAl(dpe.nome, 30);
+    printf("\nendereco S/ número: ");				{}	strPlusAl(dpe.end, 20);
+    printf("\nNúmero do endereco: ");				{}	strPlusNum(dpe.endNum, 4);
 	printf("\nTelefone: ");							{}	strPlusNum(dpe.tel, 11);
 	printf("\nData de Nascimento: ");				{}	dataf(dpe.dataNas);
 	printf("\nSexo(F/M): ");						{}	strPlusAl(dpe.sexo, 15);
-	printf("\nInforme seu endere?o de e-mail: \n");	{}	strPlusAl(dpe.email, 40);
+	printf("\nInforme seu endere?o de e-mail: ");	{}	strPlusAl(dpe.email, 40);
 	printf("\nN?mero de RG: ");						{}	rgm(dpe.rg);
 	printf("\nN?mero de CPF: ");					{}	cpfm(dpe.cpf);
 	printf("\nEstado Civil: ");						{}	strPlusAl(dpe.estCivil, 15);
 
-    fprintf(Cliente,"\n");
 	fprintf(Cliente,"\nNome:" "%s",dpe.nome);
+	fprintf(Cliente,"\nEndereco:" "%s, %s",dpe.end,dpe.endNum);
 	fprintf(Cliente,"\nTelefone:" "%s",dpe.tel);
 	fprintf(Cliente,"\nData de Nascimento:" "%s",dpe.dataNas);
 	fprintf(Cliente,"\nSexo:" "%s",dpe.sexo);
 	fprintf(Cliente,"\nEndere?o de e-mail:" "%s",dpe.email);
 	fprintf(Cliente,"\nRegistro Geral:" "%s",dpe.rg);
-	fprintf(Cliente,"\nCadastro Pessoa F?sica:" "%s",dpe.cpf);
+	fprintf(Cliente,"\nCadastro Pessoa Fisica:" "%s",dpe.cpf);
 	fprintf(Cliente,"\nEstado Civil::" "%s",dpe.estCivil);
-    
+
 	fclose(Cliente);
     //============================================
 
-    //fprintf(Arquivo,"\n");              
-	TirarEspaco(dpe.nome);      {}  fprintf(Arquivo,"%s\n",dpe.nome);    
-	TirarEspaco(dpe.tel);       {}  fprintf(Arquivo,"%s\n",dpe.tel);     
-	TirarEspaco(dpe.dataNas);   {}  fprintf(Arquivo,"%s\n",dpe.dataNas); 
-	TirarEspaco(dpe.sexo);      {}  fprintf(Arquivo,"%s\n",dpe.sexo);    
-	TirarEspaco(dpe.email);     {}  fprintf(Arquivo,"%s\n",dpe.email);   
-	TirarEspaco(dpe.rg);        {}  fprintf(Arquivo,"%s\n",dpe.rg);      
-	TirarEspaco(dpe.cpf);       {}  fprintf(Arquivo,"\n%s\n",dpe.cpf);     
+    //fprintf(Arquivo,"\n");
+	TirarEspaco(dpe.nome);      {}  fprintf(Arquivo,"%s\n",dpe.nome);
+	TirarEspaco(dpe.end);       {}  fprintf(Arquivo,"%s\n",dpe.end);
+	TirarEspaco(dpe.endNum);    {}  fprintf(Arquivo,"%s\n",dpe.endNum);
+	TirarEspaco(dpe.tel);       {}  fprintf(Arquivo,"%s\n",dpe.tel);
+	TirarEspaco(dpe.dataNas);   {}  fprintf(Arquivo,"%s\n",dpe.dataNas);
+	TirarEspaco(dpe.sexo);      {}  fprintf(Arquivo,"%s\n",dpe.sexo);
+	TirarEspaco(dpe.email);     {}  fprintf(Arquivo,"%s\n",dpe.email);
+	TirarEspaco(dpe.rg);        {}  fprintf(Arquivo,"%s\n",dpe.rg);
+	TirarEspaco(dpe.cpf);       {}  fprintf(Arquivo,"%s\n",dpe.cpf);
 	TirarEspaco(dpe.estCivil);  {}  fprintf(Arquivo,"%s",dpe.estCivil);
 
     fclose(Arquivo);
@@ -387,56 +398,8 @@ void CadastroCliente(){
 }
 
 
-void BuscarCliente(){
-/*
-	if (!arquivo_existe("notas.txt"))
-		return;
-
-	printf("\n\nListagem do cadastro\n\n");
-	Arquivo = fopen("Cliente.txt","r"); // abrir arquivo em modo leitura
-	while(!feof(Arquivo))
-	{
-		fscanf(Arquivo,"%s %s %s %s %s %s %s %s\n", dpe.nome, dpe.dataNas, dpe.sexo, dpe.email, dpe.tel, dpe.rg, dpe.cpf, dpe.estCivil); // acessar os dados
-        printf("\n");
-        printf("%s",dpe.nome);
-        printf("\n");
-        printf("%s",dpe.dataNas);
-        printf("\n");
-        printf("%s",dpe.sexo);
-        printf("\n");
-        printf("%s",dpe.email);
-        printf("\n");
-        printf("%s",dpe.tel);
-        printf("\n");
-        printf("%s",dpe.rg);
-        printf("\n");
-        printf("%s",dpe.cpf);
-        printf("\n");
-        printf("%s",dpe.estCivil);
-        printf("\n");
-	}
-	fclose(Arquivo); // fechar o uso do arquivo
-
-	printf("Fim da listagem!");
-    printf("Fim da listagem!");
-    getch();
-*/
-    char texto_str[50];// array de string
-
-	// fa�o a atribuai?ao do meu ponteiro para qual arquivo quero abrir e como vai ser a abertura dele.
-	Leitura = fopen("Cliente.txt", "r");
-	//fa?o um loop aqui para nao parar de ler enquanto nao achar algo igual a null
-	while(fgets(texto_str, 5, Leitura) != NULL)
-	{
-		printf("%s", texto_str);
-	}
-	//fechando o arquivo
-	fclose(Leitura);
-	getch();
-}
-
 void RelatorioCliente(){
-	char buscaCpf[15];
+
     // char texto_str[50];
     // int i;
 	printf("\nBuscar cliente\n\n");
@@ -450,9 +413,9 @@ void RelatorioCliente(){
 
     //     }
 	// }
-	while(!feof(Arquivo)){         
-        fscanf( Arquivo,"%s %s %s %s %s %s %s %s",
-                dpe.nome, dpe.tel,dpe.dataNas, dpe.sexo,dpe.email,dpe.rg, dpe.cpf, dpe.estCivil);    
+	while(!feof(Arquivo)){
+        fscanf( Arquivo,"%s %s %s %s %s %s %s %s %s %s",
+                dpe.nome, dpe.end, dpe.endNum, dpe.tel, dpe.dataNas, dpe.sexo, dpe.email, dpe.rg, dpe.cpf, dpe.estCivil);
         // fscanf(Arquivo,"%s",dpe.cpf);      {}//  TirarEspaco(dpe.cpf);
         // fscanf(Arquivo,"%s",dpe.nome);     {}//  ColocarEspaco(dpe.nome);
         // fscanf(Arquivo,"%s",dpe.tel);      {}//  TirarEspaco(dpe.tel);
@@ -461,64 +424,156 @@ void RelatorioCliente(){
         // fscanf(Arquivo,"%s",dpe.email);    {}//  TirarEspaco(dpe.email);
         // fscanf(Arquivo,"%s",dpe.rg);       {}//  TirarEspaco(dpe.rg);
         // fscanf(Arquivo,"%s",dpe.estCivil); {}//  TirarEspaco(dpe.estCivil);
-        
+
 		if (strcmp(dpe.cpf, buscaCpf)==0){
-            //printf(Arquivo,"\n");              
-            {
-            ColocarEspaco(dpe.nome);
-            } 
-            printf("\nNome:" "%s",dpe.nome);
-            printf("\nTelefone:" "%s",dpe.tel);     
-            printf("\nData de Nascimento:" "%s",dpe.dataNas); 
-            printf("\nSexo:" "%s",dpe.sexo);    
-            printf("\nEndere?o de e-mail:" "%s",dpe.email);   
-            printf("\nRegistro Geral:" "%s",dpe.rg);      
-            printf("\nCadastro Pessoa F?sica:" "%s",dpe.cpf);
-            printf("\nEstado Civil::" "%s",dpe.estCivil);
-            
+            ColocarEspaco(dpe.nome);    {}  printf("\nNome:" "%s",dpe.nome);
+            ColocarEspaco(dpe.nome);    {}  printf("\nEndereco:" "%s,%s",dpe.end,dpe.endNum);
+            ColocarEspaco(dpe.nome);    {}  printf("\nTelefone:" "%s",dpe.tel);
+            ColocarEspaco(dpe.nome);    {}  printf("\nData de Nascimento:" "%s",dpe.dataNas);
+            ColocarEspaco(dpe.nome);    {}  printf("\nSexo:" "%s",dpe.sexo);
+            ColocarEspaco(dpe.nome);    {}  printf("\nEndere?o de e-mail:" "%s",dpe.email);
+            ColocarEspaco(dpe.nome);    {}  printf("\nRegistro Geral:" "%s",dpe.rg);
+            ColocarEspaco(dpe.nome);    {}  printf("\nCadastro Pessoa F?sica:" "%s",dpe.cpf);
+            ColocarEspaco(dpe.nome);    {}  printf("\nEstado Civil::" "%s",dpe.estCivil);
+
 		}
 	}
 	fclose(Arquivo);
 	getch();
-	return(0);
 }
+
+
+void BuscarCliente(){
+
+    char texto_str[60];// array de string
+
+	// fa�o a atribuai?ao do meu ponteiro para qual arquivo quero abrir e como vai ser a abertura dele.
+	Leitura = fopen("Cliente.txt", "r");
+    printf("\n`\n");
+	//fa?o um loop aqui para nao parar de ler enquanto nao achar algo igual a null
+	while(fgets(texto_str, 5, Leitura) != NULL)
+	{
+		printf("%s", texto_str);
+	}
+	//fechando o arquivo
+	fclose(Leitura);
+	getch();
+}
+
+
+void ExcluirCliente(){
+
+	printf("\nExclusão do cadastro\n\n");
+	printf("Informe o CPF referente ao cadastro que deseja excluir: ");
+	cpfm(buscaCpf);
+	Arquivo = fopen("ClienteConsulta.txt","r"); // abrir arquivo em modo leitura
+    // Cliente = fopen("Cliente.txt","r");
+	arquivoNovo1 = fopen("ClienteConsulta_novo.txt","w");
+	FILE* arquivoNovo2 = fopen("Cliente_novo.txt","w");
+	while(!feof(Arquivo)){
+
+        fscanf( Arquivo,"%s %s %s %s %s %s %s %s %s %s",
+        dpe.nome, dpe.end, dpe.endNum, dpe.tel,dpe.dataNas, dpe.sexo,dpe.email,dpe.rg, dpe.cpf, dpe.estCivil);// acessar os dados
+		if (strcmp(dpe.cpf, buscaCpf)!=0){
+            //editado
+
+            ColocarEspaco(dpe.nome);    {}  fprintf(arquivoNovo2,"\nNome:" "%s",dpe.nome);
+            ColocarEspaco(dpe.nome);    {}  fprintf(arquivoNovo2,"\nEndereco:" "%s, %s",dpe.end,dpe.endNum);
+            ColocarEspaco(dpe.nome);    {}  fprintf(arquivoNovo2,"\nTelefone:" "%s",dpe.tel);
+            ColocarEspaco(dpe.nome);    {}  fprintf(arquivoNovo2,"\nData de Nascimento:" "%s",dpe.dataNas);
+            ColocarEspaco(dpe.nome);    {}  fprintf(arquivoNovo2,"\nSexo:" "%s",dpe.sexo);
+            ColocarEspaco(dpe.nome);    {}  fprintf(arquivoNovo2,"\nEndere?o de e-mail:" "%s",dpe.email);
+            ColocarEspaco(dpe.nome);    {}  fprintf(arquivoNovo2,"\nRegistro Geral:" "%s",dpe.rg);
+            ColocarEspaco(dpe.nome);    {}  fprintf(arquivoNovo2,"\nCadastro Pessoa F?sica:" "%s",dpe.cpf);
+            ColocarEspaco(dpe.nome);    {}  fprintf(arquivoNovo2,"\nEstado Civil::" "%s",dpe.estCivil);
+            // novo em linha
+            TirarEspaco(dpe.nome);      {}  fprintf(arquivoNovo1,"%s\n",dpe.nome);
+            TirarEspaco(dpe.end);       {}  fprintf(arquivoNovo1,"%s\n",dpe.end);
+            TirarEspaco(dpe.endNum);    {}  fprintf(arquivoNovo1,"%s\n",dpe.endNum);
+            TirarEspaco(dpe.tel);       {}  fprintf(arquivoNovo1,"%s\n",dpe.tel);
+            TirarEspaco(dpe.dataNas);   {}  fprintf(arquivoNovo1,"%s\n",dpe.dataNas);
+            TirarEspaco(dpe.sexo);      {}  fprintf(arquivoNovo1,"%s\n",dpe.sexo);
+            TirarEspaco(dpe.email);     {}  fprintf(arquivoNovo1,"%s\n",dpe.email);
+            TirarEspaco(dpe.rg);        {}  fprintf(arquivoNovo1,"%s\n",dpe.rg);
+            TirarEspaco(dpe.cpf);       {}  fprintf(arquivoNovo1,"%s\n",dpe.cpf);
+            TirarEspaco(dpe.estCivil);  {}  fprintf(arquivoNovo1,"%s\n",dpe.estCivil);
+            //novo editado
+		}
+	}
+	fclose(Arquivo);
+	fclose(Cliente);
+	fclose(arquivoNovo1);
+	fclose(arquivoNovo2);
+
+	system("del ClienteConsulta.txt");
+	system("del Cliente.txt");
+	system("rename ClienteConsulta_novo.txt ClienteConsulta.txt");
+	system("rename Cliente_novo.txt Cliente.txt");
+
+	printf("Cadastro excluido");
+}
+
 
 //---------CORRETOR-----------CORRETOR--------------CORRETOR---------------
 
 void CadastroCorretor(){
-	char nome [10], tel[12],end[15];
 
-	Corretor = fopen("Corretor.txt","a++");// verificar se aqui eu abro usando o W  e depois vou usando A para adicionar.
+    Arquivo = fopen("CorretorConsulta.txt","a+");
+	Corretor = fopen("Corretor.txt","a+");// verificar se aqui eu abro usando o W  e depois vou usando A para adicionar.
 
-		if (Corretor == NULL)
-		{
+		if (Corretor == NULL){
 			printf("abertura nao foi bem sucedida");
 		}
-		else
-		{
+		else{
 			printf("deu bom a abertura do arquivo!\n");
 		}
 	printf("\nCADASTRO DO CORRETOR!!\n");
-	printf ("\nescreva seu nome:");
-	scanf("%s",&nome);
-	printf("telefone:");
-	scanf("%s",&tel);
-	printf("informe seu endere?o:");
-	scanf("%s",&end);
 
-	fprintf(Corretor,"\nNome:" "%s",nome);
-	//fprintf(cadastro,"%s",nome);
-	fprintf(Corretor,"\nEndereco:");
-	fprintf(Corretor,"%s",end);
-	fprintf(Corretor,"\nTelefone:");
-	fprintf(Corretor,"%s",tel);
-	fclose(Corretor);
+
+	printf ("\nEscreva seu nome completo: "); 		{} 	strPlusAl(dpe.nome, 30);
+    printf("\nendereco S/ número: ");				{}	strPlusAl(dpe.end, 15);
+    printf("\nNúmero do endereco: ");				{}	strPlusNum(dpe.endNum, 15);
+	printf("\nTelefone: ");							{}	strPlusNum(dpe.tel, 11);
+	printf("\nData de Nascimento: ");				{}	dataf(dpe.dataNas);
+	printf("\nSexo(F/M): ");						{}	strPlusAl(dpe.sexo, 15);
+	printf("\nInforme seu endere?o de e-mail: \n");	{}	strPlusAl(dpe.email, 40);
+	printf("\nN?mero de RG: ");						{}	rgm(dpe.rg);
+	printf("\nN?mero de CPF: ");					{}	cpfm(dpe.cpf);
+	printf("\nEstado Civil: ");						{}	strPlusAl(dpe.estCivil, 15);
+
+	fprintf(Cliente,"\nNome:" "%s",dpe.nome);
+	fprintf(Cliente,"\nEndereco:" "%s, %s",dpe.end,dpe.endNum);
+	fprintf(Cliente,"\nTelefone:" "%s",dpe.tel);
+	fprintf(Cliente,"\nData de Nascimento:" "%s",dpe.dataNas);
+	fprintf(Cliente,"\nSexo:" "%s",dpe.sexo);
+	fprintf(Cliente,"\nEndere?o de e-mail:" "%s",dpe.email);
+	fprintf(Cliente,"\nRegistro Geral:" "%s",dpe.rg);
+	fprintf(Cliente,"\nCadastro Pessoa F?sica:" "%s",dpe.cpf);
+	fprintf(Cliente,"\nEstado Civil::" "%s",dpe.estCivil);
+
+	fclose(Cliente);
+    //============================================
+
+    //fprintf(Arquivo,"\n");
+	TirarEspaco(dpe.nome);      {}  fprintf(Arquivo,"%s\n",dpe.nome);
+	TirarEspaco(dpe.end);       {}  fprintf(Arquivo,"%s",dpe.end);
+	TirarEspaco(dpe.endNum);    {}  fprintf(Arquivo,"%s%s",dpe.endNum);
+	TirarEspaco(dpe.tel);       {}  fprintf(Arquivo,"%s\n",dpe.tel);
+	TirarEspaco(dpe.dataNas);   {}  fprintf(Arquivo,"%s\n",dpe.dataNas);
+	TirarEspaco(dpe.sexo);      {}  fprintf(Arquivo,"%s\n",dpe.sexo);
+	TirarEspaco(dpe.email);     {}  fprintf(Arquivo,"%s\n",dpe.email);
+	TirarEspaco(dpe.rg);        {}  fprintf(Arquivo,"%s\n",dpe.rg);
+	TirarEspaco(dpe.cpf);       {}  fprintf(Arquivo,"\n%s\n",dpe.cpf);
+	TirarEspaco(dpe.estCivil);  {}  fprintf(Arquivo,"%s",dpe.estCivil);
+
+    fclose(Arquivo);
+
 	printf("Cadastrado Com sucesso!!");
 
-	printf("Cliente cadastrado com sucesso ! Pressione 1 para realizar um novo cadastro, ou 0 para sair:");
-	scanf("%i", &opcaoMenu);//FILE * Cliente;
+	printf("\n\nCliente cadastrado com sucesso ! Pressione 1 para realizar um novo cadastro, ou 0 para sair:");
+	ctrNumber(&opcaoMenu);
 
-	if(opcaoMenu==0)
+	if(opcaoMenu == '0')
 		{
 			MenuCliente();
 		}
@@ -526,30 +581,30 @@ void CadastroCorretor(){
 		{
 			CadastroCliente();
 		}
+
 }
 
 
 void ExcluirCorretor(){
 
-	char nome [10], tel[12],end[15];
-	printf("\nExclus�o do cadastro\n\n");
-	printf("Informe o RA que deseja remover: ");
-	scanf("%s",&nome);
-	Corretor = fopen("Corretor.txt","r"); // abrir arquivo em modo leitura
-	FILE* arquivoNovo = fopen("CadastroCorretor_novo.txt","r"); // abrir arquivo em modo escrita
-	while(!feof(Corretor))
-	{
-		fscanf(Corretor,"%s %s %s \n", &nome, &end, &tel); // acessar os dados
-		if (strcmp(nome, nome)!=0) // se o RA lido for diferente do desejado para exluir, grava no arquivo novo
-		{
-			fprintf(arquivoNovo,"%s %s %s \n", &nome, &end, &tel); // escrever dados no arquivo novo
-		}
-	}
-	fclose(Corretor); // fechar o uso do arquivo
-	fclose(arquivoNovo); // fechar o uso do arquivo
+	// printf("\nExclusão do cadastro\n\n");
+	// printf("Informe o CPF referente ao cadastro que deseja excluir: ");
+	// cpfm(buscaCpf);
+	// Corretor = fopen("CorretorConsultar.txt","r"); // abrir arquivo em modo leitura
+	// FILE* arquivoNovo = fopen("CadastroCorretor_novo.txt","r"); // abrir arquivo em modo escrita
+	// while(!feof(Corretor))
+	// {
+	// 	fscanf(Corretor,"%s %s %s \n", &nome, &end, &tel); // acessar os dados
+	// 	if (strcmp(nome, nome)!=0) // se o RA lido for diferente do desejado para exluir, grava no arquivo novo
+	// 	{
+	// 		fprintf(arquivoNovo,"%s %s %s \n", &nome, &end, &tel); // escrever dados no arquivo novo
+	// 	}
+	// }
+	// fclose(Corretor); // fechar o uso do arquivo
+	// fclose(arquivoNovo); // fechar o uso do arquivo
 
-	system("del CadastroCorretor.txt");
-	system("rename CadastroCorretor_novo.txt CadastroCorretor.txt");
+	// system("del CadastroCorretor.txt");
+	// system("rename CadastroCorretor_novo.txt CadastroCorretor.txt");
 
 	printf("Fim da exclus�o!");
 }
