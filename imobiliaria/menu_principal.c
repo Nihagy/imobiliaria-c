@@ -16,22 +16,7 @@
 
 
 //Configuracão
-#define  PRETO          0
-#define  AZUL_ESCURO     1
-#define  CINZA_ESCURO     2
-#define  DARK_CYAN      3
-#define  VERMELHO_ESCURO       4
-#define  DARK_MAGENTA   5
-#define  DARK_YELLOW    6
-#define  DARK_WHITE     7
-#define  CINZA          8
-#define  AZUL           9
-#define  VERDE          10
-#define  AZUL_CLARO     11
-#define  VERMELHO       12
-#define  MAGENTA        13
-#define  AMARELO        14
-#define  BRANCO         15
+
 
 
 // contantes
@@ -81,6 +66,7 @@ void MenuCliente(Console){
     //char opc;
     // configuracao da tela
     setlocale(LC_ALL, "Portuguese");
+    SetConsoleTextAttribute(Console, DARK_CYAN); 
 
 	printf("\n\n\n\t\tMENU CLIENTE\n\n");
 
@@ -105,7 +91,7 @@ void MenuCliente(Console){
 
 	switch(opcao){
 		case '1': // Cadastro Cliente
-			CadastroCliente();
+			CadastroCliente(Console);
 			break;
 		case '2': // Editar Cadastro
 			RelatorioCliente();
@@ -117,7 +103,7 @@ void MenuCliente(Console){
 			ExcluirCliente();
 			break;
         case '5': // Excluir Cliente
-			BuscarCliente();
+			BuscarCliente(Console);
 			break;
 		case '0':// Voltar para o Menu Principal
             main();
