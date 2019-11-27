@@ -25,19 +25,6 @@
 
 // Variavel Global
 char opcao;
-// struct {
-//     Nome[40];
-//     telefonecel[11];
-//     Nasc[10];
-//     sexo[3];
-//     email[30];
-//     rg[11];
-//     cpf[11];
-//     est_civil[10];
-// }dados;
-
-
-
 
 
 // Tela login
@@ -47,15 +34,14 @@ char opcao;
 
 //Menu Incial com as opcões
 void MenuPrincipal(){
-	//printf("IMÓBILIARIA \n");
 
     setlocale(LC_ALL, "Portuguese");
-	SetConsoleTitle("IMOBILIÁRIA");
+	SetConsoleTitle("IMOBILIARIA");
 
 	printf(	"\n\t\t\t\tIMOBILIARIA \n\n\n"
-			"\n\n\t1 - CLIENTE     ||" "\t4 - AJUDA\t|| "       "7 - TESTES"
-			"\n\n\t2 - CORRETOR    ||" "\t5 - UTILIDADES\t|| "  "0 - Sair"
-			"\n\n\t3 - IMÓVEIS    ||" "\t6 - Simulacao\t|| "
+			"\n\n\t1 -> CLIENTE     ||" "\t4 -> AJUDA\t\t|| "       "\t7 -> SOBRE"
+			"\n\n\t2 -> CORRETOR    ||" "\t5 -> UTILIDADES\t\t|| "  "\t0 -> SAIR"
+			"\n\n\t3 -> IMÓVEIS    ||" "\t6 -> SIMULAÇÃO\t|| "
 			"\n\nEntre com a o desejada: ");
 }
 
@@ -63,27 +49,29 @@ void MenuPrincipal(){
 //Numero correspodente aa opcao do menu
 //1
 void MenuCliente(Console){
-    //char opc;
+
     // configuracao da tela
     setlocale(LC_ALL, "Portuguese");
-    SetConsoleTextAttribute(Console, DARK_CYAN); 
+    SetConsoleTitle("IMOBILIARIA - ClIENTES");
+    SetConsoleTextAttribute(Console, DARK_CYAN);
 
 	printf("\n\n\n\t\tMENU CLIENTE\n\n");
 
-    SetConsoleTextAttribute(Console, VERDE);    {}  printf( "\n\t1 - ");
-    SetConsoleTextAttribute(Console, BRANCO);   {}  printf( "Cadastrar Cliente");
-    SetConsoleTextAttribute(Console, VERDE);    {}  printf( "\n\t2 - ");
-    SetConsoleTextAttribute(Console, BRANCO);   {}  printf( "lista de Cliente");
-    SetConsoleTextAttribute(Console, VERDE);    {}  printf( "\n\t3 - ");
-    SetConsoleTextAttribute(Console, BRANCO);   {}  printf( "Editar Cadastro");
-    SetConsoleTextAttribute(Console, VERDE);    {}  printf( "\n\t4 - ");
-    SetConsoleTextAttribute(Console, BRANCO);   {}  printf( "Excluir Cliente");
-    SetConsoleTextAttribute(Console, VERDE);    {}  printf( "\n\t5 - ");
-    SetConsoleTextAttribute(Console, BRANCO);   {}  printf( "Buscar Cliente");
-    SetConsoleTextAttribute(Console, VERMELHO); {}  printf( "\n\t0 - ");
-    SetConsoleTextAttribute(Console, BRANCO);   {}  printf( "Menu Principal");
+    // Comando para cor de um lado e o que vai ser exbido na tel do outro de acordo com a cor
+    SetConsoleTextAttribute(Console, BRANCO);   {}  printf( "\n\t1 <-> ");
+    SetConsoleTextAttribute(Console, VERDE);    {}  printf( "Cadastrar Cliente");
+    SetConsoleTextAttribute(Console, BRANCO);   {}  printf( "\n\t2 <-> ");
+    SetConsoleTextAttribute(Console, VERDE);    {}  printf( "lista de Cliente");
+    // SetConsoleTextAttribute(Console, VERDE);    {}  printf( "\n\t3 - ");
+    // SetConsoleTextAttribute(Console, BRANCO);   {}  printf( "Editar Cadastro");
+    SetConsoleTextAttribute(Console, BRANCO);   {}  printf( "\n\t3 <-> ");
+    SetConsoleTextAttribute(Console, VERDE);    {}  printf( "Excluir Cliente");
+    SetConsoleTextAttribute(Console, BRANCO);   {}  printf( "\n\t4 <-> ");
+    SetConsoleTextAttribute(Console, VERDE);    {}  printf( "Buscar Cliente");
+    SetConsoleTextAttribute(Console, BRANCO);   {}  printf( "\n\t0 <-> ");
+    SetConsoleTextAttribute(Console, VERMELHO); {}  printf( "Menu Principal");
 
-    SetConsoleTextAttribute(Console, DARK_CYAN); 
+    SetConsoleTextAttribute(Console, DARK_CYAN);
     printf("\n\nEntre com a opção desejada: ");
 
     SetConsoleTextAttribute(Console, VERDE);
@@ -93,16 +81,16 @@ void MenuCliente(Console){
 		case '1': // Cadastro Cliente
 			CadastroCliente(Console);
 			break;
-		case '2': // Editar Cadastro
-			RelatorioCliente();
+		case '2': // listar Cadastro
+			ListarCliente(Console);
 			break;
-        case '3': // Buscar Cliente
-			main();
-			break;
-        case '4': // Excluir Cliente
+        // case '3': // Editar Cliente
+		// 	main();
+		// 	break;
+        case '3': // Excluir Cliente
 			ExcluirCliente();
 			break;
-        case '5': // Excluir Cliente
+        case '4': // Buscar Cliente
 			BuscarCliente(Console);
 			break;
 		case '0':// Voltar para o Menu Principal
@@ -117,37 +105,38 @@ void MenuCliente(Console){
 
 
 //2
-void MenuCorretor(){
+void MenuCorretor(Console){
 
     // configuracao da tela
     setlocale(LC_ALL, "Portuguese");
+    SetConsoleTitle("IMOBILIARIA - CORRETOR");
 
     printf("MENU Corretor");
 
-	printf( "\n1 - Cadastrar Corretor\n"
-	        "2 - lista de Corretores\n"
-            "3 - Editar Cadastro\n"
-	        "4 - Excluir Corretor\n"// estudar se aqui ? o lugar certo de comissao.
-            "5 - Buscar Corretor\n"
+	printf( "\n1 <-> Cadastrar Corretor\n"
+	        "2 <-> lista de Corretores\n"
+            // "3 - Editar Cadastro\n"
+	        "3 <-> Excluir Corretor\n"// estudar se aqui ? o lugar certo de comissao.
+            "4 <-> Buscar Corretor\n"
 	        "0 - Menu Principal\n");
 	printf("Digite o numero da opçção desejada: ");
 
     ctrNumber(&opcao);
 
-    	switch(opcao){
+    switch(opcao){
 		case '1': // Cadastro Corretor
 			CadastroCorretor();
 			break;
-		case '2': // Editar Cadastro
-			main();
+		case '2': // Listar Cadastro
+			ListarCorretor();
 			break;
-        case '3': // Buscar Corretor
-			main();
-			break;
-        case '4': // Excluir Corretor
+        // case '3': // Editar Corretor
+		// 	main();
+		// 	break;
+        case '3': // Excluir Corretor
 			ExcluirCorretor();
 			break;
-        case '5': // Excluir Corretor
+        case '4': // Excluir Corretor
 			BuscarCorretor();
 			break;
 		case '0':// Voltar para o Menu Principal
@@ -161,36 +150,39 @@ void MenuCorretor(){
 
 
 //3
-void MenuImoveis(){
+void MenuImoveis(Console){
 
     // configuracao da tela
     setlocale(LC_ALL, "Portuguese");
+    SetConsoleTitle("IMOBILIARIA - IMOVEIS");
 
 	printf("MENU IMOVEIS");
 
-	printf( "\n\n(1) - Cadastro Imóvel\n"
-	        "(2) - Buscar Imóvel\n"
-	        "(3) - Alteracao no Imóvel\n"
-	        "(4) - Excluir Imóvel\n"
-	        "(0) - Voltar\n");
+	printf( "\n\n1 <-> Cadastro Imóvel\n"
+            "2 <-> Lista de Imóveis"
+	        // "3 <-> Alterar Imóvel\n"
+	        "3 <-> Excluir Imóvel\n"
+	        "4 <-> Buscar Imóvel\n"
+	        "0 <-> Voltar\n");
 
-    printf("Entre com a opcao desejada: ");
+    printf("Entre com a opção desejada: ");
     ctrNumber(&opcao);
 
 	switch(opcao){
 		case '1': // Cadastro Imóvel
 			CadastroImovel();
 			break;
-		case '2': // Buscar Imóvel
-			BuscarCadastroImovel();
+		case '2': // Lista com tod imóveis
+            ListarImovel(Console);
 			break;
-        case '3': // Alteracao Cadastro
+        case '3': //Excluir imóvel
+			ExcluiImovel();
+			break;
+        case '4': // Buscar Imóvel
+			BuscarImovel();
 			main();
 			break;
-        case '4': // Excluir Imóvel
-			main();
-			break;
-        // case 5: // Leitura Cadastro
+        // case 5: //
 		// 	MenuPrincipal();
 		// 	break;
 		case '0': //Voltar
@@ -207,6 +199,7 @@ void MenuAjuda(){
 
     // configuracao da tela
     setlocale(LC_ALL, "Portuguese");
+    SetConsoleTitle("IMOBILIARIA - AJUDA");
 
 
     printf("MENU AJUDA\n\n");
@@ -221,18 +214,18 @@ void MenuUtilidades(){
     setlocale(LC_ALL, "Portuguese");
 
     //título do programa
-    SetConsoleTitle("Imobliaria - Utilidades");
-    
+    SetConsoleTitle("Imobliaria - UTILIDADES");
+
 
     printf( "MENU Utilidade"
             "Escolha um programa para abrir\n\n"
-            "\t1 - Calculadora\n\n"
-            "\t2 - Bloco de notas\n\n"
-            "\t3 - WordPad\n\n"
-            "\t4 - Microsoft Word\n\n"
-            "\t5 - Microsoft Excel\n\n"
-            "\t6 - Microsoft chrome\n\n"
-            "\t7 - Menu Principal\n\n"
+            "\t1 <-> Calculadora\n\n"
+            "\t2 <-> Bloco de notas\n\n"
+            "\t3 <-> WordPad\n\n"
+            "\t4 <-> Microsoft Word\n\n"
+            "\t5 <-> Microsoft Excel\n\n"
+            "\t6 <-> Microsoft chrome\n\n"
+            "\t7 <-> Menu Principal\n\n"
             "Obs.: Algumas opcoes acima só irá abrir se o mesmo estiver instalado no computador.\n\n");
 
 
@@ -283,42 +276,66 @@ void MenuUtilidades(){
 
 
 //6
-void MenuTeste(){
+void MenuSimulado(){
 
-    // configuracao da tela
-    setlocale(LC_ALL, "Portuguese");
+    SetConsoleTitle("IMOBILIARIA - SIMULADO");
+	printf("MENU Simulado");
+
+	printf("\n\n(1) <-> Simulacao tabela SAC\n");
+	printf("(2) <-> Simulacao tabela Price\n");
+	printf("(0) <-> Menu Pricipal\n");
+	printf("Entre com a opção desejada: ");
+    ctrNumber(&opcao);
 
 
-    printf("MENU Teste");
-    system("pause");
+	switch(opcao){
+		case '1': // tabela SAC
+			SimularFinanciamento();
+			break;
+		case '2': // tabela Price
+            main();
+			break;
+		// case '3': // Voltar
+        //     main();
+		// 	break;
+		case 0: // Voltar Menu Pricipal
+            main();
+			break;
+		default:
+			printf("Opção Invalida");
+			break;
+	}
 }
 
 
 //7
-void MenuSimulado(){
-	printf("MENU Simulado");
+void MenuSobre(Console){
 
-	printf("\n\n(1) - Simulacao financiamento\n");
-	printf("(2) - Comissao por locacao\n");
-	printf("(3) - Comissao por venda\n");
-	printf("(0) - Voltar\n");
-	printf("Entre com a opção desejada: ");
-	scanf("%i", &opcao);
-	getchar(); // limpar o <enter> do scanf anterior
-	system("cls");
 
-	switch(opcao){
-		case 1: // Simula??o financiamento
-			SimularFinanciamento();
-			break;
-		case 0: // Voltar
-            main();
-			break;
-		default:
-			printf("Op??o inv?lida");
-			break;
-	}
+    SetConsoleTextAttribute(Console, BRANCO);
+
+    printf( "A BI tecnology foi formada por dois estudantes e tamebem programadores com grandes sonhos e muita criatividade. "
+            "\n\nObrigado por adquirir um dde nossos software, espero que goste e obrigado por nos escolher."
+            "\nAtesiosamente Isac e Valdenor CEOs da BI Tecnology.!");
+    printf( "\n\n\nUma supresa para você cliente, no software adquirido tem menus secretos que em breve estará disponivel em uma breve atulaização"
+            "\nDigite 1,2 ou 3 para acessar esses misteriosos menus");
+
+        ctrNumber(&opcao);
+        if(opcao == '1'){
+            EditarCliente();
+        }else if(opcao == '2'){
+            EditarCorretor();
+        }else if(opcao == '3'){
+            EditarImovel();
+        }else{
+            SetConsoleTextAttribute(Console, VERMELHO);
+            printf("\n\n\t\t\tOpção Invalida!");
+            Sleep(500);
+            system("cls");
+            MenuSobre(Console);
+        }
 }
+
 
 
 //Redireciona para qual menu vai acessar de acordo com as opcão e todos retornam para o main
@@ -422,13 +439,12 @@ int main(){
         case '6': // Menu de Teste
             opcMenu[0] ='\0';
             system("cls");
-            MenuTeste();
-            printf("teste6");
+            MenuSimulado();
             break;
         case '7': // Menu de Simulado
             opcMenu[0] ='\0';
             system("cls");
-            MenuSimulado();
+            MenuSobre(Console);
             break;
         case '0': // sair
             system("cls");
@@ -465,3 +481,4 @@ int main(){
 
 	return 0;
 }
+
