@@ -350,16 +350,15 @@ dadosPessoais dpe;
 
 typedef struct {
 	char tipo[16];
-	char construido[4];
+	char constru[4];
 	char terreno[40];
 	char garagem[13];
 	char banheiro[11];
-	char dormitorios[15];
+	char dormi[15];
 	char end[50];
 	char endNum[5];
     double valor[11];
-    float compri[8];
-    float lagura[8];
+    float metros[10];
 } dadosImoveis;
 
 dadosImoveis dim;
@@ -906,38 +905,35 @@ void BuscarCorretor(){
 void CadastroImovel(){
 
 
-	// FILE* cadastro;
+	FILE* cadastro;
 
-	// cadastro = fopen("CadastroImovel.txt","a+");// verificar se aqui eu abro usando o W  e depois vou usando A para adicionar.
-	// printf("CADASTRO DE IMOVEL\n");
-
-
-	// printf ("\nQual e o tipo do im?vel(Aluguel ou Venda):");
-	// scanf("%s",&tipo);
-	// printf("Informe o endereco do imovel:");
-	// scanf("%s",&endereco);
-	// printf("Informe a quantidade de dormitorios:");
-	// scanf("%s",&dormitorios);
-	// printf("Quantidade de banheiros:");
-	// scanf("%s",&banheiro);
-	// printf("Quantos metros quadrados de terreno:");
-	// scanf("%s", &terreno);
-	// printf("Quantos metros quadrados construidos:");
-	// scanf("%s", &construido);
-	// printf("Tem garagem ?(S/N):");
-	// scanf("%s", &garagem);
-
-	// fprintf(cadastro,"\nTipo de negociacao:" "%s",tipo);
-	// fprintf(cadastro,"\nEndereco:" "%s", endereco);
-	// fprintf(cadastro,"\nQuantidade de dormitorios:" "%s", dormitorios);
-	// fprintf(cadastro,"\nQuantidade de banheiros:" "%s",banheiro);
-	// fprintf(cadastro,"\nMetros quadrados do terreno:" "%s", terreno);
-	// fprintf(cadastro,"\nMetros quadrados construidos:" "%s", construido);
-	// fprintf(cadastro,"\nGaragem:" "%s", garagem);
+	cadastro = fopen("CadastroImovel.txt","a+");// verificar se aqui eu abro usando o W  e depois vou usando A para adicionar.
+	printf("CADASTRO DE IMOVEL\n");
 
 
-	// fclose(cadastro);
-	// printf("Cadastrado Com sucesso!!");
+	printf ("\nQual e o tipo do imóvel");               {}strPlusAl(dim.tipo, 16);
+	printf("Informe o endereco do imovel:");            {} strPlusAl(dim.end, 16);
+	printf("Informe a quantidade de dormitorios:");     {} strPlusAl(dim.dormi, 16);
+	printf("Quantidade de banheiros:");                 {} strPlusAl(dim.banheiro, 16);
+	printf("Quantos metros quadrados de terreno:");     {} strPlusAl(dim.terreno, 16);
+	printf("Quantos metros quadrados construidos:");    {} strPlusAl(dim.constru, 16);
+	printf("Tem garagem ?(S/N):");                      strPlusAl(dim.garagem, 16);
+	printf("Quantos metros quadrados construidos:");    {} strPlusAl(dim.metros, 16);
+	printf("Tem garagem ?(S/N):");                      strPlusAl(dim.valor, 16);
+
+
+
+	fprintf(cadastro,"\nTipo de negociacao:" "%s",tipo);
+	fprintf(cadastro,"\nEndereco:" "%s", endereco);
+	fprintf(cadastro,"\nQuantidade de dormitorios:" "%s", dormitorios);
+	fprintf(cadastro,"\nQuantidade de banheiros:" "%s",banheiro);
+	fprintf(cadastro,"\nMetros quadrados do terreno:" "%s", terreno);
+	fprintf(cadastro,"\nMetros quadrados construidos:" "%s", construido);
+	fprintf(cadastro,"\nGaragem:" "%s", garagem);
+
+
+	fclose(cadastro);
+	printf("Cadastrado Com sucesso!!");
 }
 
 
@@ -1093,19 +1089,70 @@ void BuscarImovel(){
 //-------SIMULAÇÃO------------SIMULAÇÃO---------------SIMULAÇÃO--------------
 
 void SimularFinanciamento(){
-		float valorImovel, calculo1, calculo2, porcentagem;
 
-		printf("Informe o valor do imóvel R$:");
-		scanf("%f", &valorImovel);
-		printf("Informe a porcentagem para o estado de SP:");
-		scanf("%f", &porcentagem);
+    float valorImovel, calculo1, calculo2, porcentagem;
 
-		calculo1 = (porcentagem / 100) * valorImovel;
-		calculo2 = valorImovel + calculo1;
-		system("cls");
-		printf("Com a porcentagem de %.0f %%, o valor final do im?vel ser? de %.2f.", porcentagem, calculo2);
-		getch();
+    printf("Informe o valor do imóvel R$:");
+    scanf("%f", &valorImovel);
+    printf("Informe a porcentagem para o estado de SP:");
+    scanf("%f", &porcentagem);
+
+    calculo1 = (porcentagem / 100) * valorImovel;
+    calculo2 = valorImovel + calculo1;
+    system("cls");
+    printf("Com a porcentagem de %.0f %%, o valor final do im?vel ser? de %.2f.", porcentagem, calculo2);
+    getch();
+
+    //======================================================
+
+    float valor_financiado,tempo, juro_anual,saldo_devedor, juro_calculado, amortizacao, parcela,valor_parcela;
+
+ 
+
+    printf("Tabela Sac - (tbsac)\t\n\n");
+
+    printf("Valor Finaciado: ");
+
+    scanf("%f", &valor_financiado);
+
+    printf("Digite Tempo de financiamento: ");
+
+    scanf("%f ", &tempo);
+
+    printf("Digite juro_anual: ");
+
+    scanf("%f ",& juro_anual);
+
+    
+
+    saldo_devedor = valor_financiado;
+
+    juro_anual = (juro_anual /100) /12;
+
+    amortizacao = valor_financiado / tempo;
+
+    
+
+
+
+    while (parcela < tempo)
+
+    {
+
+    saldo_devedor = saldo_devedor - amortizacao;
+
+    juro_calculado = saldo_devedor * juro_anual;
+
+    valor_parcela = juro_calculado + amortizacao;
+
+    parcela = parcela + 1;
+
+    printf("parcela: %0.2f saldo: %0.2f amort.: %0.2f juros: %0.2f valor: %0.2f \n", parcela, saldo_devedor, amortizacao, juro_calculado, valor_parcela);'
+
 }
+
+
+
 
 /*
 
