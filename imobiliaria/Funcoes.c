@@ -905,85 +905,12 @@ void BuscarCorretor(){
 void CadastroImovel(){
 
 
-	FILE* cadastro;
-
-	cadastro = fopen("CadastroImovel.txt","a+");// verificar se aqui eu abro usando o W  e depois vou usando A para adicionar.
-	printf("CADASTRO DE IMOVEL\n");
-
-
-	printf ("\nQual e o tipo do imóvel");               {}strPlusAl(dim.tipo, 16);
-	printf("Informe o endereco do imovel:");            {} strPlusAl(dim.end, 16);
-	printf("Informe a quantidade de dormitorios:");     {} strPlusAl(dim.dormi, 16);
-	printf("Quantidade de banheiros:");                 {} strPlusAl(dim.banheiro, 16);
-	printf("Quantos metros quadrados de terreno:");     {} strPlusAl(dim.terreno, 16);
-	printf("Quantos metros quadrados construidos:");    {} strPlusAl(dim.constru, 16);
-	printf("Tem garagem ?(S/N):");                      strPlusAl(dim.garagem, 16);
-	printf("Quantos metros quadrados construidos:");    {} strPlusAl(dim.metros, 16);
-	printf("Tem garagem ?(S/N):");                      strPlusAl(dim.valor, 16);
-
-
-
-	fprintf(cadastro,"\nTipo de negociacao:" "%s",tipo);
-	fprintf(cadastro,"\nEndereco:" "%s", endereco);
-	fprintf(cadastro,"\nQuantidade de dormitorios:" "%s", dormitorios);
-	fprintf(cadastro,"\nQuantidade de banheiros:" "%s",banheiro);
-	fprintf(cadastro,"\nMetros quadrados do terreno:" "%s", terreno);
-	fprintf(cadastro,"\nMetros quadrados construidos:" "%s", construido);
-	fprintf(cadastro,"\nGaragem:" "%s", garagem);
-
-
-	fclose(cadastro);
-	printf("Cadastrado Com sucesso!!");
 }
 
 
 void ListarImovel(Console){
 
-    char texto_str[60];// array de string captura os dados em uma linha no arquivo
-    cont =0;
-    system("cls");
-    SetConsoleTextAttribute(Console, VERDE);
-    printf("\n\n\t\t\t\tLista de Imoveis Cadastrado\n\n");
-    SetConsoleTextAttribute(Console, BRANC_ESC);
-	Leitura = fopen("Cliente.txt", "r");
-	while(fgets(texto_str, 60, Leitura) != NULL){
-		printf("\t\t\t%s", texto_str);
-        cont++;
-        if(cont% 9==0 ){
-            printf("\n\t\t\t=======================================\n");
-        }
-	}
-	//fechando o arquivo
-	fclose(Leitura);
-    SetConsoleTextAttribute(Console, VERDE);
-    printf( "\n\n\n\t\t\t================================================"
-	        "\n\t\t\t\tCliente(s) listado com sucesso !");
-    opcaoMenu = '0';
-    if(opcaoMenu != '0'){
-        SetConsoleTextAttribute(Console, VERDE);
-        printf("\n\n\t\t\tPressione 0 para voltar ao menu cliente: ");
-    }
-    else{
-    erromenu1:
-        SetConsoleTextAttribute(Console, VERMELHO);
-        printf("\n\n\t\t\tPressione 0 para voltar ao menu cliente: ");
-    }
-    SetConsoleTextAttribute(Console, VERDE);
-	ctrNumber(&opcaoMenu);
-
-	if(opcaoMenu == '0'){
-        system("cls");
-		MenuCliente(Console);
-    }
-    else{
-        system("cls");
-        SetConsoleTextAttribute(Console, VERMELHO);
-        printf("\n\n\t\t\t    Opção invalida!");
-        Sleep(500);
-        goto erromenu1;
-    }
 }
-
 
 void EditarImovel(){
     printf("\nEditar cadastro\n\n");
@@ -997,91 +924,12 @@ void EditarImovel(){
 
 
 void ExcluiImovel(Console){
-    int i=0;
-	printf("\nExclusão do cadastro\n\n");
-	printf("Informe o CPF referente ao cadastro que deseja excluir: ");
-	cpfm(buscaCpf);
-	Arquivo = fopen("ClienteConsulta.txt","r");
-    Cliente = fopen("Cliente.txt","r");
-	arquivoNovo1 = fopen("ClienteConsulta_novo.txt","w");
-	FILE* arquivoNovo2 = fopen("Cliente_novo.txt","w");
-	while(!feof(Arquivo)){
 
-        fscanf( Arquivo,"%s %s %s %s %s %s %s %s %s %s",
-        dpe.nome, dpe.sexo, dpe.estCivil, dpe.end, dpe.endNum, dpe.dataNas, dpe.rg, dpe.cpf, dpe.tel, dpe.email);// acessar os dados
-		if (strcmp(dpe.cpf, buscaCpf)!=0){
-            //editado
-            ColocarEspaco(dpe.nome);    {}  fprintf(arquivoNovo2,"\n\nNome:" "%s",dpe.nome);
-            ColocarEspaco(dpe.nome);    {}  fprintf(arquivoNovo2,"\nSexo:" "%s",dpe.sexo);
-            ColocarEspaco(dpe.nome);    {}  fprintf(arquivoNovo2,"\nEstado Civil::" "%s",dpe.estCivil);
-            ColocarEspaco(dpe.nome);    {}  fprintf(arquivoNovo2,"\nEndereco:" "%s, %s",dpe.end,dpe.endNum);
-            ColocarEspaco(dpe.nome);    {}  fprintf(arquivoNovo2,"\nData de Nascimento:" "%s",dpe.dataNas);
-            ColocarEspaco(dpe.nome);    {}  fprintf(arquivoNovo2,"\nRegistro Geral:" "%s",dpe.rg);
-            ColocarEspaco(dpe.nome);    {}  fprintf(arquivoNovo2,"\nCadastro Pessoa F?sica:" "%s",dpe.cpf);
-            ColocarEspaco(dpe.nome);    {}  fprintf(arquivoNovo2,"\nTelefone:" "%s",dpe.tel);
-            ColocarEspaco(dpe.nome);    {}  fprintf(arquivoNovo2,"\nEndere?o de e-mail:" "%s",dpe.email);
-            // novo em linha
-            TirarEspaco(dpe.nome);      {}  fprintf(arquivoNovo1,"\n%s\n",dpe.nome);
-            TirarEspaco(dpe.sexo);      {}  fprintf(arquivoNovo1,"%s\n",dpe.sexo);
-            TirarEspaco(dpe.estCivil);  {}  fprintf(arquivoNovo1,"%s\n",dpe.estCivil);
-            TirarEspaco(dpe.end);       {}  fprintf(arquivoNovo1,"%s\n",dpe.end);
-            TirarEspaco(dpe.endNum);    {}  fprintf(arquivoNovo1,"%s\n",dpe.endNum);
-            TirarEspaco(dpe.dataNas);   {}  fprintf(arquivoNovo1,"%s\n",dpe.dataNas);
-            TirarEspaco(dpe.rg);        {}  fprintf(arquivoNovo1,"%s\n",dpe.rg);
-            TirarEspaco(dpe.cpf);       {}  fprintf(arquivoNovo1,"%s\n",dpe.cpf);
-            TirarEspaco(dpe.tel);       {}  fprintf(arquivoNovo1,"%s\n",dpe.tel);
-            TirarEspaco(dpe.email);     {}  fprintf(arquivoNovo1,"%s\n",dpe.email);
-            //novo editado
-		}else{
-            i++;
-        }
-	}
-	fclose(Arquivo);
-	fclose(Cliente);
-	fclose(arquivoNovo1);
-	fclose(arquivoNovo2);
-
-	system("del ClienteConsulta.txt");
-	system("del Cliente.txt");
-	system("rename ClienteConsulta_novo.txt ClienteConsulta.txt");
-	system("rename Cliente_novo.txt Cliente.txt");
-    if(i==1){
-        printf("Cadastro excluido");
-        printf( "\n\nCliente Excluido com sucesso !");
-
-    }
-    printf("\nPressione 1 para Excluir outro cadastro, ou 0 para sair:");
-	ctrNumber(&opcaoMenu);
-
-    do{
-        if(opcaoMenu=='0'){
-            MenuCliente(Console);
-        }
-        else if(opcaoMenu == '1'){
-            ExcluirCliente(Console);
-        }else{
-            SetConsoleTextAttribute(Console, VERMELHO);
-            printf("opção invalida!");
-        }
-    }while(opcaoMenu >= '2');
 }
 
 
 void BuscarImovel(){
-	FILE *Leitura;// tipo de arquivo FILE --> SEMPRE ELE EM MAIUSCULO
-	char texto_str[200];// array de string
 
-	// fa?o a atribuai?ao do meu ponteiro para qual arquivo quero abrir e como vai ser a abertura dele.
-	Leitura = fopen("CadastroImovel.txt", "r");
-	//fa?o um loop aqui para nao parar de ler enquanto nao achar algo igual a null
-	while(fgets(texto_str, 20, Leitura) != NULL)
-	{
-		printf("%s", texto_str);
-	}
-	//fechando o arquivo
-	fclose(Leitura);
-	getch();
-	return(0);
 }
 
 
@@ -1107,7 +955,7 @@ void SimularFinanciamento(){
 
     float valor_financiado,tempo, juro_anual,saldo_devedor, juro_calculado, amortizacao, parcela,valor_parcela;
 
- 
+
 
     printf("Tabela Sac - (tbsac)\t\n\n");
 
@@ -1123,7 +971,7 @@ void SimularFinanciamento(){
 
     scanf("%f ",& juro_anual);
 
-    
+
 
     saldo_devedor = valor_financiado;
 
@@ -1131,13 +979,11 @@ void SimularFinanciamento(){
 
     amortizacao = valor_financiado / tempo;
 
-    
 
 
 
-    while (parcela < tempo)
 
-    {
+    while (parcela < tempo){
 
     saldo_devedor = saldo_devedor - amortizacao;
 
@@ -1147,7 +993,9 @@ void SimularFinanciamento(){
 
     parcela = parcela + 1;
 
-    printf("parcela: %0.2f saldo: %0.2f amort.: %0.2f juros: %0.2f valor: %0.2f \n", parcela, saldo_devedor, amortizacao, juro_calculado, valor_parcela);'
+    printf("parcela: %0.2f saldo: %0.2f amort.: %0.2f juros: %0.2f valor: %0.2f \n", parcela, saldo_devedor, amortizacao, juro_calculado, valor_parcela);
+
+    }
 
 }
 
@@ -1159,10 +1007,10 @@ void SimularFinanciamento(){
 void SimularSac(){
     float Valor_Financiado,Tempo, Juros_ano;
     float Saldo_devedor, Juros_calc, Amortizacao, Parcela;
-    
+
     printf("Tabela Sac - (tbsac)\t\n\n");
     printf("Valor Finaciado: ");
-    scanf("%f", & Valor_Financiado); 
+    scanf("%f", & Valor_Financiado);
     printf("Tempo: ");
     scanf("%f ", & Tempo);
     printf("Juros ao ano: ");
@@ -1175,9 +1023,9 @@ void SimularSac(){
     scanf("%f ", & Amortizacao);
     printf("Parcela: ");
     scanf("%f ", & Parcela);
-    
+
     while( Parcela = (contador==contador+1){
-        if(Amortizacao==Valor_Financiado)  
+        if(Amortizacao==Valor_Financiado)
         Amortizacao==Valor Financiado/Tempo;
     }
     while{
@@ -1191,16 +1039,16 @@ void SimularSac(){
         else{
             if(Parcela==Amortizacao+Juros ao ano)
             Parcela==Amortizacao+Juros calc;
-        }     
-        
+        }
+
      system("pause");
-     
+
 }
 
 
 
 void SimularPrice(){
-    
+
 }
 */
 

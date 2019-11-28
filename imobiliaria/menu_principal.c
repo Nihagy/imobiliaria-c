@@ -28,16 +28,18 @@ char opcao;
 void MenuPrincipal(Console){
     // Nome que aparece no topo da janela
 	SetConsoleTitle("IMOBILIARIA");
-    printf( "\n\t\t\t\tIMOBILIARIA \n\n\n");
+    printf( "\n\t\t\t\tIMOBILIARIA");
 
     SetConsoleTextAttribute(Console, VERDE);
 	printf( "\n\n\n\t========================= BAIXADA BROKERS =========================\n");
     SetConsoleTextAttribute(Console, BRANCO);
 
-	printf(	"\n\n\t1 -> CLIENTE     ||" "\t4 -> SIMULAÇÃO\t|| "     "\t7 -> SOBRE"
-			"\n\n\t2 -> CORRETOR    ||" "\t5 -> UTILIDADES\t\t|| "  "\t0 -> SAIR"
-			"\n\n\t3 -> IMÓVEIS    ||"  "\t6 -> AJUDA\t\t|| ");
+	printf(	"\n\n\t1 -> CLIENTE     ||" "\t4 -> SIMULAÇÃO\t|| "     "\t7 -> AJUDA"
+			"\n\n\t2 -> CORRETOR    ||" "\t5 -> UTILIDADES\t\t|| "  "\t8 -> SOBRE"
+			"\n\n\t3 -> IMÓVEIS    ||"  "\t6 -> USUARIO\t\t|| "     "\t0 -> SAIR||");
+    SetConsoleTextAttribute(Console, VERDE);
     printf( "\n\n\t===================================================================\n");
+    SetConsoleTextAttribute(Console, BRANCO);
     printf("\nEntre com a o desejada: ");
 }
 
@@ -316,6 +318,12 @@ void MenuUtilidades(Console){
 
 
 //6
+void MenuUsuario(Console){
+    SetConsoleTextAttribute(Console, BRANCO);
+}
+
+
+//7
 void MenuAjuda(Console){
 
     // configuracao da tela
@@ -323,14 +331,16 @@ void MenuAjuda(Console){
     SetConsoleTextAttribute(Console, BRANCO);
 
     printf( "\n\n\t\t============ MENU AJUDA ==============="
+           "\t\t\t1 <-> Menu PRINCIPAL\n"
             "\n\n\t\t\t1 <-> Menu CLIENTE\n"
             "\t\t\t2 <-> Menu CORRETOR\n"
-            // "3 <-> Alterar Imóvel\n"
             "\t\t\t3 <-> Menu IMÓVEIS\n"
             "\t\t\t4 <-> Menu UTILIDADES\n"
             "\t\t\t5 <-> Menu SIMULAÇÃO\n"
+            "\t\t\t5 <-> Menu USUARIO\n"
+            "\t\t\t5 <-> Menu AJUDA\n"
             "\t\t\t6 <-> Menu SOBRE\n"
-            "\t\t\t0 <-> Voltar"
+            "\t\t\t0 <-> VOLTAR"
             "\n\n\t\t=======================================");
     printf("\n\nQual dos menus tem Duvida: ");
 
@@ -338,26 +348,77 @@ void MenuAjuda(Console){
         ctrNumber(&opcao);
 
     switch(opcao){
-        case '1': // Cadastro Corretor
-            printf("");
+        case '1': // pricipal
+            printf( "\n\n\t\tO Menu Principal é a tela pricipal, "
+                   "\n\t\t"
+                    "\n\t\tTe da acesso aos outros menus e foi ao que te trouxe aqui"
+                    "\n\t\tLinka"
+                    "\n\n\t\t\Precione qualquer tecla ara voltar: ");
+                    getch();
             break;
-        case '2': // Listar Cadastro
-            printf("");
+        case '2': // cliente
+            printf( "\n\n\t\tO Menu Cliente cria cadastro do cliente da imobiliaria, "
+                    "\n\t\tRealiza a busca do cadastro do cliente através do CPF"
+                    "\n\t\tRealiza a exclusão do cadastro de algum cliente"
+                    "\n\t\tMostrar uma Lista com todos os cliente cadastrado"
+                    "\n\n\t\t\Precione qualquer tecla ara voltar: ");
+                    getch();
             break;
-        // case '3': // Editar Corretor
-        // 	main();
-        // 	break;
-        case '3': // Excluir Corretor
-            printf("");
+        case '3': // Corretor
+            printf( "\n\n\t\tO Menu Corretor cria cadastro do corretor da imobiliaria, "
+                    "\n\t\tRealiza a busca do cadastro do corretor através do CPF"
+                    "\n\t\tRealiza a exclusão do cadastro de algum corretor"
+                    "\n\t\tMostrar uma Lista com todos os corretor cadastrado"
+                    "\n\n\t\t\Precione qualquer tecla ara voltar: ");
+                    getch();
             break;
-        case '4': // Excluir Corretor
-            printf("");
+        case '4': // imoveis
+            printf( "\n\n\t\tO Menu Imóveis cria cadastro do Imóveis da imobiliaria, "
+                    "\n\t\tRealiza a busca do cadastro do Imóveis através do CPF"
+                    "\n\t\tRealiza a exclusão do cadastro de algum Imóveis"
+                    "\n\t\tMostrar uma Lista com todos os Imóveis cadastrado"
+                    "\n\n\t\t\Precione qualquer tecla ara voltar: ");
+                    getch();
             break;
-        case '5': // Excluir Corretor
-            printf("");
+        case '5': // utilidades
+            printf( "\n\n\t\tO Menu Cliente cria cadastro do Imóveis da imobiliaria, "
+                    "\n\t\tRealiza a busca do cadastro do Imóveis através do CPF"
+                    "\n\t\tRealiza a exclusão do cadastro de algum Imóveis"
+                    "\n\t\tMostrar uma Lista com todos os Imóveis cadastrado"
+                    "\n\n\t\t\Precione qualquer tecla ara voltar: ");
+                    getch();
             break;
-        case '6': // Excluir Corretor
-            printf("");
+        case '6': // simulação
+            printf( "\n\n\t\tO Menu Simulação cria cadastro do simulação da imobiliaria, "
+                    "\n\t\tRealiza a busca do cadastro do simulação através do CPF"
+                    "\n\t\tRealiza a exclusão do cadastro de algum simulação"
+                    "\n\t\tMostrar uma Lista com todos os simulação cadastrado"
+                    "\n\n\t\t\Precione qualquer tecla ara voltar: ");
+                    getch();
+            break;
+        case '7': // usuario
+            printf( "\n\n\t\tO Menu Usuário cria cadastro do usuário da imobiliaria, "
+                    "\n\t\tRealiza a busca do cadastro do usuário através do CPF"
+                    "\n\t\tRealiza a exclusão do cadastro de algum usuário"
+                    "\n\t\tMostrar uma Lista com todos os usuário cadastrado"
+                    "\n\n\t\t\Precione qualquer tecla ara voltar: ");
+                    getch();
+            break;
+        case '8': // ajuda
+            printf( "\n\n\t\tO Menu Ajuda "
+                    "\n\t\tRealiza a busca do "
+                    "\n\t\tRealiza a exclusão do "
+                    "\n\t\tMostrar uma Lista com todos "
+                    "\n\n\t\t\Precione qualquer tecla ara voltar: ");
+                    getch();
+            break;
+        case '9': // sobre
+            printf( "\n\n\t\tO Menu Sobre"
+                    "\n\t\tRealiza "
+                    "\n\t\tRealiza"
+                    "\n\t\tMostrar "
+                    "\n\n\t\t\Precione qualquer tecla ara voltar: ");
+                    getch();
             break;
         case '0':// Voltar para o Menu Principal
             main();
@@ -373,7 +434,7 @@ void MenuAjuda(Console){
 }
 
 
-//7
+//8
 void MenuSobre(Console){
 
     SetConsoleTitle("IMOBILIARIA - SOBRE");
@@ -430,7 +491,7 @@ int main(){
     setlocale(LC_ALL, "Portuguese");
 
     system("cls");
-    MenuPrincipal();
+    MenuPrincipal(Console);
     SetConsoleTextAttribute(Console, VERDE);
     do{
         cont++;
@@ -513,11 +574,16 @@ int main(){
             break;
         case '6': // Menu de Teste
             opcMenu[0] ='\0';
+            system("cls");
+            MenuUsuario(Console);
+            break;
+        case '7': // Menu de Teste
+            opcMenu[0] ='\0';
             ajuda:
             system("cls");
             MenuAjuda(Console);
             break;
-        case '7': // Menu de Simulado
+        case '8': // Menu de Simulado
             opcMenu[0] ='\0';
             system("cls");
             MenuSobre(Console);
