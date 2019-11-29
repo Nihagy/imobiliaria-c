@@ -3,6 +3,7 @@
 #include <locale.h>
 #include <string.h>
 #include "formatbr.c"
+#include "string++.h"
 
 
 // variaveis globais funcóes de acordo com o menu selecionado
@@ -57,181 +58,18 @@ void ColocarEspaco(char *texto){
 	}
 }
 
+int arquivo_existe(char nmarq[]) {
+	FILE* arq = fopen(nmarq, "r");
+    if (arq) {
+        fclose(arq);
+        return 1;
+    }
+    return 0;
+}
+
 // outras funçoes na:
 // pasta Projeto_bibliotecaC oinde estar a biblioteca string++
 // e no arquivo formatbr.c
-void ctrAlnum(char *chart){
-
-    unsigned char ctrLimitar[2];
-    unsigned int i = 0, cont=0, enter=0;
-
-    do{
-		cont++;
-        *chart=getch();
-        if (*chart != 13){
-            if (isalnum(*chart)!=0){
-                if (i < 1){
-                    ctrLimitar[i] = *chart;
-                    i++;
-                    printf ("%c", *chart);
-                }
-                else if(*chart!='\b' && i){
-                    if(i==1){
-                        printf("\b");
-                        ctrLimitar[i]='\0';
-                        i--;
-                        printf ("%c", *chart);
-                        printf("\b");
-                    }
-                }
-            }
-            else if(*chart=='\b'){
-                cont=0;
-                enter=0;
-                if(i==1){
-                    printf("\b \b");
-                    i--;
-                }else if(i==0){
-                    printf(" \b");
-                }
-            }
-        }else{
-            enter++;
-            if(cont==1 && enter==1){
-                cont=0;
-                enter=0;
-                printf(" \b");
-            }else{
-                if(i==0 && cont>1){
-                    i=2;
-                }
-                else if(i!='\0'){
-                    i=2;
-                }
-            }
-        }
-    }while(i<2);
-
-    *chart = ctrLimitar[0];
-    //return ctrLimitar[0];
-}
-
-
-void ctrNumber(char *num){
-
-    unsigned char ctrLimitar[2];
-    unsigned int i = 0, cont=0, enter=0;
-
-    do{
-        cont++;
-        *num=getch();
-        if (*num != 13){
-            if (isdigit(*num)!=0){
-                if (i < 1){
-                    ctrLimitar[i] = *num;
-                    i++;
-                    printf ("%c", *num);
-                }
-                else if(*num!='\b' && i){
-                    if(i==1){
-                        printf("\b");
-                        ctrLimitar[i]='\0';
-                        i--;
-                        printf ("%c", *num);
-                        printf("\b");
-                    }
-                }
-            }
-            else if(*num=='\b'){
-                cont=0;
-                enter=0;
-                if(i==1){
-                    printf("\b \b");
-                    i--;
-                }else if(i==0){
-                    printf(" \b");
-                }
-            }
-        }else{
-            enter++;
-            if(cont==1 && enter==1){
-                cont=0;
-                enter=0;
-                printf(" \b");
-            }else{
-                if(i==0 && cont>1){
-                    i=2;
-                }
-                else if(i!='\0'){
-                    i=2;
-                }
-            }
-        }
-    }while(i<2);
-
-    *num = ctrLimitar[0];
-    //return ctrLimitar[0];
-}
-
-
-void ctr(char *c){
-
-    //char c;
-    char ctrLimitar[2];
-    unsigned int i=0, cont=0, enter=0;
-
-    ctrLimitar[0] == "/0";
-
-    do{
-        cont++;
-        *c =getch();
-        if (*c != 13){
-            if(i == 0 && *c!='\b' ){
-                ctrLimitar[i] = *c;
-                i++;
-                printf ("%c", *c);
-            }
-            else if(*c!='\b' && i){
-                if(i==1){
-                    printf("\b");
-                    ctrLimitar[i]='\0';
-                    i--;
-                    printf ("%c", *c);
-                    printf("\b");
-                }
-            }
-        }
-		else if(*c=='\b'){
-			cont=0;
-			enter=0;
-			if(i==1){
-				printf("\b \b");
-				i--;
-			}else if(i==0){
-				printf(" \b");
-			}
-        }
-        else{
-            enter++;
-            if(cont==1 && enter==1){
-                cont=0;
-                enter=0;
-                printf(" \b");
-            }else{
-                if(i==0 && cont>1){
-                    i=2;
-                }
-                else if(i!='\0'){
-                    i=2;
-                }
-            }
-        }
-    }while (i<2);
-
-    *c = ctrLimitar[0];
-    // return ctrLimitar[0];
-
-}
 
 
 void senhaOculta(char *senha){
@@ -241,91 +79,6 @@ void senhaOculta(char *senha){
         c++;
     }
     senha[c] = '\0';
-}
-
-void strPlus(char *var, int tam){
-
-    char c;
-    int i=0;
-    do{
-        c=getch();
-        if(i < tam-1){
-            if (c !=8 || c == 32){
-                var[i] = c;
-                i++;
-                printf ("%c", c);
-            }
-            else if(c==8&&i){
-                var[i]='\0';
-                i--;
-                printf("\b \b");
-            }
-        }
-        else if(c==8&&i){
-            var[i]='\0';
-            i--;
-            printf("\b \b");
-        }
-    }while(c!=13);
-
-    var[i]='\0';
-}
-
-void strPlusAl(char *var, int tam){
-
-    char c;
-    int i=0;
-    do{
-        c=getch();
-        if(i < tam-1){
-            if (isalpha(c) !=0 || c == 32){
-                var[i] = c;
-                i++;
-                printf ("%c", c);
-            }
-            else if(c=='\b'&&i){
-                var[i]='\0';
-                i--;
-                printf("\b \b");
-            }
-        }
-        else if(c=='\b'&&i){
-            var[i]='\0';
-            i--;
-            printf("\b \b");
-        }
-    }while(c!=13);
-
-    var[i]='\0';
-}
-
-
-void strPlusNum(char *var, int tam){
-
-    char c;
-    int i=0;
-    do{
-        c=getch();
-        if(i < tam-1){
-            if (isdigit(c) !=0 || c == 32){
-                var[i] = c;
-                i++;
-                printf ("%c", c);
-            }
-            else if(c=='\b'&&i){
-                var[i]='\0';
-                i--;
-                printf("\b \b");
-            }
-        }
-        else if(c=='\b'&&i){
-            var[i]='\0';
-            i--;
-            printf("\b \b");
-        }
-    }while(c!=13);
-
-    var[i]='\0';
 }
 
 //=========Estrutura=============
@@ -339,10 +92,10 @@ typedef struct {
 	char tel[11];
 	char cel[11];
 	char sexo[13];
-	char estCivil[10];
+	char estCivil[13];
 	char end[50];
 	char endNum[5];
-    char creci[7]
+    char creci[8]
 } dadosPessoais;
 
 dadosPessoais dpe;
@@ -365,16 +118,18 @@ dadosImoveis dim;
 
 //--------CLIENTE-----------CLIENTE------------------CLIENTE---------------
 
+//numero referente ao menu e sub menu, usei na funcao goto
+//1.1
 void CadastroCliente(Console){
 
 	// configuracao da tela
     SetConsoleTitle("IMOBILIARIA - Cadastro de Cliente");
     SetConsoleTextAttribute(Console, BRANCO);
-	//FILE* Cliente;
+    int validar;
 	Arquivo = fopen("ClienteConsulta.txt","a+");
-
 	Cliente = fopen("Cliente.txt","a+");// verificar se aqui eu abro usando o W  e depois vou usando A para adicionar.
-	printf("\n\n\n\t\tCADASTRO DE CLIENTE\n\n");
+
+    printf("\n\n\n\t\tCADASTRO DE CLIENTE\n\n");
 
 	SetConsoleTextAttribute(Console, BRANC_ESC);    {}  printf ("\nEscreva seu nome completo: ");
     SetConsoleTextAttribute(Console, VERDE);        {} 	strPlusAl(dpe.nome, 40);
@@ -383,7 +138,7 @@ void CadastroCliente(Console){
     SetConsoleTextAttribute(Console, AZUL_CLARO);   {}  strPlusAl(dpe.sexo, 13);
     //
 	SetConsoleTextAttribute(Console, VERDE);        {}  printf("\nEstado Civil: ");
-    SetConsoleTextAttribute(Console, AZUL_CLARO);   {}  strPlusAl(dpe.estCivil, 10);
+    SetConsoleTextAttribute(Console, AZUL_CLARO);   {}  strPlusAl(dpe.estCivil, 13);
     //
     SetConsoleTextAttribute(Console, BRANC_ESC);    {}  printf("\nendereco S/ número: ");
     SetConsoleTextAttribute(Console, VERDE);        {}  strPlusAl(dpe.end, 50);
@@ -401,10 +156,16 @@ void CadastroCliente(Console){
     SetConsoleTextAttribute(Console, AZUL_CLARO);   {}  cpfm(dpe.cpf);
     //
 	SetConsoleTextAttribute(Console, VERDE);        {}  printf("\nTelefone: ");
-    SetConsoleTextAttribute(Console, AZUL_CLARO);   {}  strPlusNum(dpe.tel, 11);
+    SetConsoleTextAttribute(Console, AZUL_CLARO);   {}  strPlusNum(dpe.tel, 12);
     //
+    valEmailcli:
 	SetConsoleTextAttribute(Console, VERDE);        {}  printf("\nInforme seu endere?o de e-mail: ");
-    SetConsoleTextAttribute(Console, AZUL_CLARO);   {}  strPlusAl(dpe.email, 40);
+    SetConsoleTextAttribute(Console, AZUL_CLARO);   {}  validar = emailf(dpe.email);
+    if(validar==0){
+        SetConsoleTextAttribute(Console, VERMELHO);
+        printf("\nE-mail Inválido digite novamente\n");
+        goto valEmailcli;
+    }
 
 
 	fprintf(Cliente,"\n\nNome:" "%s",dpe.nome);
@@ -436,31 +197,38 @@ void CadastroCliente(Console){
     printf("\n\nCorretor Cadastrado Com Sucesso!");
 	system("cls");
     SetConsoleTextAttribute(Console, BRANCO);
+
+    errocli1:
 	printf("Pressione 1 para realizar um novo cadastro, ou 0 para sair:");
 	ctrNumber(&opcaoMenu);
 
 	if(opcaoMenu == '0'){
+        system("cls");
 		MenuCliente(Console);
 	}
 	else if(opcaoMenu == '1'){
-        CadastroCliente();
+        system("cls");
+        CadastroCliente(Console);
     }else{
-        printf("opção invalida!");
+        SetConsoleTextAttribute(Console, VERMELHO);
+        printf("\n\n\t\t\t    Opção invalida!");
+        Sleep(500);
+    goto errocli1;
     }
-
 }
 
-
+//1.2
 void ListarCliente(Console){
 
-    char texto_str[60];// array de string captura os dados em uma linha no arquivo
+    char texto_str[150];// array de string captura os dados em uma linha no arquivo
     cont =0;
+
     system("cls");
     SetConsoleTextAttribute(Console, VERDE);
     printf("\n\n\t\t\t\tLista de Clientes Cadastrado\n\n");
     SetConsoleTextAttribute(Console, BRANC_ESC);
 	Leitura = fopen("Cliente.txt", "r");
-	while(fgets(texto_str, 60, Leitura) != NULL){
+	while(fgets(texto_str, 100, Leitura) != NULL){
 		printf("\t\t\t%s", texto_str);
         cont++;
         if(cont% 9==0 ){
@@ -473,15 +241,12 @@ void ListarCliente(Console){
     printf( "\n\n\n\t\t\t================================================"
 	        "\n\t\t\t\tCliente(s) listado com sucesso !");
     opcaoMenu = '0';
-    if(opcaoMenu != '0'){
+
+
+    errocli2:
         SetConsoleTextAttribute(Console, VERDE);
         printf("\n\n\t\t\tPressione 0 para voltar ao menu cliente: ");
-    }
-    else{
-    erromenu1:
-        SetConsoleTextAttribute(Console, VERMELHO);
-        printf("\n\n\t\t\tPressione 0 para voltar ao menu cliente: ");
-    }
+
     SetConsoleTextAttribute(Console, VERDE);
 	ctrNumber(&opcaoMenu);
 
@@ -494,13 +259,16 @@ void ListarCliente(Console){
         SetConsoleTextAttribute(Console, VERMELHO);
         printf("\n\n\t\t\t    Opção invalida!");
         Sleep(500);
-        goto erromenu1;
+    goto errocli2;
     }
 }
 
-
-void EditarCliente(){
+//1.5
+void EditarCliente(Console){
     char teste;
+
+    SetConsoleTextAttribute(Console, BRANCO);
+
     printf("\nEditar cadastro\n\n");
     printf("\n\n\t\tCASO NÃO SAIBA O CPF, PROCURE O CLIENTE NA OPCAO LISTAR CLIENTE OU BUSCAR CLIENTE\n\n");
 	printf("Informe o CPF referente ao cadastro que deseja excluir: ");
@@ -508,127 +276,149 @@ void EditarCliente(){
 
     printf( "\ntenha paciência, por favor!"
             "\nAguarde a atualização");
+    getch();
+    system("cls");
+    MenuCliente(Console);
 }
 
-
+//1.3
 void ExcluirCliente(Console){
-    int i=0;
-	printf("\nExclusão do cadastro\n\n");
-	printf("Informe o CPF referente ao cadastro que deseja excluir: ");
-	cpfm(buscaCpf);
-	Arquivo = fopen("ClienteConsulta.txt","r");
-    Cliente = fopen("Cliente.txt","r");
-	arquivoNovo1 = fopen("ClienteConsulta_novo.txt","w");
-	FILE* arquivoNovo2 = fopen("Cliente_novo.txt","w");
-	while(!feof(Arquivo)){
 
-        fscanf( Arquivo,"%s %s %s %s %s %s %s %s %s %s",
-        dpe.nome, dpe.sexo, dpe.estCivil, dpe.end, dpe.endNum, dpe.dataNas, dpe.rg, dpe.cpf, dpe.tel, dpe.email);// acessar os dados
-		if (strcmp(dpe.cpf, buscaCpf)!=0){
-            //editado
-            ColocarEspaco(dpe.nome);    {}  fprintf(arquivoNovo2,"\n\nNome:" "%s",dpe.nome);
-            ColocarEspaco(dpe.nome);    {}  fprintf(arquivoNovo2,"\nSexo:" "%s",dpe.sexo);
-            ColocarEspaco(dpe.nome);    {}  fprintf(arquivoNovo2,"\nEstado Civil::" "%s",dpe.estCivil);
-            ColocarEspaco(dpe.nome);    {}  fprintf(arquivoNovo2,"\nEndereco:" "%s, %s",dpe.end,dpe.endNum);
-            ColocarEspaco(dpe.nome);    {}  fprintf(arquivoNovo2,"\nData de Nascimento:" "%s",dpe.dataNas);
-            ColocarEspaco(dpe.nome);    {}  fprintf(arquivoNovo2,"\nRegistro Geral:" "%s",dpe.rg);
-            ColocarEspaco(dpe.nome);    {}  fprintf(arquivoNovo2,"\nCadastro Pessoa F?sica:" "%s",dpe.cpf);
-            ColocarEspaco(dpe.nome);    {}  fprintf(arquivoNovo2,"\nTelefone:" "%s",dpe.tel);
-            ColocarEspaco(dpe.nome);    {}  fprintf(arquivoNovo2,"\nEndere?o de e-mail:" "%s",dpe.email);
-            // novo em linha
-            TirarEspaco(dpe.nome);      {}  fprintf(arquivoNovo1,"\n%s\n",dpe.nome);
-            TirarEspaco(dpe.sexo);      {}  fprintf(arquivoNovo1,"%s\n",dpe.sexo);
-            TirarEspaco(dpe.estCivil);  {}  fprintf(arquivoNovo1,"%s\n",dpe.estCivil);
-            TirarEspaco(dpe.end);       {}  fprintf(arquivoNovo1,"%s\n",dpe.end);
-            TirarEspaco(dpe.endNum);    {}  fprintf(arquivoNovo1,"%s\n",dpe.endNum);
-            TirarEspaco(dpe.dataNas);   {}  fprintf(arquivoNovo1,"%s\n",dpe.dataNas);
-            TirarEspaco(dpe.rg);        {}  fprintf(arquivoNovo1,"%s\n",dpe.rg);
-            TirarEspaco(dpe.cpf);       {}  fprintf(arquivoNovo1,"%s\n",dpe.cpf);
-            TirarEspaco(dpe.tel);       {}  fprintf(arquivoNovo1,"%s\n",dpe.tel);
-            TirarEspaco(dpe.email);     {}  fprintf(arquivoNovo1,"%s\n",dpe.email);
-            //novo editado
-		}else{
-            i++;
+    if (!arquivo_existe("ClienteConsulta.txt")){
+        printf("\n\n\tnão existe cadastro");
+    }else{
+        int i=0;
+        printf("\nExclusão do cadastro\n\n");
+        printf("Informe o CPF referente ao cadastro que deseja excluir: ");
+        cpfm(buscaCpf);
+        Arquivo = fopen("ClienteConsulta.txt","r");
+        Cliente = fopen("Cliente.txt","r");
+        arquivoNovo1 = fopen("ClienteConsulta_novo.txt","w");
+        FILE* arquivoNovo2 = fopen("Cliente_novo.txt","w");
+        while(!feof(Arquivo)){
+
+            fscanf( Arquivo,"%s %s %s %s %s %s %s %s %s %s",
+            dpe.nome, dpe.sexo, dpe.estCivil, dpe.end, dpe.endNum, dpe.dataNas, dpe.rg, dpe.cpf, dpe.tel, dpe.email);// acessar os dados
+            if (strcmp(dpe.cpf, buscaCpf)!=0){
+                //editado
+                ColocarEspaco(dpe.nome);    {}  fprintf(arquivoNovo2,"\n\nNome:" "%s",dpe.nome);
+                ColocarEspaco(dpe.nome);    {}  fprintf(arquivoNovo2,"\nSexo:" "%s",dpe.sexo);
+                ColocarEspaco(dpe.nome);    {}  fprintf(arquivoNovo2,"\nEstado Civil::" "%s",dpe.estCivil);
+                ColocarEspaco(dpe.nome);    {}  fprintf(arquivoNovo2,"\nEndereco:" "%s, %s",dpe.end,dpe.endNum);
+                ColocarEspaco(dpe.nome);    {}  fprintf(arquivoNovo2,"\nData de Nascimento:" "%s",dpe.dataNas);
+                ColocarEspaco(dpe.nome);    {}  fprintf(arquivoNovo2,"\nRegistro Geral:" "%s",dpe.rg);
+                ColocarEspaco(dpe.nome);    {}  fprintf(arquivoNovo2,"\nCadastro Pessoa F?sica:" "%s",dpe.cpf);
+                ColocarEspaco(dpe.nome);    {}  fprintf(arquivoNovo2,"\nTelefone:" "%s",dpe.tel);
+                ColocarEspaco(dpe.nome);    {}  fprintf(arquivoNovo2,"\nEndere?o de e-mail:" "%s",dpe.email);
+                // novo em linha
+                TirarEspaco(dpe.nome);      {}  fprintf(arquivoNovo1,"\n%s\n",dpe.nome);
+                TirarEspaco(dpe.sexo);      {}  fprintf(arquivoNovo1,"%s\n",dpe.sexo);
+                TirarEspaco(dpe.estCivil);  {}  fprintf(arquivoNovo1,"%s\n",dpe.estCivil);
+                TirarEspaco(dpe.end);       {}  fprintf(arquivoNovo1,"%s\n",dpe.end);
+                TirarEspaco(dpe.endNum);    {}  fprintf(arquivoNovo1,"%s\n",dpe.endNum);
+                TirarEspaco(dpe.dataNas);   {}  fprintf(arquivoNovo1,"%s\n",dpe.dataNas);
+                TirarEspaco(dpe.rg);        {}  fprintf(arquivoNovo1,"%s\n",dpe.rg);
+                TirarEspaco(dpe.cpf);       {}  fprintf(arquivoNovo1,"%s\n",dpe.cpf);
+                TirarEspaco(dpe.tel);       {}  fprintf(arquivoNovo1,"%s\n",dpe.tel);
+                TirarEspaco(dpe.email);     {}  fprintf(arquivoNovo1,"%s\n",dpe.email);
+                //novo editado
+            }else{
+                i++;
+            }
         }
-	}
-	fclose(Arquivo);
-	fclose(Cliente);
-	fclose(arquivoNovo1);
-	fclose(arquivoNovo2);
+        fclose(Arquivo);
+        fclose(Cliente);
+        fclose(arquivoNovo1);
+        fclose(arquivoNovo2);
 
-	system("del ClienteConsulta.txt");
-	system("del Cliente.txt");
-	system("rename ClienteConsulta_novo.txt ClienteConsulta.txt");
-	system("rename Cliente_novo.txt Cliente.txt");
-    if(i==1){
-        printf("Cadastro excluido");
-        printf( "\n\nCliente Excluido com sucesso !");
-
+        system("del ClienteConsulta.txt");
+        system("del Cliente.txt");
+        system("rename ClienteConsulta_novo.txt ClienteConsulta.txt");
+        system("rename Cliente_novo.txt Cliente.txt");
+        if(i==1){
+            printf("Cadastro excluido");
+            printf( "\n\nCliente Excluido com sucesso !");
+        }
+        getchar();
     }
+    errocli3:
     printf("\nPressione 1 para Excluir outro cadastro, ou 0 para sair:");
 	ctrNumber(&opcaoMenu);
 
-    do{
-        if(opcaoMenu=='0'){
-            MenuCliente(Console);
-        }
-        else if(opcaoMenu == '1'){
-            ExcluirCliente(Console);
-        }else{
-            SetConsoleTextAttribute(Console, VERMELHO);
-            printf("opção invalida!");
-        }
-    }while(opcaoMenu >= '2');
+    if(opcaoMenu=='0'){
+        system("cls");
+        MenuCliente(Console);
+    }
+    else if(opcaoMenu == '1'){
+        system("cls");
+        ExcluirCliente(Console);
+    }else{
+        SetConsoleTextAttribute(Console, VERMELHO);
+        printf("\n\n\t\t\t    Opção invalida!");
+        Sleep(500);
+        goto errocli3;
+    }
 }
 
-
+//1.4
 void BuscarCliente(Console){
 
-    int i = 0;
-	printf("\nBuscar cliente\n\n");
-	printf("Informe o cpf ");
-	cpfm(buscaCpf);
-    printf("\n");
-	Arquivo = fopen("ClienteConsulta.txt","r"); // abrir arquivo em modo leitura
-    // 	while(fgets(texto_str, 5, Leitura) != NULL)
-	// {
-	// 	for(i=0; i<(fgets(texto_str, 5, Leitura) != NULL); i++){
-
-    //     }
-	// }
-	while(!feof(Arquivo)){
-        fscanf( Arquivo,"%s %s %s %s %s %s %s %s %s %s",
-        dpe.nome, dpe.sexo, dpe.estCivil, dpe.end, dpe.endNum, dpe.dataNas, dpe.rg, dpe.cpf, dpe.tel, dpe.email);
-
-		if (strcmp(dpe.cpf, buscaCpf)==0){
-            i++;
-            ColocarEspaco(dpe.nome);    {}  printf("\nNome:" "%s",dpe.nome);
-            ColocarEspaco(dpe.nome);    {}  printf("\nSexo:" "%s",dpe.sexo);
-            ColocarEspaco(dpe.nome);    {}  printf("\nEstado Civil::" "%s",dpe.estCivil);
-            ColocarEspaco(dpe.nome);    {}  printf("\nEndereco:" "%s,%s",dpe.end,dpe.endNum);
-            ColocarEspaco(dpe.nome);    {}  printf("\nData de Nascimento:" "%s",dpe.dataNas);
-            ColocarEspaco(dpe.nome);    {}  printf("\nRegistro Geral:" "%s",dpe.rg);
-            ColocarEspaco(dpe.nome);    {}  printf("\nCadastro Pessoa F?sica:" "%s",dpe.cpf);
-            ColocarEspaco(dpe.nome);    {}  printf("\nTelefone:" "%s",dpe.tel);
-            ColocarEspaco(dpe.nome);    {}  printf("\nEndere?o de e-mail:" "%s",dpe.email);
-		}
-	}
-	fclose(Arquivo);
-    if(i==0){
-        printf("Nenhum cliente cadastrado com esse CPF");
+    if (!arquivo_existe("ClienteConsulta.txt")){
+        printf("\n\n\tnão existe cadastro");
     }else{
-	    printf("\n\nBusca concluida com sucesso !");
+        int i = 0;
+        printf("\nBuscar cliente\n\n");
+        printf("Informe o cpf ");
+        cpfm(buscaCpf);
+        printf("\n");
+        Arquivo = fopen("ClienteConsulta.txt","r"); // abrir arquivo em modo leitura
+        // 	while(fgets(texto_str, 5, Leitura) != NULL)
+        // {
+        // 	for(i=0; i<(fgets(texto_str, 5, Leitura) != NULL); i++){
+
+        //     }
+        // }
+        while(!feof(Arquivo)){
+            fscanf( Arquivo,"%s %s %s %s %s %s %s %s %s %s",
+            dpe.nome, dpe.sexo, dpe.estCivil, dpe.end, dpe.endNum, dpe.dataNas, dpe.rg, dpe.cpf, dpe.tel, dpe.email);
+
+            if (strcmp(dpe.cpf, buscaCpf)==0){
+                i++;
+                ColocarEspaco(dpe.nome);    {}  printf("\nNome:" "%s",dpe.nome);
+                ColocarEspaco(dpe.nome);    {}  printf("\nSexo:" "%s",dpe.sexo);
+                ColocarEspaco(dpe.nome);    {}  printf("\nEstado Civil::" "%s",dpe.estCivil);
+                ColocarEspaco(dpe.nome);    {}  printf("\nEndereco:" "%s,%s",dpe.end,dpe.endNum);
+                ColocarEspaco(dpe.nome);    {}  printf("\nData de Nascimento:" "%s",dpe.dataNas);
+                ColocarEspaco(dpe.nome);    {}  printf("\nRegistro Geral:" "%s",dpe.rg);
+                ColocarEspaco(dpe.nome);    {}  printf("\nCadastro Pessoa F?sica:" "%s",dpe.cpf);
+                ColocarEspaco(dpe.nome);    {}  printf("\nTelefone:" "%s",dpe.tel);
+                ColocarEspaco(dpe.nome);    {}  printf("\nEndere?o de e-mail:" "%s",dpe.email);
+            }
+        }
+        fclose(Arquivo);
+        if(i==0){
+            printf("\nNenhum cliente cadastrado com esse CPF");
+        }else{
+            printf("\n\nBusca concluida com sucesso !");
+        }
     }
-        printf("\nDigite 1 para realizar uma nova busca ou 0 para sair:");
+    errocli3:
+    printf("\nDigite 1 para realizar uma nova busca ou 0 para sair:");
 	ctrNumber(&opcaoMenu);
 
 	if(opcaoMenu == '0'){
-			MenuCliente();
+        system("cls");
+		MenuCliente(Console);
 	}
 	else if(opcaoMenu == '1'){
-			CadastroCliente();
+        system("cls");
+		BuscarCliente(Console);
 	}else{
-        printf("opção invalida!");
+        system("cls");
+        SetConsoleTextAttribute(Console, VERMELHO);
+        printf("\n\n\t\t\t    Opção invalida!");
+        Sleep(500);
+    goto errocli3;
     }
 }
 
@@ -636,29 +426,35 @@ void BuscarCliente(Console){
 //---------CORRETOR-----------CORRETOR--------------CORRETOR---------------
 
 
+//2.1
 void CadastroCorretor(Console){
 
     SetConsoleTitle("IMOBILIARIA - Cadastro de Corretor");
+    SetConsoleTextAttribute(Console, BRANCO);
 
+    int validar;
     Arquivo = fopen("CorretorConsulta.txt","a+");
 	Corretor = fopen("Corretor.txt","a+");// verificar se aqui eu abro usando o W  e depois vou usando A para adicionar.
 
 	printf("\n\n\n\t\tCADASTRO DE CORRETOR\n\n");
 
-	SetConsoleTextAttribute(Console, BRANC_ESC);    {}  printf ("\nEscreva seu nome completo: ");
-    SetConsoleTextAttribute(Console, VERDE);        {} 	strPlusAl(dpe.nome, 30);
+	SetConsoleTextAttribute(Console, VERDE);        {}  printf ("\nEscreva seu nome completo: ");
+    SetConsoleTextAttribute(Console,  AZUL_CLARO);  {} 	strPlusAl(dpe.nome, 40);
     //
 	SetConsoleTextAttribute(Console, VERDE);        {}  printf("\nSexo(F/M): ");
-    SetConsoleTextAttribute(Console, AZUL_CLARO);   {}  strPlusAl(dpe.sexo, 15);
+    SetConsoleTextAttribute(Console, AZUL_CLARO);   {}  strPlusAl(dpe.sexo, 13);
+    //
+	SetConsoleTextAttribute(Console, VERDE);        {}  printf("\nCreci: ");
+    SetConsoleTextAttribute(Console, AZUL_CLARO);   {}  strPlusNum(dpe.creci, 8);
     //
 	SetConsoleTextAttribute(Console, VERDE);        {}  printf("\nEstado Civil: ");
-    SetConsoleTextAttribute(Console, AZUL_CLARO);   {}  strPlusAl(dpe.estCivil, 15);
+    SetConsoleTextAttribute(Console, AZUL_CLARO);   {}  strPlusAl(dpe.estCivil, 13);
     //
     SetConsoleTextAttribute(Console, BRANC_ESC);    {}  printf("\nendereco S/ número: ");
-    SetConsoleTextAttribute(Console, VERDE);        {}  strPlusAl(dpe.end, 20);
+    SetConsoleTextAttribute(Console, VERDE);        {}  strPlusAl(dpe.end, 50);
     //
     SetConsoleTextAttribute(Console, BRANC_ESC);    {}  printf("\nNúmero do endereco: ");
-    SetConsoleTextAttribute(Console, AZUL_CLARO);   {}  strPlusNum(dpe.endNum, 4);
+    SetConsoleTextAttribute(Console, AZUL_CLARO);   {}  strPlusNum(dpe.endNum, 5);
     //
 	SetConsoleTextAttribute(Console, VERDE);        {}  printf("\nData de Nascimento: ");
     SetConsoleTextAttribute(Console, AZUL_CLARO);   {}  dataf(dpe.dataNas);
@@ -670,15 +466,22 @@ void CadastroCorretor(Console){
     SetConsoleTextAttribute(Console, AZUL_CLARO);   {}  cpfm(dpe.cpf);
     //
 	SetConsoleTextAttribute(Console, VERDE);        {}  printf("\nTelefone: ");
-    SetConsoleTextAttribute(Console, AZUL_CLARO);   {}  strPlusNum(dpe.tel, 11);
+    SetConsoleTextAttribute(Console, AZUL_CLARO);   {}  strPlusNum(dpe.tel, 12);
     //
+    valEmail:
 	SetConsoleTextAttribute(Console, VERDE);        {}  printf("\nInforme seu endere?o de e-mail: ");
-    SetConsoleTextAttribute(Console, AZUL_CLARO);   {}  strPlusAl(dpe.email, 40);
-    //
+    SetConsoleTextAttribute(Console, AZUL_CLARO);   {}  //strPlusAl(dpe.email, 40);
+    validar = emailf(dpe.email);
+    if(validar==0){
+        SetConsoleTextAttribute(Console, VERMELHO);
+        printf("E-mail Inválido digite novamente\n");
+        goto valEmail;
+    }
 
 	fprintf(Corretor,"\n\nNome:" "%s",dpe.nome);
 	fprintf(Corretor,"\nSexo:" "%s",dpe.sexo);
-	fprintf(Corretor,"\nEstado Civil::" "%s",dpe.estCivil);
+	fprintf(Corretor,"\nCreci:" "%s",dpe.creci);
+	fprintf(Corretor,"\nEstado Civil:" "%s",dpe.estCivil);
 	fprintf(Corretor,"\nEndereço:" "%s, %s",dpe.end,dpe.endNum);
 	fprintf(Corretor,"\nData de Nascimento:" "%s",dpe.dataNas);
 	fprintf(Corretor,"\nRegistro Geral:" "%s",dpe.rg);
@@ -687,11 +490,13 @@ void CadastroCorretor(Console){
 	fprintf(Corretor,"\nEndere?o de e-mail:" "%s",dpe.email);
 
 	fclose(Corretor);
-    //============================================
+    //============================================================================
 
-    //função para automatizar isso
+    //função para automatizar isso se der tempo
+    //algumas não precisa tirar o espaco mais coloquei por garantia
 	TirarEspaco(dpe.nome);      {}  fprintf(Arquivo,"\n%s\n",dpe.nome);
 	TirarEspaco(dpe.sexo);      {}  fprintf(Arquivo,"%s\n",dpe.sexo);
+	TirarEspaco(dpe.creci);     {}  fprintf(Arquivo,"%s\n",dpe.creci);
 	TirarEspaco(dpe.estCivil);  {}  fprintf(Arquivo,"%s\n",dpe.estCivil);
 	TirarEspaco(dpe.end);       {}  fprintf(Arquivo,"%s\n",dpe.end);
 	TirarEspaco(dpe.endNum);    {}  fprintf(Arquivo,"%s\n",dpe.endNum);
@@ -705,32 +510,39 @@ void CadastroCorretor(Console){
 
 	printf("\n\nCorretor Cadastrado Com Sucesso!");
     system("cls");
+    SetConsoleTextAttribute(Console, BRANCO);
+
+    errocor1:
 	printf("\n\nCliente cadastrado com sucesso ! Pressione 1 para realizar um novo cadastro, ou 0 para sair:");
 	ctrNumber(&opcaoMenu);
 
 	if(opcaoMenu == '0'){
-        MenuCliente();
+        system("cls");
+        MenuCorretor(Console);
     }
 	else if(opcaoMenu == '1'){
-        CadastroCliente();
+        system("cls");
+        CadastroCorretor(Console);
     }else{
-        printf("opção invalida!");
+        SetConsoleTextAttribute(Console, VERMELHO);
+        printf("\n\n\t\t\t    Opção invalida!");
+        Sleep(500);
+        goto errocor1;
     }
 
 }
 
-
+//2.2
 void ListarCorretor(Console){
-
-
-    char texto_str[60];
+    char texto_str[200];
     cont =0;
+
     system("cls");
     SetConsoleTextAttribute(Console, VERDE);
-    printf("\n\n\t\t\t\tLista de Clientes Cadastrado\n\n");
+    printf("\n\n\t\t\t\tLista de Corretores Cadastrado\n\n");
     SetConsoleTextAttribute(Console, BRANC_ESC);
-	Leitura = fopen("Cliente.txt", "r");
-	while(fgets(texto_str, 60, Leitura) != NULL){
+	Leitura = fopen("Corretor.txt", "r");
+	while(fgets(texto_str, 200, Leitura) != NULL){
 		printf("\t\t\t%s", texto_str);
         cont++;
         if(cont% 9==0 ){
@@ -742,201 +554,286 @@ void ListarCorretor(Console){
     SetConsoleTextAttribute(Console, VERDE);
     printf( "\n\n\n\t\t\t================================================"
 	        "\n\t\t\t\tCorretores(s) listado com sucesso !");
-    opcaoMenu = '0';
-    if(opcaoMenu != '0'){
-        SetConsoleTextAttribute(Console, VERDE);
-        printf("\n\n\t\t\tPressione 0 para voltar ao menu cliente: ");
-    }
-    else{
-    erromenu2:
-        SetConsoleTextAttribute(Console, VERMELHO);
-        printf("\n\n\t\t\tPressione 0 para voltar ao menu cliente: ");
-    }
+
+
+
+    errocor2:
+    SetConsoleTextAttribute(Console, VERDE);
+    printf("\n\n\t\t\tPressione 0 para voltar ao menu corretor: ");
     SetConsoleTextAttribute(Console, VERDE);
 	ctrNumber(&opcaoMenu);
 
 	if(opcaoMenu == '0'){
         system("cls");
-		MenuCliente(Console);
+		MenuCorretor(Console);
     }
     else{
         system("cls");
         SetConsoleTextAttribute(Console, VERMELHO);
         printf("\n\n\t\t\t    Opção invalida!");
         Sleep(500);
-        goto erromenu2;
+    goto errocor2;
     }
 }
 
-
-void EditarCorretor(){
+//2.3
+void EditarCorretor(Console){
     char teste;
+
+    SetConsoleTextAttribute(Console, BRANCO);
+
     printf("\nEditar cadastro\n\n");
-    printf("\n\n\t\tCASO NÃO SAIBA O CPF, PROCURE O CLIENTE NA OPCAO LISTAR CLIENTE OU BUSCAR CLIENTE\n\n");
+    printf("\n\n\t\tFaça o teste vai que da certo, não custa tentar\n\n");
 	printf("Informe o CPF referente ao cadastro que deseja excluir: ");
 	cpfm(teste);
 
     printf( "\ntenha paciência, por favor!"
             "\nAguarde a atualização");
+    getch();
+    system("cls");
+    MenuCorretor(Console);
 }
 
-
+//2.4
 void ExcluirCorretor(Console){
-    int i=0;
-	printf("\nExclusão do cadastro\n\n");
-	printf("Informe o CPF referente ao cadastro que deseja excluir: ");
-	cpfm(buscaCpf);
-	Arquivo = fopen("ClienteConsulta.txt","r");
-    Cliente = fopen("corretor.txt","r");
-	arquivoNovo1 = fopen("CorretorConsulta_novo.txt","w");
-	FILE* arquivoNovo2 = fopen("Corretor_novo.txt","w");
-	while(!feof(Arquivo)){
 
-        fscanf( Arquivo,"%s %s %s %s %s %s %s %s %s %s",
-        dpe.nome, dpe.sexo, dpe.estCivil, dpe.end, dpe.endNum, dpe.dataNas, dpe.rg, dpe.cpf, dpe.tel, dpe.email);// acessar os dados
-		if (strcmp(dpe.cpf, buscaCpf)!=0){
-            //novo editado
-            ColocarEspaco(dpe.nome);    {}  fprintf(arquivoNovo2,"\n\nNome:" "%s",dpe.nome);
-            ColocarEspaco(dpe.nome);    {}  fprintf(arquivoNovo2,"\nSexo:" "%s",dpe.sexo);
-            ColocarEspaco(dpe.nome);    {}  fprintf(arquivoNovo2,"\nEstado Civil::" "%s",dpe.estCivil);
-            ColocarEspaco(dpe.nome);    {}  fprintf(arquivoNovo2,"\nEndereco:" "%s, %s",dpe.end,dpe.endNum);
-            ColocarEspaco(dpe.nome);    {}  fprintf(arquivoNovo2,"\nData de Nascimento:" "%s",dpe.dataNas);
-            ColocarEspaco(dpe.nome);    {}  fprintf(arquivoNovo2,"\nRegistro Geral:" "%s",dpe.rg);
-            ColocarEspaco(dpe.nome);    {}  fprintf(arquivoNovo2,"\nCadastro Pessoa F?sica:" "%s",dpe.cpf);
-            ColocarEspaco(dpe.nome);    {}  fprintf(arquivoNovo2,"\nTelefone:" "%s",dpe.tel);
-            ColocarEspaco(dpe.nome);    {}  fprintf(arquivoNovo2,"\nEndere?o de e-mail:" "%s",dpe.email);
-            // novo em linha
-            TirarEspaco(dpe.nome);      {}  fprintf(arquivoNovo1,"\n%s\n",dpe.nome);
-            TirarEspaco(dpe.sexo);      {}  fprintf(arquivoNovo1,"%s\n",dpe.sexo);
-            TirarEspaco(dpe.estCivil);  {}  fprintf(arquivoNovo1,"%s\n",dpe.estCivil);
-            TirarEspaco(dpe.end);       {}  fprintf(arquivoNovo1,"%s\n",dpe.end);
-            TirarEspaco(dpe.endNum);    {}  fprintf(arquivoNovo1,"%s\n",dpe.endNum);
-            TirarEspaco(dpe.dataNas);   {}  fprintf(arquivoNovo1,"%s\n",dpe.dataNas);
-            TirarEspaco(dpe.rg);        {}  fprintf(arquivoNovo1,"%s\n",dpe.rg);
-            TirarEspaco(dpe.cpf);       {}  fprintf(arquivoNovo1,"%s\n",dpe.cpf);
-            TirarEspaco(dpe.tel);       {}  fprintf(arquivoNovo1,"%s\n",dpe.tel);
-            TirarEspaco(dpe.email);     {}  fprintf(arquivoNovo1,"%s\n",dpe.email);
-		}else{
-            i++;
+    SetConsoleTextAttribute(Console, BRANCO);
+
+    if (!arquivo_existe("ClienteConsulta.txt")){
+        printf("\n\n\tnão existe cadastro");
+    }else{
+        int i=0;
+        printf("\nExclusão do cadastro\n\n");
+        printf("Informe o CPF referente ao cadastro que deseja excluir: ");
+        cpfm(buscaCpf);
+        Arquivo = fopen("CorretorConsulta.txt","r");
+        Cliente = fopen("corretor.txt","r");
+        arquivoNovo1 = fopen("CorretorConsulta_novo.txt","w");
+        FILE* arquivoNovo2 = fopen("Corretor_novo.txt","w");
+        while(!feof(Arquivo)){
+
+            fscanf( Arquivo,"%s %s %s %s %s %s %s %s %s %s %s",
+            dpe.nome, dpe.sexo, dpe.creci, dpe.estCivil, dpe.end, dpe.endNum, dpe.dataNas, dpe.rg, dpe.cpf, dpe.tel, dpe.email);// acessar os dados
+            if (strcmp(dpe.cpf, buscaCpf)!=0){
+                //novo editado
+                ColocarEspaco(dpe.nome);    {}  fprintf(arquivoNovo2,"\n\nNome:" "%s",dpe.nome);
+                ColocarEspaco(dpe.sexo);    {}  fprintf(arquivoNovo2,"\nSexo:" "%s",dpe.sexo);
+                ColocarEspaco(dpe.creci);   {}  fprintf(arquivoNovo2,"\nCreci:" "%s",dpe.creci);
+                ColocarEspaco(dpe.estCivil);{}  fprintf(arquivoNovo2,"\nEstado Civil::" "%s",dpe.estCivil);
+                ColocarEspaco(dpe.end);
+                ColocarEspaco(dpe.endNum);  {}  fprintf(arquivoNovo2,"\nEndereco:" "%s, %s",dpe.end,dpe.endNum);
+                ColocarEspaco(dpe.dataNas);    {}  fprintf(arquivoNovo2,"\nData de Nascimento:" "%s",dpe.dataNas);
+                ColocarEspaco(dpe.rg);    {}  fprintf(arquivoNovo2,"\nRegistro Geral:" "%s",dpe.rg);
+                ColocarEspaco(dpe.cpf);    {}  fprintf(arquivoNovo2,"\nCadastro Pessoa F?sica:" "%s",dpe.cpf);
+                ColocarEspaco(dpe.tel);    {}  fprintf(arquivoNovo2,"\nTelefone:" "%s",dpe.tel);
+                ColocarEspaco(dpe.email);    {}  fprintf(arquivoNovo2,"\nEndere?o de e-mail:" "%s",dpe.email);
+                // novo em linha
+                TirarEspaco(dpe.nome);      {}  fprintf(arquivoNovo1,"\n%s\n",dpe.nome);
+                TirarEspaco(dpe.sexo);      {}  fprintf(arquivoNovo1,"%s\n",dpe.sexo);
+                TirarEspaco(dpe.estCivil);  {}  fprintf(arquivoNovo1,"%s\n",dpe.estCivil);
+                TirarEspaco(dpe.end);       {}  fprintf(arquivoNovo1,"%s\n",dpe.end);
+                TirarEspaco(dpe.endNum);    {}  fprintf(arquivoNovo1,"%s\n",dpe.endNum);
+                TirarEspaco(dpe.dataNas);   {}  fprintf(arquivoNovo1,"%s\n",dpe.dataNas);
+                TirarEspaco(dpe.rg);        {}  fprintf(arquivoNovo1,"%s\n",dpe.rg);
+                TirarEspaco(dpe.cpf);       {}  fprintf(arquivoNovo1,"%s\n",dpe.cpf);
+                TirarEspaco(dpe.tel);       {}  fprintf(arquivoNovo1,"%s\n",dpe.tel);
+                TirarEspaco(dpe.email);     {}  fprintf(arquivoNovo1,"%s\n",dpe.email);
+            }else{
+                i++;
+            }
         }
-	}
-	fclose(Arquivo);
-	fclose(Cliente);
-	fclose(arquivoNovo1);
-	fclose(arquivoNovo2);
+        fclose(Arquivo);
+        fclose(Cliente);
+        fclose(arquivoNovo1);
+        fclose(arquivoNovo2);
 
-	system("del CorretorConsulta.txt");
-	system("del Corretor.txt");
-	system("rename CorretorConsulta_novo.txt CorretorConsulta.txt");
-	system("rename Corretor_novo.txt Corretor.txt");
-    if(i==1){
-        printf("Cadastro excluido");
-        printf( "\n\nCorretor Excluido com sucesso !");
-
-
+        system("del CorretorConsulta.txt");
+        system("del Corretor.txt");
+        system("rename CorretorConsulta_novo.txt CorretorConsulta.txt");
+        system("rename Corretor_novo.txt Corretor.txt");
+        if(i==1){
+            printf("Cadastro excluido");
+            printf( "\n\nCorretor Excluido com sucesso !");
+        }
     }
-
-        printf("\nPressione 1 para Excluir outro cadastro, ou 0 para sair:");
+    errocor3:
+    printf("\nPressione 1 para Excluir outro cadastro, ou 0 para sair:");
 	ctrNumber(&opcaoMenu);
 
-    do{
-        if(opcaoMenu=='0'){
-            MenuCorretor(Console);
-        }
-        else if(opcaoMenu == '1'){
-            ExcluirCorretor(Console);
-        }else{
-            printf("opção invalida!");
-        }
-    }while(opcaoMenu >= '2');
+    if(opcaoMenu=='0'){
+        system("cls");
+        MenuCorretor(Console);
+    }
+    else if(opcaoMenu == '1'){
+        system("cls");
+        ExcluirCorretor(Console);
+    }else{
+        SetConsoleTextAttribute(Console, VERMELHO);
+        printf("\n\n\t\t\t    Opção invalida!");
+        Sleep(500);
+        goto errocor3;
+    }
 }
 
-
-void BuscarCorretor(){
-
-    int i = 0;
-	printf("\nBuscar Corretor\n\n");
-	printf("Informe o cpf ");
-	cpfm(buscaCpf);
-    printf("\n");
-	Arquivo = fopen("CorretorConsulta.txt","r"); // abrir arquivo em modo leitura
-
-	while(!feof(Arquivo)){
-        fscanf( Arquivo,"%s %s %s %s %s %s %s %s %s %s",
-        dpe.nome, dpe.sexo, dpe.estCivil, dpe.end, dpe.endNum, dpe.dataNas, dpe.rg, dpe.cpf, dpe.tel, dpe.email);
-
-		if (strcmp(dpe.cpf, buscaCpf)==0){
-            i++;
-            ColocarEspaco(dpe.nome);    {}  printf("\nNome:" "%s",dpe.nome);
-            ColocarEspaco(dpe.nome);    {}  printf("\nSexo:" "%s",dpe.sexo);
-            ColocarEspaco(dpe.nome);    {}  printf("\nEstado Civil::" "%s",dpe.estCivil);
-            ColocarEspaco(dpe.nome);    {}  printf("\nEndereco:" "%s,%s",dpe.end,dpe.endNum);
-            ColocarEspaco(dpe.nome);    {}  printf("\nData de Nascimento:" "%s",dpe.dataNas);
-            ColocarEspaco(dpe.nome);    {}  printf("\nRegistro Geral:" "%s",dpe.rg);
-            ColocarEspaco(dpe.nome);    {}  printf("\nCadastro Pessoa F?sica:" "%s",dpe.cpf);
-            ColocarEspaco(dpe.nome);    {}  printf("\nTelefone:" "%s",dpe.tel);
-            ColocarEspaco(dpe.nome);    {}  printf("\nEndere?o de e-mail:" "%s",dpe.email);
-		}
-	}
-	fclose(Arquivo);
-    if(i==0){
-        printf("Nenhum Corretor cadastrado com esse CPF");
+//2.5
+void BuscarCorretor(Console){
+    if (!arquivo_existe("CorretorConsulta.txt")){
+        printf("\n\n\tnão existe cadastro");
     }else{
-	    printf("\n\nBusca concluida com sucesso !");
+        int i = 0;
+
+        SetConsoleTextAttribute(Console, BRANCO);
+        printf("\nBuscar Corretor\n\n");
+        printf("Informe o cpf ");
+        cpfm(buscaCpf);
+        printf("\n");
+        Arquivo = fopen("CorretorConsulta.txt","r"); // abrir arquivo em modo leitura
+
+        while(!feof(Arquivo)){
+            fscanf( Arquivo,"%s %s %s %s %s %s %s %s %s %s",
+            dpe.nome, dpe.sexo, dpe.estCivil, dpe.end, dpe.endNum, dpe.dataNas, dpe.rg, dpe.cpf, dpe.tel, dpe.email);
+
+            if (strcmp(dpe.cpf, buscaCpf)==0){
+                i++;
+                ColocarEspaco(dpe.nome);    {}  printf("\nNome:" "%s",dpe.nome);
+                ColocarEspaco(dpe.nome);    {}  printf("\nSexo:" "%s",dpe.sexo);
+                ColocarEspaco(dpe.nome);    {}  printf("\nEstado Civil::" "%s",dpe.estCivil);
+                ColocarEspaco(dpe.nome);    {}  printf("\nEndereco:" "%s,%s",dpe.end,dpe.endNum);
+                ColocarEspaco(dpe.nome);    {}  printf("\nData de Nascimento:" "%s",dpe.dataNas);
+                ColocarEspaco(dpe.nome);    {}  printf("\nRegistro Geral:" "%s",dpe.rg);
+                ColocarEspaco(dpe.nome);    {}  printf("\nCadastro Pessoa F?sica:" "%s",dpe.cpf);
+                ColocarEspaco(dpe.nome);    {}  printf("\nTelefone:" "%s",dpe.tel);
+                ColocarEspaco(dpe.nome);    {}  printf("\nEndere?o de e-mail:" "%s",dpe.email);
+            }
+        }
+        fclose(Arquivo);
+        if(i==0){
+            printf("Nenhum Corretor cadastrado com esse CPF");
+        }else{
+            printf("\n\nBusca concluida com sucesso !");
+        }
     }
-        printf("\nDigite 1 para realizar uma nova busca ou 0 para sair:");
+    errocor4:
+    printf("\nDigite 1 para realizar uma nova busca ou 0 para sair:");
 	ctrNumber(&opcaoMenu);
 
 	if(opcaoMenu == '0'){
-			MenuCliente();
+        system("cls");
+		BuscarCorretor(Console);
 	}
 	else if(opcaoMenu == '1'){
-			CadastroCliente();
+        system("cls");
+		CadastroCorretor(Console);
 	}else{
-        printf("opção invalida!");
+        system("cls");
+        SetConsoleTextAttribute(Console, VERMELHO);
+        printf("\n\n\t\t\t    Opção invalida!");
+        Sleep(500);
+        goto errocor4;
     }
-
 }
 
 
 
 //---------IMOVEIS-------------IMOVEIS----------------IMOVEIS---------------
 
-void CadastroImovel(){
+void CadastroImovel(Console){
 
+    SetConsoleTextAttribute(Console, BRANCO);
+
+	// FILE* cadastro;
+
+	// cadastro = fopen("CadastroImovel.txt","a+");// verificar se aqui eu abro usando o W  e depois vou usando A para adicionar.
+	// printf("CADASTRO DE IMOVEL\n");
+
+
+	// printf ("\nQual e o tipo do imóvel");               {} strPlusAl(dim.tipo, 16);
+	// printf("Informe o endereco do imovel:");            {} strPlusAl(dim.end, 50);
+	// printf("Informe a quantidade de dormitorios:");     {} strPlusAl(dim.dormi, 11);
+	// printf("Quantidade de banheiros:");                 {} strPlusAl(dim.banheiro, 11);
+	// printf("Quantos metros quadrados de terreno:");     {} strPlusAl(dim.metros, 11);
+	// printf("Tem garagem ?(S/N):");                      {} strPlusAl(dim.garagem, 16);
+	// printf("Quantos metros quadrados: ");               {} strPlusAl(dim.metros, 16);
+	// printf("Tem garagem ?(S/N):");                      {} strPlusAl(dim.valor, 16);
+
+
+
+	// fprintf(cadastro,"\nTipo de negociacao:" "%s",tipo);
+	// fprintf(cadastro,"\nEndereco:" "%s", endereco);
+	// fprintf(cadastro,"\nQuantidade de dormitorios:" "%s", dormitorios);
+	// fprintf(cadastro,"\nQuantidade de banheiros:" "%s",banheiro);
+	// fprintf(cadastro,"\nMetros quadrados do terreno:" "%s", terreno);
+	// fprintf(cadastro,"\nMetros quadrados construidos:" "%s", construido);
+	// fprintf(cadastro,"\nGaragem:" "%s", garagem);
+
+
+	// fclose(cadastro);
+	// printf("Cadastrado Com sucesso!!");
+    // // =====================================================
+
+    // TirarEspaco(dpe.nome);      {}  fprintf(Arquivo,"\n%s\n",dpe.nome);
+	// TirarEspaco(dpe.sexo);      {}  fprintf(Arquivo,"%s\n",dpe.sexo);
+	// TirarEspaco(dpe.estCivil);  {}  fprintf(Arquivo,"%s\n",dpe.estCivil);
+	// TirarEspaco(dpe.end);       {}  fprintf(Arquivo,"%s\n",dpe.end);
+	// TirarEspaco(dpe.endNum);    {}  fprintf(Arquivo,"%s\n",dpe.endNum);
+	// TirarEspaco(dpe.dataNas);   {}  fprintf(Arquivo,"%s\n",dpe.dataNas);
+	// TirarEspaco(dpe.rg);        {}  fprintf(Arquivo,"%s\n",dpe.rg);
+	// TirarEspaco(dpe.cpf);       {}  fprintf(Arquivo,"%s\n",dpe.cpf);
+	// TirarEspaco(dpe.tel);       {}  fprintf(Arquivo,"%s\n",dpe.tel);
+	// TirarEspaco(dpe.email);     {}  fprintf(Arquivo,"%s\n",dpe.email);
+
+
+    // fclose(Arquivo);
+    // printf("\n\nCorretor Cadastrado Com Sucesso!");
+	// system("cls");
+    // SetConsoleTextAttribute(Console, BRANCO);
+	// printf("Pressione 1 para realizar um novo cadastro, ou 0 para sair:");
+	// ctrNumber(&opcaoMenu);
+
+	// if(opcaoMenu == '0'){
+	// 	MenuCliente(Console);
+	// }
+	// else if(opcaoMenu == '1'){
+    //     CadastroCliente();
+    // }else{
+    //     printf("opção invalida!");
+    // }
 
 }
 
 
 void ListarImovel(Console){
-
+    SetConsoleTextAttribute(Console, BRANCO);
 }
 
-void EditarImovel(){
-    printf("\nEditar cadastro\n\n");
-    printf("\n\n\t\tCASO NÃO SAIBA O CPF, PROCURE O CLIENTE NA OPCAO LISTAR CLIENTE OU BUSCAR CLIENTE\n\n");
-	printf("Informe o CPF referente ao cadastro que deseja excluir: ");
-	cpfm(buscaCpf);
+void EditarImovel(Console){
 
-    printf( "\ntenha paciência, por favor!"
-            "\nAguarde a atualização");
+    SetConsoleTextAttribute(Console, BRANCO);
+    printf("\nEditar cadastro\n\n");
+    printf("\n\n\t\tNão da para editar imóveis ainda, mas em breve vai ser possivel\n\n");
+	printf("aperte uma tecla para continuar ");
+
+    getch();
+    system("cls");
+    MenuCliente(Console);
 }
 
 
 void ExcluiImovel(Console){
-
+    SetConsoleTextAttribute(Console, BRANCO);
 }
 
 
-void BuscarImovel(){
-
+void BuscarImovel(Console){
+    SetConsoleTextAttribute(Console, BRANCO);
 }
 
 
 
 //-------SIMULAÇÃO------------SIMULAÇÃO---------------SIMULAÇÃO--------------
 
-void SimularFinanciamento(){
+void SimularFinanciamento(Console){
+    SetConsoleTextAttribute(Console, BRANCO);
 
     float valorImovel, calculo1, calculo2, porcentagem;
 

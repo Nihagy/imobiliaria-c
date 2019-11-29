@@ -88,6 +88,7 @@ int ctrNumber(char *num){
     unsigned int i = 0, cont=0, enter=0;
 
     do{
+        cont++;
         *num=getch();
         if (*num != 13){
             if (isdigit(*num)!=0){
@@ -110,7 +111,7 @@ int ctrNumber(char *num){
                 cont=0;
                 enter=0;
                 if(i==1){
-                    printf("\b \b");
+                    printf("\b\b");
                     i--;
                 }else if(i==0){
                     printf(" \b");
@@ -132,7 +133,6 @@ int ctrNumber(char *num){
             }
         }
     }while(i<2);
-
     *num = ctrLimitar[0];
     return ctrLimitar[0];
 }

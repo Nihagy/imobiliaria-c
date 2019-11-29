@@ -157,6 +157,37 @@ int main(){
 	fclose(arq);
 	system("pause");
 	return 0;
+
+
+
+
+
+
+	==================================================
+
+
+
+		char LoginAut[30], SenhaAut[30];
+	printf("Login:");
+	gets(&LoginAut);
+	printf("Senha:");
+	gets(&SenhaAut);
+	arq=fopen("Funcionario.txt","a+");
+	while(!feof(arq))
+	{
+		fscanf(arq,"\n%i \n%s \n%s \n%s \n%s \n%i \n%s \n%f \n%s \n%s \n\n ", CodFunc,NomeFunc,CPFFunc,LoginFunc,SenhaFunc,RGFunc,CargoFunc,SalFunc,DatFunc,EndFunc);
+	}
+	if(LoginAut==LoginFunc || SenhaAut==SenhaFunc)
+	{
+		Menu();
+	}
+	else
+	{
+		printf("senha ou login invalidos");
+	}
+	fclose(arq);
+
+	
 }
 */
 

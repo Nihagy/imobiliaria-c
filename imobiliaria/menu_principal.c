@@ -12,6 +12,7 @@
 #include <windows.h> // importar para usar algun comandos do windows principalmente na parte de utilidades e as cores
 #include "funcoes.c"
 //#include "formatbr.c"
+#include "string++.h"
 
 
 
@@ -83,7 +84,7 @@ void MenuCliente(Console){
         // 	main();
         // 	break;
         case '3': // Excluir Cliente
-            ExcluirCliente();
+            ExcluirCliente(Console);
             break;
         case '4': // Buscar Cliente
             BuscarCliente(Console);
@@ -128,19 +129,19 @@ void MenuCorretor(Console){
 
     switch(opcao){
         case '1': // Cadastro Corretor
-            CadastroCorretor();
+            CadastroCorretor(Console);
             break;
         case '2': // Listar Cadastro
-            ListarCorretor();
+            ListarCorretor(Console);
             break;
         // case '3': // Editar Corretor
         // 	main();
         // 	break;
         case '3': // Excluir Corretor
-            ExcluirCorretor();
+            ExcluirCorretor(Console);
             break;
         case '4': // Excluir Corretor
-            BuscarCorretor();
+            BuscarCorretor(Console);
             break;
         case '0':// Voltar para o Menu Principal
             main();
@@ -219,13 +220,13 @@ void MenuSimulado(Console){
 	printf("\n\t\t\t2 <-> Simulacao tabela Price\n");
 	printf("\n\t\t\t0 <-> Menu Pricipal\n");
     printf( "\n\t\t======================================");
-	printf("Entre com a opção desejada: ");
+	printf("\n\nEntre com a opção desejada: ");
 
     SetConsoleTextAttribute(Console, VERDE);
     ctrNumber(&opcao);
     switch(opcao){
         case '1': // tabela SAC
-            SimularFinanciamento();
+            SimularFinanciamento(Console);
             break;
         case '2': // tabela Price
             main();
@@ -320,6 +321,7 @@ void MenuUtilidades(Console){
 //6
 void MenuUsuario(Console){
     SetConsoleTextAttribute(Console, BRANCO);
+
 }
 
 
@@ -332,14 +334,14 @@ void MenuAjuda(Console){
 
     printf( "\n\n\t\t============ MENU AJUDA ==============="
            "\t\t\t1 <-> Menu PRINCIPAL\n"
-            "\n\n\t\t\t1 <-> Menu CLIENTE\n"
-            "\t\t\t2 <-> Menu CORRETOR\n"
-            "\t\t\t3 <-> Menu IMÓVEIS\n"
-            "\t\t\t4 <-> Menu UTILIDADES\n"
-            "\t\t\t5 <-> Menu SIMULAÇÃO\n"
-            "\t\t\t5 <-> Menu USUARIO\n"
-            "\t\t\t5 <-> Menu AJUDA\n"
-            "\t\t\t6 <-> Menu SOBRE\n"
+            "\n\n\t\t\t2 <-> Menu CLIENTE\n"
+            "\t\t\t3 <-> Menu CORRETOR\n"
+            "\t\t\t4 <-> Menu IMÓVEIS\n"
+            "\t\t\t5 <-> Menu UTILIDADES\n"
+            "\t\t\t6 <-> Menu SIMULAÇÃO\n"
+            "\t\t\t7 <-> Menu USUARIO\n"
+            "\t\t\t8 <-> Menu AJUDA\n"
+            "\t\t\t9 <-> Menu SOBRE\n"
             "\t\t\t0 <-> VOLTAR"
             "\n\n\t\t=======================================");
     printf("\n\nQual dos menus tem Duvida: ");
@@ -349,86 +351,108 @@ void MenuAjuda(Console){
 
     switch(opcao){
         case '1': // pricipal
+            system("cls");
             printf( "\n\n\t\tO Menu Principal é a tela pricipal, "
                    "\n\t\t"
-                    "\n\t\tTe da acesso aos outros menus e foi ao que te trouxe aqui"
-                    "\n\t\tLinka"
-                    "\n\n\t\t\Precione qualquer tecla ara voltar: ");
-                    getch();
+                    "\n\t\tTe da acesso aos outros menus e foi o que te trouxe aqui"
+                    "\n\t\tLinkar"
+                    "\n\n\t\tPrecione qualquer tecla para voltar: ");
+            getch();
+            system("cls");
+            MenuAjuda(Console);
             break;
         case '2': // cliente
+            system("cls");
             printf( "\n\n\t\tO Menu Cliente cria cadastro do cliente da imobiliaria, "
                     "\n\t\tRealiza a busca do cadastro do cliente através do CPF"
                     "\n\t\tRealiza a exclusão do cadastro de algum cliente"
                     "\n\t\tMostrar uma Lista com todos os cliente cadastrado"
-                    "\n\n\t\t\Precione qualquer tecla ara voltar: ");
-                    getch();
+                    "\n\n\t\tPrecione qualquer tecla ara voltar: ");
+            getch();
+            system("cls");
+            MenuAjuda(Console);
             break;
         case '3': // Corretor
+            system("cls");
             printf( "\n\n\t\tO Menu Corretor cria cadastro do corretor da imobiliaria, "
                     "\n\t\tRealiza a busca do cadastro do corretor através do CPF"
                     "\n\t\tRealiza a exclusão do cadastro de algum corretor"
                     "\n\t\tMostrar uma Lista com todos os corretor cadastrado"
-                    "\n\n\t\t\Precione qualquer tecla ara voltar: ");
-                    getch();
+                    "\n\n\t\tPrecione qualquer tecla ara voltar: ");
+            getch();
+            system("cls");
+            MenuAjuda(Console);
             break;
         case '4': // imoveis
-            printf( "\n\n\t\tO Menu Imóveis cria cadastro do Imóveis da imobiliaria, "
-                    "\n\t\tRealiza a busca do cadastro do Imóveis através do CPF"
-                    "\n\t\tRealiza a exclusão do cadastro de algum Imóveis"
+            system("cls");
+            printf( "\n\n\t\tO Menu Imóveis cadastra Imóveis na imobiliaria, "
+                    "\n\t\tRealiza a busca do cadastro do Imóveis através do endereço"
+                    "\n\t\tRealiza a exclusão do cadastro de algum Imóveil"
                     "\n\t\tMostrar uma Lista com todos os Imóveis cadastrado"
-                    "\n\n\t\t\Precione qualquer tecla ara voltar: ");
-                    getch();
+                    "\n\n\t\tPrecione qualquer tecla para voltar: ");
+            getch();
+            system("cls");
+            MenuAjuda(Console);
             break;
         case '5': // utilidades
-            printf( "\n\n\t\tO Menu Cliente cria cadastro do Imóveis da imobiliaria, "
-                    "\n\t\tRealiza a busca do cadastro do Imóveis através do CPF"
-                    "\n\t\tRealiza a exclusão do cadastro de algum Imóveis"
-                    "\n\t\tMostrar uma Lista com todos os Imóveis cadastrado"
-                    "\n\n\t\t\Precione qualquer tecla ara voltar: ");
-                    getch();
+            system("cls");
+            printf( "\n\n\t\tO Menu Utilidades mostra algumas ferramentas"
+                    "\n\t\tque pode ser utilizadas como apoio para o dia a dia,"
+                    "\n\t\talgumas ferramentas precisam ser instaladas"
+                    "\n\t\tcomo é caso do office, ja outras não precisam"
+                    "\n\t\tcomo é caso do bloco de notas, caculadores e outras."
+                    "\n\n\t\tPrecione qualquer tecla ara voltar: ");
+            getch();
+            system("cls");
+            MenuAjuda(Console);
             break;
         case '6': // simulação
-            printf( "\n\n\t\tO Menu Simulação cria cadastro do simulação da imobiliaria, "
-                    "\n\t\tRealiza a busca do cadastro do simulação através do CPF"
-                    "\n\t\tRealiza a exclusão do cadastro de algum simulação"
-                    "\n\t\tMostrar uma Lista com todos os simulação cadastrado"
-                    "\n\n\t\t\Precione qualquer tecla ara voltar: ");
-                    getch();
+            system("cls");
+            printf( "\n\n\t\tO Menu Simulação, simula um financiamento"
+                    "\n\t\tutilizando a tabela SAC e faz o calculo"
+                    "\n\t\tde acordo com os dados informados"
+                    "\n\n\t\tPrecione qualquer tecla ara voltar: ");
+            getch();
+            system("cls");
+            MenuAjuda(Console);
             break;
         case '7': // usuario
-            printf( "\n\n\t\tO Menu Usuário cria cadastro do usuário da imobiliaria, "
-                    "\n\t\tRealiza a busca do cadastro do usuário através do CPF"
-                    "\n\t\tRealiza a exclusão do cadastro de algum usuário"
-                    "\n\t\tMostrar uma Lista com todos os usuário cadastrado"
-                    "\n\n\t\t\Precione qualquer tecla ara voltar: ");
-                    getch();
+            system("cls");
+            printf( "\n\n\t\tO Menu Usuário cria cadastro de usuário para o sistema da imobiliaria"
+                    "\n\n\t\tPrecione qualquer tecla ara voltar: ");
+            getch();
+            system("cls");
+            MenuAjuda(Console);
             break;
         case '8': // ajuda
-            printf( "\n\n\t\tO Menu Ajuda "
-                    "\n\t\tRealiza a busca do "
-                    "\n\t\tRealiza a exclusão do "
-                    "\n\t\tMostrar uma Lista com todos "
-                    "\n\n\t\t\Precione qualquer tecla ara voltar: ");
-                    getch();
+            system("cls");
+            printf( "\n\n\t\tO Menu Ajuda, Esse mesmo que você"
+                    "\n\t\tele ajuda você como o próprio nome ja diz"
+                    "\n\t\tCom breve descrições sobre cada menu"
+                    "\n\t\tObrigado pela escolha e foco para dominar esse sistema."
+                    "\n\n\t\tPrecione qualquer tecla ara voltar: ");
+            getch();
+            system("cls");
+            MenuAjuda(Console);
             break;
         case '9': // sobre
-            printf( "\n\n\t\tO Menu Sobre"
-                    "\n\t\tRealiza "
-                    "\n\t\tRealiza"
-                    "\n\t\tMostrar "
-                    "\n\n\t\t\Precione qualquer tecla ara voltar: ");
-                    getch();
+            system("cls");
+            printf( "\n\n\t\tO Menu Sobre, Mostrar informações sobre a empresa"
+                    "\n\t\tque desenvolveu o software e alguns outros dados "
+                    "\n\t\ttbm contém um supresa lá, porém só estara liberado futuramente,"
+                    "\n\t\tmas vai la conhecer o menu sobre e ver essa tal supresa"
+                    "\n\n\t\tPrecione qualquer tecla ara voltar: ");
+            getch();
+            system("cls");
+            MenuAjuda(Console);
             break;
         case '0':// Voltar para o Menu Principal
+            system("cls");
             main();
             break;
         default:
             SetConsoleTextAttribute(Console, VERMELHO);
             printf("\nOpção Inválida!\n");
-            Sleep(500);
-            system("cls");
-            MenuAjuda(Console);
             break;
     }
 }
@@ -452,13 +476,13 @@ void MenuSobre(Console){
     ctrNumber(&opcao);
     switch(opcao){
         case '1':
-            EditarCliente();
+            EditarCliente(Console);
             break;
         case '2': // Lista com tod imóveis
-            EditarCorretor();
+            EditarCorretor(Console);
             break;
         case '3':
-            EditarImovel();
+            EditarImovel(Console);
             break;
         case '0':
             main();
@@ -603,7 +627,7 @@ int main(){
                     }else if(sair== '2' || tolower(sair)== 'n'){
                         printf ("%c", sair);
                         system("cls");
-                        MenuPrincipal();
+                        main(Console);
                         break;
                     }
                     else{
