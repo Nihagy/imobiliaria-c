@@ -1,0 +1,14 @@
+BI-Tecnology imobliaria Versão 2.0
+
+Programa para gerenciamento de imobiliaria.
+Incluir as seguintes funcões:
+* Cadastro de Clientes
+* Cadastro de Imóveis
+* Cadastro de Corretor de imóveis
+* Simulacão
+entre outros.
+
+
+caminho padrao
+
+C:\BI-Tecnology
